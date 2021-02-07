@@ -1,52 +1,159 @@
-<!doctype html>
-<head>
-  <meta charset="utf-8">
-  <meta name="description" content="">
-
-  
-<!-- <div style="background-image: url('Res/bb.jpg');"> -->
-
-  <title></title>
-  <h2> Hi! Welcome to my webpage</h2>
-  <p>I am currently a postdoctoral researcher at Perimeter Institute for Theoretical Physics in Waterloo, Canada. I completed my Ph.D. from Syracuse University in 2019. More details can be found in my <a href="Res\rjha_cv.pdf">CV</a>. </p>
-
-  Just the <a href="Res\pubs"> papers</a> </p>
-  Just the <a href="Res\talks"> talks</a> </p>
-
-
-
-
-
-  <p> Some pictures from my Nikon D3100 with 18-55 and 55-200 clicked many years ago.</p>
-
-
-
-
- <img src="Res\Goa.jpg" alt="Trulli" width="200" height="133">
- <img src="Res\Boulder.jpg" alt="Trulli" width="200" height="133">
- <img src="Res\DSC_0280.jpg" alt="Trulli" width="200" height="133">
- <img src="Res\NYUpstate.jpg" alt="Trulli" width="200" height="133">
- <img src="Res\Japan1.jpg" alt="Trulli" width="200" height="133">
-
- <img src="Res\DSC_0309.jpg" alt="Trulli" width="200" height="133">
- <img src="Res\Greece1-1.jpg" alt="Trulli" width="200" height="133">
- <img src="Res\Lagos1-3.jpg" alt="Trulli" width="200" height="133">
- <img src="Res\NYC1-2.jpg" alt="Trulli" width="200" height="133">
- <img src="Res\Prague.jpg" alt="Trulli" width="200" height="133">
-
-  <link rel="stylesheet" href="http://yui.yahooapis.com/3.5.1/build/cssreset/cssreset-min.css">
-  <link rel="stylesheet" href="styles.css">
-  
-</head>
+<!DOCTYPE html>
+<html lang="en">
+<title>RGJ</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="styles.css">
+<style>
+body {font-family: "Lato", sans-serif}
+.mySlides {display: none}
+p {margin:0 0 1.5em; color: #797979;}
+em {font-style:italic;}
+a:link {color: blue; text-decoration: none;}
+a:visited {color: blue; text-decoration: none;}
+a:hover {color: red; text-decoration: underline;}
+</style>
 <body>
-    <section id="header">
-    </section>
 
-    <section id="main">
-    </section>
+<!-- Navbar -->
+<div class="w3-top">
+  <div class="w3-bar w3-black w3-card">
+    <a class="w3-bar-item w3-button w3-padding-large w3-hide-medium w3-hide-large w3-right" href="javascript:void(0)" onclick="myFunction()" title="Toggle Navigation Menu"><i class="fa fa-bars"></i></a>
+    <a href="#" class="w3-bar-item w3-button w3-padding-large">HOME</a>
+    <a href="#papers" class="w3-bar-item w3-button w3-padding-large w3-hide-small">PAPERS</a>
+    <a href="#talks" class="w3-bar-item w3-button w3-padding-large w3-hide-small">TALKS</a>
+    <a href="#contact" class="w3-bar-item w3-button w3-padding-large w3-hide-small">CONTACT</a>
+    <div class="w3-dropdown-hover w3-hide-small">
+      </div>
+    </div>
+  </div>
+</div>
 
-    <section id="footer">
-    </section>
-    
+<!-- Navbar on small screens (remove the onclick attribute if you want the navbar to always show on top of the content when clicking on the links) -->
+<div id="navDemo" class="w3-bar-block w3-black w3-hide w3-hide-large w3-hide-medium w3-top" style="margin-top:46px">
+  <a href="#papers" class="w3-bar-item w3-button w3-padding-large" onclick="myFunction()">PAPERS</a>
+  <a href="#talks" class="w3-bar-item w3-button w3-padding-large" onclick="myFunction()">TALKS</a>
+  <a href="#contact" class="w3-bar-item w3-button w3-padding-large" onclick="myFunction()">CONTACT</a>
+  <a href="#" class="w3-bar-item w3-button w3-padding-large" onclick="myFunction()">MERCH</a>
+</div>
+
+    <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+</script>
+<script type="text/javascript"
+  src="http://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+<!-- Page content -->
+<div class="w3-content" style="max-width:2000px;margin-top:40px">
+<img style="float:right" alt="" src="res\photo1.jpg" width="300" height="200" />
+<div style="clear: right-10">
+</div>  
+
+
+  <!-- The Intro Section -->
+  <div class="w3-container w3-content w3-center w3-padding-64" style="max-width:1000px" id="band">
+    <h2 class="w3-wide">RAGHAV GOVIND JHA (राघव गोविन्द झा) </h2>
+    <p class="w3-opacity"><i>Nature is Physics, rest is stamp collecting - Ernest Rutherford</i></p>
+     <p class="w3-justify"> I am currently a postdoctoral researcher at Perimeter Institute for Theoretical Physics in Waterloo, Canada. I completed my Ph.D. from Syracuse University in 2019. More details can be found in my <a href="res\rjha_cv.pdf">CV</a>. 
+
+    My research is related to the study of supersymmetric gauge theories as non-perturbative formulations of superstring/M-theory via the gauge/gravity duality. I am interested in numerical studies of the maximally supersymmetric gauge theory using Monte Carlo simulations to predict results from the supergravity (SUGRA) side. This is a possible check of the AdS/CFT conjecture. This conjecture relates $\mathcal{N}=4$ in four dimensions and Type IIB string theory on $AdS_{5} \times S_{5}$. However, even when the field theory is non-conformal (in space-time dimensions not equal to four), there is still some region in the coupling space where the conjecture holds. I am also interested in exploring thermal phase structures of multi-matrix models (such as BMN). In recent years, I have started working on tensor networks methods to study lower-dimensional gauge theories such as SU(2) gauge-Higgs models and spin models exhibiting continuous or discrete symmetries such as 2d O(2)/XY, Ising model in a magnetic field, and other interesting models with sign problems which are not tractable by Monte Carlo methods. 
+
+
+
+
+
+
+     </p>
+
+
+    <div class="w3-row w3-padding-100">
+      <div class="w3-third">
+      </div>
+      </div>
+    </div>
+  </div>
+
+  
+
+  <!-- Paper Section -->
+  <div class="w3-container w3-content w3-padding-64" style="max-width:1000px" id="papers">
+    <h2 class="w3-wide w3-center">PAPERS (most recent first) </h2>
+    <ol>
+  <li> Three-dimensional super-Yang–Mills theory on the lattice and dual black branes <a href="https://arxiv.org/abs/2010.00026"> (arXiv) </a>(Published in PRD) </li>
+  <li> Positive geometries for all scalar theories from twisted intersection theory <a href="https://arxiv.org/abs/2006.15359"> (arXiv) </a>(Published in PRR) </li>
+  <li> Critical analysis of two-dimensional classical XY model using tensor renormalization group <a href="https://arxiv.org/abs/2004.06314"> (arXiv) </a>(Published in JSTAT) </li>
+  <li> Thermal phase structure of a supersymmetric matrix model <a href="https://arxiv.org/abs/2003.01298"> (arXiv) </a>(Published in PoS) </li>
+  <li> Finite N unitary matrix models <a href="https://arxiv.org/abs/2003.00341"> (arXiv) </a> </li>
+  <li> Tensor renormalization group study of the non-Abelian Higgs model in two dimensions <a href="https://arxiv.org/abs/1901.01143"> (arXiv) </a>(Published in PRD) </li>
+  <li> Lattice quantum gravity with scalar fields <a href="https://arxiv.org/abs/1810.09946"> (arXiv) </a>(Published in PoS) </li>
+  <li> The properties of D1-branes from lattice super Yang–Mills theory using gauge/gravity duality <a href="https://arxiv.org/abs/1809.00797"> (arXiv) </a>(Published in PoS) </li>
+  <li> On the removal of the trace mode in lattice $\mathcal{N} = 4$ super Yang-Mills theory <a href="https://arxiv.org/abs/1808.04735"> (arXiv) </a>(Published in PRD) </li>
+  <li> Nonperturbative study of dynamical SUSY breaking in $\mathcal{N} = (2,2)$ Yang-Mills theory <a href="https://arxiv.org/abs/1801.00012"> (arXiv) </a>(Published in PRD) </li>
+  <li> Truncation of lattice $\mathcal{N} = 4$ super Yang-Mills (Published in EPJC) </li>
+  <li> Testing the holographic principle using lattice simulations <a href="https://arxiv.org/abs/1710.06398"> (arXiv) </a>(Published in EPJC) </li>
+  <li> Testing holography using the lattice with super-Yang-Mills theory on a 2-torus <a href="https://arxiv.org/abs/1709.07025"> (arXiv) </a>(Published in PRD) </li>
+
+</ol>
+
+<div class="w3-row w3-padding-100">
+      <div class="w3-third">
+      </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Talks Section -->
+  <div class="w3-container w3-content w3-padding-64" style="max-width:1000px" id="talks">
+    <h2 class="w3-wide w3-center">TALKS</h2>
+    <ol>
+  <li> New tool for old problems – Tensor network approach to spin models and gauge theories - October 14, 2020 at University of Liverpool, UK [Online via Zoom due to COVID-19 pandemic] </li>
+  <li> Tensor Networks: Algorithm & Applications — June 10 and 11, 2020 – Two lectures [1.5 hours each] for CyberTraining Summer School 2020 at Rensselaer Polytechnic Institute, USA [Online due to COVID-19 pandemic] </li>
+  <li> Holographic aspects of supersymmetric gauge theories – October 4, 2019 - Perimeter Institute </li>
+  <li> Numerical Approaches to Holography — August 28, 2019 - Seminar at Ashoka University, Sonipat, India  </li>
+  <li> Numerical Approaches to Holography — August 08, 2019 - Seminar at Indian Institute of Science Education and Research (IISER), Mohali, India </li>
+  <li> Holography, large N, and supersymmetry on the lattice — April 02, 2019 - Ph.D. thesis defense </li>
+  <li> Fundamentals of Quantum Entropy — March 29, 2019  </li>
+  <li> Holographic dualities and tensor renormalization group study of gauge theories — March 11, 2019 - Interdisciplinary Quantum Fields and Strings + Tensor Networks Initiative invited talk at Perimeter Institute </li>
+
+ 
+
+
+
+</ol>
+
+
+  <!-- Contact Section -->
+  <div class="w3-container w3-content w3-padding-64" style="max-width:1000px" id="contact">
+    <h2 class="w3-wide w3-center">CONTACT</h2>
+
+    <div class="w3-row w3-padding-60">
+      <div class="w3-col m6 w3-large w3-margin-bottom">
+        <i class="fa fa-map-marker" style="width:30px"></i> Waterloo, ON, Canada<br>
+        <i class="fa fa-phone" style="width:30px"></i> Phone: +1 519 570 7150<br>
+        <i class="fa fa-envelope" style="width:30px"> </i> Email: rjha1@perimeterinstitute.ca<br>
+
+
+<br><br> <br><br> 
+
+
+
+
+        <script language="JavaScript">
+<!-- Hide JavaScript...
+var LastUpdated = document.lastModified;
+document.writeln ("This page was last updated on February 6, 2020" ); 
+
+// End Hiding -->
+</script>
+
+
+</script>
+
 </body>
 </html>
+
