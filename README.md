@@ -1,3 +1,4 @@
-# rgjha.github.io
+# Personal Website
 
-Content for my professional website https://rgjha.github.io/ 
+This repository contains contents related to my website https://rgjha.github.io/ 
+
