@@ -26,6 +26,7 @@ div {
   <div class="w3-bar w3-black w3-card">
     <a class="w3-bar-item w3-button w3-padding-large w3-hide-medium w3-hide-large w3-right" href="javascript:void(0)" onclick="myFunction()" title="Toggle Navigation Menu"><i class="fa fa-bars"></i></a>
     <a href="#" class="w3-bar-item w3-button w3-padding-large">HOME</a>
+    <a href="#dsml" class="w3-bar-item w3-button w3-padding-large w3-hide-small">DS/ML PORTFOLIO</a>
     <a href="#papers" class="w3-bar-item w3-button w3-padding-large w3-hide-small">PAPERS</a>
     <a href="#talks" class="w3-bar-item w3-button w3-padding-large w3-hide-small">TALKS</a>
     <a href="#notes" class="w3-bar-item w3-button w3-padding-large w3-hide-small">NOTES</a>
@@ -37,6 +38,7 @@ div {
 
 
 <div id="navDemo" class="w3-bar-block w3-black w3-hide w3-hide-large w3-hide-medium w3-top" style="margin-top:46px">
+  <a href="#dsml" class="w3-bar-item w3-button w3-padding-large" onclick="myFunction()">DS/ML PORTFOLIO </a>
   <a href="#papers" class="w3-bar-item w3-button w3-padding-large" onclick="myFunction()">PAPERS</a>
   <a href="#talks" class="w3-bar-item w3-button w3-padding-large" onclick="myFunction()">TALKS</a>
   <a href="#notes" class="w3-bar-item w3-button w3-padding-large" onclick="myFunction()">NOTES</a>
@@ -105,6 +107,108 @@ div {
       </div>
     </div>
   </div>
+
+
+  <!-- Paper Section -->
+
+  <p class="w3-justify">
+
+  <div class="w3-container w3-content w3-padding-64" style="max-width:900px" id="dsml">
+    <h2 class="w3-wide w3-center"> PORTFOLIO </h2>
+
+     <font size="+1"> 
+    <ol>
+  <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="https://www.github.com/rgjha" role="tablist" title="Financial Visualization"> EDA and Data Visualization <i class="fa fa-bar-chart" aria-hidden="true"></i></a> 
+
+     </p>
+
+     Exploratory Data Analysis (EDA) is the process of retrieving and processing the data. And it makes full use of a DS slogan - Visualize!  
+     For example, below figures are taken from the analysis of my own flight data (i.e., airlines I have used since 2009) and 
+     comparison of Accuracy, F1 Score, Precision, Recall for a classification problem. 
+
+     I have explored Matplotlib, Plotly, Seaborn for data visualization while most of the EDA was done in Pandas. 
+
+    <font size="-0"> 
+
+
+    </font>
+
+  </p>
+
+  <ul>
+    <li>
+        <img src="gallery/airline.png" style="max-width:500px" alt="Image" class="center"/>  
+        <a href="#"> </a>
+    </li>
+    <li>
+        <img src="gallery/compare.png" style="max-width:600px" alt="Image" class="center"/> 
+        <a href="#"> </a>
+</ul>
+
+  </li>
+
+  <li class="nav-item"><a class="nav-link" data-toggle="tab" href="https://www.github.com/rgjha" role="tablist" title="Natural Language Processing (NLP)"> Natural Language Processing (NLP) <i class="fa fa-language" aria-hidden="false"></i></a>
+
+    </p>
+
+    <font size="-0"> 
+
+    NLP is the field of data science/machine learning related to the analysis of texts, speech and drawing meaningful conclusions from it. 
+    In fact, advanced NLP models based on AGI (Artificial General Intelligence) can also suggest texts and answer questions based on 
+    trained models. This is why with Chat-GPT, the interest in LLM (large language models) have considerably increased. Below we see
+    a snapshot of the project involving the determination of whether a message is spam or not and glimpse of processing of such 
+    written texts. 
+
+    The packages I have used for NLP problems are the NL tool-kit (NLTK) (it is aleading platform for building Python 
+    programs to work with human language data) and spaCy. 
+
+
+
+    <ul>
+    <li>
+        <img src="gallery/spam.png" style="max-width:600px" alt="Image" class="center"/>  
+        <a href="#"> </a>
+    </li>
+
+
+</ul>
+
+    </font>
+
+  </p>
+
+
+  </li> 
+
+
+
+  <li class="nav-item"><a class="nav-link" data-toggle="tab" href="https://www.github.com/rgjha" role="tablist" title="Machine Learning"> Machine Learning <i class="fa fa-newspaper-o" aria-hidden="true"></i></a>  
+
+    </p>
+
+    <font size="-0"> 
+
+    One of the famous unsupervised learning algorithms is clustering. Here we show an analysis based on k-means algorithm with five cluster
+    and classifying the single-channel fashion dataset image with deep learning models in PyTorch. 
+
+    <ul>
+    <li>
+        <img src="gallery/kmeans1.png" style="max-width:600px" alt="Image" class="center"/>  
+        <a href="#"> </a>
+    </li>
+
+    <li>
+        <img src="gallery/fashion.png" style="max-width:600px" alt="Image" class="center"/>  
+        <a href="#"> </a>
+    </li>
+
+    </font>
+
+  </p>
+
+
+
+    
 
   <!-- Paper Section -->
 
@@ -217,6 +321,7 @@ div {
   <li> Introduction to Quantum Computing (<a href="notes/x.pdf"> In progress! </a>)</li>
   <li> Short review on holographic matrix models + fuzzy spheres (<a href="notes/mm_notes.pdf">read here, December 2018</a>)</li>
   <li> Julia programming language for physicists (<a href="notes/x.pdf"> To come soon </a>)</li>
+  <li> Some scratch notes on Data Science and Machine Learning (<a href="notes/v0_ML.pdf">read here</a>)</li>
   <li> Some notes on topological field theory (TFT)  (<a href="notes/tft_report.pdf">read here, April 2015</a>)</li>
   <li> A brief review of lattice supersymmetry  (<a href="notes/F2014_rep.pdf">read here, December 2014</a>)</li>
   <li> Note on SUSY quantum mechanics  (<a href="notes/susy_qm.pdf">read here, August 2014</a>)</li>
