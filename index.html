@@ -81,11 +81,11 @@ div {
 
 
 
-    My research interests cover several exciting areas of research in theoretical Physics. I started my Ph.D. working on supersymmetric gauge theories as non-perturbative formulations of superstring/M-theory through the gauge/gravity duality. This has continued ever since and I am broadly interested in the study of the finite-temperature maximally supersymmetric gauge theories using Monte Carlo (MC) methods to check and predict results about non-extremal black p-branes in the dual supergravity (SUGRA). This approach constitutes a non-trivial check of the well-known AdS/CFT conjecture which relates N = 4 in four dimensions and Type IIB string theory on AdS5 times compact five sphere. However, even when the field theory is non-conformal (in space-time dimensions N = 4), there is a well-defined region in the dimensionless coupling space where gauge/gravity duality holds. I am also exploring phase structures of multi-matrix models with holographic behavior such as the BMN matrix model and the role of gauge symmetry in these one-dimensional models. I am also exploring the aspects of matrix bootstrap methods (away from zero temperature and planar limit) and how these methods can be combined with MC methods to understand the master field orbits. One of the topics which I want to pursue in the coming years is to understand the real-time (Minkowski) dynamics of matrix models. In my Ph.D., I also explored topics in hydrodynamics of D1 branes using lattice constructions and lattice approach to quantum gravity based on EDT (Euclidean Dynamical Triangulation) in four dimensions. This is an interesting approach to quantizing gravity based on Weinberg's idea of asymptotic safety of quantum field theory of gravity. 
+    My research interests cover several exciting areas of research in theoretical Physics. I started my Ph.D. working on supersymmetric gauge theories as non-perturbative formulations of superstring/M-theory through the gauge/gravity duality. This has continued ever since and I am broadly interested in the study of the finite-temperature maximally supersymmetric gauge theories using Monte Carlo (MC) methods to check and predict results about non-extremal black p-branes in the dual supergravity (SUGRA). This approach constitutes a non-trivial check of the well-known AdS/CFT conjecture. I am also exploring phase structures of multi-matrix models with holographic behavior such as the BMN matrix model and the role of gauge symmetry in these one-dimensional models. I am also exploring the aspects of matrix bootstrap methods (away from zero temperature and planar limit) and how these methods can be combined with MC methods to understand the master field orbits. One of the topics which I want to pursue in the coming years is to understand the real-time (Minkowski) dynamics of matrix models. 
 
   </p> 
 
-    In late 2019, I started working on tensor network renormalization group methods to study lower-dimensional gauge theories such as U(1), SU(2), and spin models exhibiting continuous or discrete symmetries such as Ising, Potts, O(2), and O(3) models. Since the tensor network methods are computationally expensive in higher dimensions, one of my other recent interests is also to explore different algorithms which will enable us to study a wide class of interesting three-dimensional classical statistical models with sufficient accuracy. A long-term goal is to compute critical exponents in these three-dimensional models by exploring the QFT limit and comparing it to the results from the well-established conformal bootstrap program and MC methods. Another direction is to study models which are affected by sign problems in conventional Monte Carlo methods, such as those at finite chemical potential or with topological θ-term. 
+    In late 2019, I started working on tensor network renormalization group methods to study lower-dimensional gauge theories such as U(1), SU(2), and spin models exhibiting continuous or discrete symmetries. Since the tensor network methods are computationally expensive in higher dimensions, one of my other recent interests is also to explore different algorithms which will enable us to study a wide class of interesting three-dimensional classical statistical models with sufficient accuracy. A long-term goal is to compute critical exponents in these three-dimensional models by exploring the QFT limit and comparing it to the results from the well-established conformal bootstrap program and MC methods. Another direction is to study models which are affected by sign problems in conventional Monte Carlo methods, such as those at finite chemical potential or with topological θ-term. 
 
 
   </p>
@@ -94,7 +94,7 @@ div {
 
   </p>
 
-    I am interested in mentoring undergraduate and graduate students on any of these topics and have mentored around six students since my PhD and have written or working on papers with them. Please email me if you want to know more about my work and would like to do a reading/research project with me. I would be happy to learn more and work with young students. 
+    <!-- I am interested in mentoring undergraduate and graduate students on any of these topics and have mentored around six students since my PhD and have written or working on papers with them. Please email me if you want to know more about my work and would like to do a reading/research project with me. I would be happy to learn more and work with young students. -->
 
 
 
@@ -122,11 +122,12 @@ div {
 
      </p>
 
-     Exploratory Data Analysis (EDA) is the process of retrieving and processing the data. And it makes full use of a DS slogan - Visualize!  
-     For example, below figures are taken from the analysis of my own flight data (i.e., airlines I have used since 2009) and 
-     comparison of Accuracy, F1 Score, Precision, Recall for a classification problem. 
+     Exploratory Data Analysis (EDA) is the process of retrieving and processing the data. And it makes full use of a famous DS/ML slogan - Visualize!! 
+     For example, the first figure is taken from the analysis of my own flight data (i.e., flight routes taken since 2009) and the next figure
+     is related to the comparison of various stats measures such -- Accuracy, F1 Score, Precision, Recall for a classification problem. 
 
-     I have explored Matplotlib, Plotly, Seaborn for data visualization while most of the EDA was done in Pandas. 
+     I mostly use Matplotlib, Plotly, and Seaborn for data visualization. I have carried out EDA mostly on Jupyter notebooks, Google Colab, or
+     on GCP. 
 
     <font size="-0"> 
 
@@ -137,19 +138,23 @@ div {
 
   <ul>
     <li>
-        <img src="gallery/airline.png" style="max-width:500px" alt="Image" class="center"/>  
+        <img src="gallery/map0.png" style="max-width:400px" alt="Image" class="center"/>  
         <a href="#"> </a>
     </li>
     <li>
-        <img src="gallery/compare.png" style="max-width:600px" alt="Image" class="center"/> 
+        <img src="gallery/compare.png" style="max-width:400px" alt="Image" class="center"/> 
         <a href="#"> </a>
 </ul>
 
   </li>
 
+  </p>
+
+
+
   <li class="nav-item"><a class="nav-link" data-toggle="tab" href="https://www.github.com/rgjha" role="tablist" title="Natural Language Processing (NLP)"> Natural Language Processing (NLP) <i class="fa fa-language" aria-hidden="false"></i></a>
 
-    </p>
+    <p>
 
     <font size="-0"> 
 
@@ -160,13 +165,23 @@ div {
     written texts. 
 
     The packages I have used for NLP problems are the NL tool-kit (NLTK) (it is aleading platform for building Python 
-    programs to work with human language data) and spaCy. 
+    programs to work with human language data) and spaCy. In the first figure, we see one step of how we clean the data 
+    through various columns based on removing punctuations, stop words, stemming/lemmatization, and tokenization. 
+    In the second figure, we see a word cloud of the papers written in Quantum Physics during the 1990s obtained from the dataset 
+    from arXiv preprint server. 
+
+    </p>
 
 
 
     <ul>
     <li>
-        <img src="gallery/spam.png" style="max-width:600px" alt="Image" class="center"/>  
+        <img src="gallery/spam.png" style="max-width:650px" alt="Image" class="center"/>  
+        <a href="#"> </a>
+    </li>
+
+    <li>
+        <img src="gallery/phy1.png" style="max-width:500px" alt="Image" class="center"/>  
         <a href="#"> </a>
     </li>
 
@@ -188,8 +203,10 @@ div {
 
     <font size="-0"> 
 
-    One of the famous unsupervised learning algorithms is clustering. Here we show an analysis based on k-means algorithm with five cluster
-    and classifying the single-channel fashion dataset image with deep learning models in PyTorch. 
+    A very popular unsupervised learning algorithms is clustering. Here we show an analysis based on k-means algorithm with five clusters
+    after obtaining the optimum number through the elbow method. In the second figure, we show the problem of 
+    classifying the single-channel fashion dataset image with deep learning models in PyTorch. 
+
 
     <ul>
     <li>
