@@ -222,25 +222,46 @@ div {
 
 </p>
 
-  <li class="nav-item"><a class="nav-link" data-toggle="tab" href="https://www.github.com/rgjha" role="tablist" > <font size="+2"> Machine Learning </font> <i class="fa fa-newspaper-o" aria-hidden="true"></i></a>  
+  <li class="nav-item"><a class="nav-link" data-toggle="tab" href="https://www.github.com/rgjha" role="tablist" > <font size="+2"> Unsupervised and Deep Learning </font> <i class="fa fa-newspaper-o" aria-hidden="true"></i></a>  
 
     </p>
 
     <font size="+1"> 
 
-    A very popular unsupervised learning algorithms is clustering. Here we show an analysis based on k-means algorithm with five clusters
-    after obtaining the optimum number through the elbow method. In the second figure, we show the problem of 
-    classifying the single-channel fashion dataset image with deep learning models in PyTorch. 
+
+
+    One of the most popular unsupervised learning algorithms is k-means clustering. The goal of k-means is 
+    to group data points into distinct non-overlapping subgroups. This is very useful for problems like 
+    customer segmentation. In the first figure, we show an example based on k-means algorithm with five clusters
+    for a problem related to how people (customers) in some mall spend their money. The choice of number of clusters
+    is crucial since it can lead to overfitting (high variance) for large 'k' and will underfit for small 'k'. 
+    A method for making a good choice is the elbow method. 
+    
+
+    In the second figure, we show one of the simplest CNN architecture known as 'LeNet' network. 
+    It consists of repeating convolution and pooling layers before the fully dense layer and logit output.
+    This can be used to identify a hand-drawn "8" as shown with good accuracy. In the last figure, we 
+    classify the single-channel fashion dataset image with deep learning models in PyTorch. 
 
 
     <ul>
     <li>
-        <img src="gallery/kmeans1.png" style="max-width:600px" alt="Image" class="center"/>  
+        <img src="gallery/kmeans1.png" style="max-width:700px" alt="Image" class="center"/>  
         <a href="#"> </a>
     </li>
 
+
+
     <li>
-        <img src="gallery/fashion.png" style="max-width:600px" alt="Image" class="center"/>  
+        <img src="gallery/lenet.png" style="max-width:700px" alt="Image" class="center"/>  
+        <a href="#"> </a>
+    </li>
+
+
+
+
+    <li>
+        <img src="gallery/fashion.png" style="max-width:700px" alt="Image" class="center"/>  
         <a href="#"> </a>
     </li>
 
