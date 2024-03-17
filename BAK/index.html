@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+<title>RGJ</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="others\width=device-width, initial-scale=1">
+<link rel="stylesheet" href="others\w3.css">
+<link rel="stylesheet" href="others\css?family=Lato">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+body {font-family: "Lato", serif}
+.mySlides {display: none}
+p {margin:0 0 1.5em; color: #797979;}
+em {font-style:italic;}
+a:link {color: CornflowerBlue; text-decoration: none;}
+a:visited {color: CornflowerBlue; text-decoration: none;}
+a:hover {color: red; text-decoration: underline;}
+div {
+  text-align: justify;
+  text-justify: inter-word;
+}
+</style>
+<body>
+
+  <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+</script>
+<script type="text/javascript"
+  src="http://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+<div class="w3-top">
+  <div class="w3-bar w3-black w3-card">
+    <a class="w3-bar-item w3-button w3-padding-large w3-hide-medium w3-hide-large w3-right" href="javascript:void(0)" onclick="myFunction()" title="Toggle Navigation Menu"><i class="fa fa-bars"></i></a>
+    <a href="#" class="w3-bar-item w3-button w3-padding-large">HOME</a>
+    <a href="#papers" class="w3-bar-item w3-button w3-padding-large w3-hide-small">PAPERS</a>
+    <a href="#talks" class="w3-bar-item w3-button w3-padding-large w3-hide-small">TALKS</a>
+    <a href="#notes" class="w3-bar-item w3-button w3-padding-large w3-hide-small">NOTES</a>
+    <a href="#dsml" class="w3-bar-item w3-button w3-padding-large w3-hide-small">DS/ML PORTFOLIO</a>
+    <a href="#contact" class="w3-bar-item w3-button w3-padding-large w3-hide-small">CONTACT</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div id="navDemo" class="w3-bar-block w3-black w3-hide w3-hide-large w3-hide-medium w3-top" style="margin-top:46px">
+  <a href="#dsml" class="w3-bar-item w3-button w3-padding-large" onclick="myFunction()">DS/ML PORTFOLIO </a>
+  <a href="#papers" class="w3-bar-item w3-button w3-padding-large" onclick="myFunction()">PAPERS</a>
+  <a href="#talks" class="w3-bar-item w3-button w3-padding-large" onclick="myFunction()">TALKS</a>
+  <a href="#notes" class="w3-bar-item w3-button w3-padding-large" onclick="myFunction()">NOTES</a>
+  <a href="#contact" class="w3-bar-item w3-button w3-padding-large" onclick="myFunction()">CONTACT</a>
+</div>
+
+
+
+
+<!-- Page content -->
+<div class="w3-content" style="max-width:1000px;left:0px;margin-top:40px">
+<img style="float:right" alt="" src="gallery\jwt.webp" width="1000" height="300" />
+
+</div> 
+
+  <!-- The Intro Section -->
+  <div class="w3-container w3-content w3-center w3-padding-64" style="max-width:850px" id="band">
+  <h2 class="w3-wide"> Raghav Govind Jha </h2>  
+
+
+    <p> <font size="+2"> Interested in nature, computation, and computability of nature. </font> </p>
+
+    I am postdoc at <a href="https://www.jlab.org">Jefferson Lab</a> working on various aspects of quantum computing 
+    including both qubit-based and qumodes-based approaches to universal quantum computing. This 
+    position is funded by C2QA which is is one of the five Quantum Information Science (QIS)
+    Research Centers established by the US Department of Energy (DOE). The goal 
+    is to work toward quantum advantage in computations for high-energy and nuclear physics, 
+    chemistry, materials science, condensed matter physics, and other fields.
+
+    Before this position, I spent three years at Perimeter Institute for Theoretical Physics in 
+    Waterloo, Canada where my mentor was Pedro Vieira. I completed my Ph.D. from Syracuse University in 2019 working with 
+    Simon Catterall on various aspects of lattice field theory especially application to thermodynamics of 
+    black holes in supergravity.   
+
+
+    <h6 class="w3-wide w3-center"> (Last updated: 12 February, 2024, see <a href="raghav_jha_cv.pdf">CV</a> here) </h4>
+
+<div class="w3-content" style="max-width:1000px;left:0px;margin-top:40px">
+<img style="float: left" "margin-right: 30;" alt="" src="gallery\photo1.jpg" width="280" height="200" />
+
+
+    My research interests cover several exciting areas of theoretical Physics. 
+    At the beginning of my Ph.D., I worked exclusively on supersymmetric gauge theories as 
+    non-perturbative formulations of string theory through the gauge/gravity duality. 
+    In this area, I am particularly interested in the study of the finite-temperature 
+    maximally supersymmetric gauge theories using Monte Carlo (MC) methods to check and predict 
+    results about non-extremal black p-branes in the dual supergravity (SUGRA). 
+    This numerical approach provides a tool for potential non-trivial checks 
+    of the AdS/CFT conjecture.  
+
+  </p> 
+
+    In 2018, I started exploring tensor network renormalization group 
+    methods to study lower-dimensional gauge theories 
+    and spin models with continuous or discrete symmetries. 
+    Since the tensor network methods are computationally expensive in higher dimensions, 
+    one of my other recent interests is also to explore different algorithms 
+    which will enable us to study a wide class of 
+    statistical models with sufficient accuracy. 
+    A long-term goal is to compute critical exponents in 3d 
+    models by going close to the QFT limit and comparing it to the results 
+    from the well-established conformal bootstrap program and MC methods. 
+    Another direction is to study models which are affected by sign problems 
+    in conventional Monte Carlo methods, such as those at finite chemical potential 
+    or with topological term.  
+
+
+  </p>
+
+    During my postdoc at Perimeter, I started exploring alternate methods to 
+    understand matrix models (through bootstrap). I also became part of a small 
+    collaboration trying to understand the scattering in Ising Field Theory (IFT) 
+    using MPS methods. Due to increased interest across the world related to 
+    quantum architectures and its potential applications, in the last several years, I have explored 
+    QISKIT (pronounced kiss-kit), Cirq, and PennyLane to model simple physical 
+    systems on available/near-term quantum devices and applications of quantum 
+    computation (or more formally -- classical/quantum (hybrid) NISQ based algorithms) 
+    to quantum many-body problems. Quantum computation and especially a proper 
+    understanding of digitization of gauge and spin models is one of the problems I am exploring in my 
+    second postdoc. Our goal is mostly focused on the continuous variable (CV) approach to 
+    quantum computing. In this approach, unlike the qubits, the quantum information and 
+    unitary transformations are written in terms of bosonic operators which have infinite-
+    dimensional Hilbert space. If you like to read more about quantum computing (very basic level)
+    and CV approach, please refer to the my recent review article --  
+    <a href="https://arxiv.org/abs/2301.09679"> here </a>
+
+
+  </p>
+
+    <!-- I am interested in mentoring undergraduate and graduate students on any of these topics and have mentored around six students since my PhD and have written or working on papers with them. -->
+
+    For students: Please email me if you would like to know more about my work and want do a research project with me. I would be happy to chat and discuss. 
+    
+
+
+  <!-- Paper Section -->
+
+  <p class="w3-justify">
+
+  <div class="w3-container w3-content w3-padding-64" style="max-width:900px" id="papers">
+    <h2 class="w3-wide w3-center">PAPERS </h2>
+    <h4 class="w3-wide w3-center"> (most recent first, see on <a href="https://inspirehep.net/authors/1597759"> iNSPIRE HEP</a>) </h4>
+    <h4 class="w3-wide w3-center"> (List of papers with reference as a <a href="gallery/list_pubs.pdf">PDF</a> here</a>) </h4>
+
+     
+    <ol>
+  <li> Tensor renormalization group study of 3D principal chiral model <a href="https://arxiv.org/abs/2312.11649"> (arXiv) </a> </li>
+  <li> Phase diagram of two-dimensional $SU(N)$ super-Yang--Mills theory with four supercharges <a href="https://arxiv.org/abs/2312.04980"> (arXiv) </a> </li>
+  <li> A model of quantum gravity on a noisy quantum computer <a href="https://arxiv.org/abs/2311.17991"> (arXiv) </a> </li>
+  <li> Continuous variable quantum computation of the O(3) model in 1+1 dimensions <a href="https://arxiv.org/abs/2310.12512"> (arXiv) </a> </li>
+  <li> Toward quantum computations of the O(3) model using qumodes <a href="https://arxiv.org/abs/2308.06946"> (arXiv) </a> </li>
+  <li> GPU-Acceleration of Tensor Renormalization with PyTorch using CUDA <a href="https://arxiv.org/abs/2306.00358"> (arXiv) </a> </li>
+  <li> Notes on Quantum Computation and Information <a href="https://arxiv.org/abs/2301.09679"> (arXiv) </a> </li> 
+  <li> Supersymmetric Wilson loops on the lattice in the large $N$ limit  <a href="https://link.springer.com/article/10.1140/epjs/s11734-023-00768-x"> (Springer) </a> (Published in EPJ-ST) </li> 
+  <li> Non-perturbative phase structure of the bosonic BMN matrix model <a href="https://arxiv.org/abs/2201.08791"> (arXiv) </a> (Published in JHEP)</li> 
+  <li> Thermal phase structure of dimensionally reduced super-Yang--Mills <a href="https://arxiv.org/abs/2201.03097"> (arXiv) </a> (Published in Proceedings of Science (POS))</li> 
+  <li> Tensor renormalization of three-dimensional Potts model <a href="https://arxiv.org/abs/2201.01789"> (arXiv) </a>  </li>
+  <li> Introduction to Monte Carlo for Matrix Models <a href="https://arxiv.org/abs/2111.02410"> (arXiv) </a> (Published in SciPost Lecture Notes) </li>
+  <li> Large-$N$ limit of two-dimensional Yang--Mills theory with four supercharges <a href="https://arxiv.org/abs/2109.01001"> (arXiv) </a>  </li>
+  <li> Tensor renormalization group study of the 3d O(2) model <a href="https://arxiv.org/abs/2105.08066"> (arXiv) </a> (Published in PRD) </li> 
+  <li> Three-dimensional super-Yang–Mills theory on the lattice and dual black branes <a href="https://arxiv.org/abs/2010.00026"> (arXiv) </a>(Published in PRD) </li>
+  <li> Positive geometries for all scalar theories from twisted intersection theory <a href="https://arxiv.org/abs/2006.15359"> (arXiv) </a>(Published in PRR) </li>
+  <li> Critical analysis of two-dimensional classical XY model using tensor renormalization group <a href="https://arxiv.org/abs/2004.06314"> (arXiv) </a>(Published in JSTAT) </li>
+  <li> Thermal phase structure of a supersymmetric matrix model <a href="https://arxiv.org/abs/2003.01298"> (arXiv) </a>(Published in PoS) </li>
+  <li> Finite $N$ unitary matrix models <a href="https://arxiv.org/abs/2003.00341"> (arXiv) </a> </li>
+  <li> Tensor renormalization group study of the non-Abelian Higgs model in two dimensions <a href="https://arxiv.org/abs/1901.11443"> (arXiv) </a>(Published in PRD) </li>
+  <li> Lattice quantum gravity with scalar fields <a href="https://arxiv.org/abs/1810.09946"> (arXiv) </a>(Published in PoS) </li>
+  <li> The properties of D1-branes from lattice super Yang–Mills theory using gauge/gravity duality <a href="https://arxiv.org/abs/1809.00797"> (arXiv) </a>(Published in PoS) </li>
+  <li> On the removal of the trace mode in lattice $\mathcal{N} = 4$ super Yang-Mills theory <a href="https://arxiv.org/abs/1808.04735"> (arXiv) </a>(Published in PRD) </li>
+  <li> Nonperturbative study of dynamical SUSY breaking in $\mathcal{N} = (2,2)$ Yang-Mills theory <a href="https://arxiv.org/abs/1801.00012"> (arXiv) </a>(Published in PRD) </li>
+  <li> Truncation of lattice $\mathcal{N} = 4$ super Yang-Mills (Published in EPJC) </li>
+  <li> Testing the holographic principle using lattice simulations <a href="https://arxiv.org/abs/1710.06398"> (arXiv) </a>(Published in EPJC) </li>
+  <li> Testing holography using the lattice with super-Yang-Mills theory on a 2-torus <a href="https://arxiv.org/abs/1709.07025"> (arXiv) </a>(Published in PRD) </li>
+</ol>
+
+
+<u> Number of papers ('Y' denotes the year), number of citations per paper, and number of co-authors per paper [Updated: Dec 12, 2023] </u> 
+
+<li>    
+        
+        <img src="num.pdf" style="max-width:450px" alt="Image" class="center"/> 
+        <a href="#"> </a>
+<li>    
+        
+        <img src="cit.pdf" style="max-width:850px" alt="Image" class="center"/> 
+        <a href="#"> </a>
+
+<li>    
+        
+        <img src="author.pdf" style="max-width:850px" alt="Image" class="center"/> 
+        <a href="#"> </a>
+
+<div class="w3-row w3-padding-100">
+      <div class="w3-third">
+      </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Talks Section -->
+  <div class="w3-container w3-content w3-padding-20" style="max-width:900px" id="talks">
+    <h2 class="w3-wide w3-center">TALKS/LECTURES</h2>
+    <ol>
+
+  <li> Real-time dynamics of SYK model on a noisy quantum computer (05 March, 2024) - Workshop on 'Toward quantum simulation of gauge/gravity duality and
+    lattice gauge theory', Queen Mary University of London (Online) 
+    (<a href="talks/QML_050324.pdf">PDF</a>)
+  <li> SYK model on a noisy quantum computer (06 February, 2024) - Indian Institute of Science (IISc), Bangalore, India 
+    (<a href="talks/IISc060224.pdf">PDF</a>)
+  <li> Quantum Computation of the O(3) model using qumodes (02 August, 2023) - Lattice 2023, Fermilab, USA
+  <li> Computation with Quantum Mechanics (June 20, 2023) - Set of two lectures at Quantum Computation Bootcamp, Jefferson Lab, USA
+  <li> Can quantum computation improve our understanding of quantum fields? (June 7, 2023) - Set of two lectures at HUGS 2023 Summer School, Jefferson Lab, USA
+  <li> Non-linear sigma models using quantum computation (May 30, 2023) at C2QA Meeting, New York City, USA
+  <li> Introduction to Quantum Computing methods in Physics (April 27, 2023) at Tata Institute, Mumbai, India 
+    (Online)
+    (<a href="talks/TIFR.pdf">PDF</a>)
+  <li> Aspects of Classical and Quantum Computing of Quantum Many-Body Systems (February 10, 2023) at Ashoka University (Online)
+    (<a href="talks/Ashoka_100223.pdf">PDF</a>)
+  <li> Classical computation using tensor networks and quantum computation with qubits and qumodes (November 14, 2022) at Jefferson Lab, USA
+  <li> Application of tensor methods to real-space renormalization and real-time study of field theories (October 31, 2022) at Brookhaven National Lab, USA (Online)
+  <li>  New tools for old problems in spin and gauge models on the lattice (October 12, 2022) at IIT Hyderabad, India (Online)
+  <li>  Some old problems on the lattice using tensors (August 26, 2022) at NUMSTRINGS 2022 conference at ICTS, India
+  <li>  Introduction to Quantum Computation using QISKIT (June 21 and 22, 2022) at Rensselaer Polytechnic Institute, Troy, USA (Online)   </li>
+  <li>  New approach to continuous spin models in two and three dimensions (May 17, 2022) at APTCP, Pohang, South Korea (Online)   </li>
+  <li>  Holography with large matrices on the lattice (March 24, 2022) at UNAM, Mexico City, Mexico   </li>
+  <li>  Large N matrix models using Monte Carlo and Bootstrap (February 22, 2022) at University of Surrey, UK (Online)   </li>
+  <li>  Introduction to tensor networks and spin systems (January 11, 2022) at Azim Premji University, Bengaluru, India (Online)   </li>
+
+  <li> 
+  Tensor networks and spin models (December 7, 2021) - at Indian Institute of Science Education and Research (IISER), Mohali, India (Online)
+  (<a href="talks/IISERM_071221.pdf">PDF</a>)
+  </li>
+  <li>  Real-space tensor renormalization for spin models in three dimensions  - November 19, 2021 at Perimeter Institute  </li> 
+  <li> 
+  Solving matrix models at large and finite N (June 28 and 29, 2021) - Two lectures for Summer School 2021 at Rensselaer Polytechnic Institute, USA (Online due to COVID-19 pandemic) 
+  (<a href="talks/RPI_2021_Lec1_2.pdf">PDF</a>)
+  </li>
+  <li> Holographic gauge theories on the lattice - June 23, 2021 at Dublin Institute for Advanced Studies, Dublin, Ireland (Online via Zoom due to COVID-19 pandemic) (<a href="talks/DIAS_230621.pdf">PDF</a>) </li>
+  <li> Old and  new methods for new and  old problems in Physics - March 8, 2021 at Indian Institute of Technology (IIT) Madras (Online via Zoom due to COVID-19 pandemic) (<a href="talks/Collo_IITM.pdf">PDF</a>) </li> 
+  <li> Probing holographic dualities with lattice supersymmetric Yang-Mills theories - February 25, 2021 at Massachusetts Institute of Technology (Online via Zoom due to COVID-19 pandemic) (<a href="talks/MIT_v2.pdf">PDF</a>) (<a href="http://y2u.be/fO8A18uwYIM">YouTube</a>) </li>
+  <li> New tool for old problems — Tensor network approach to spin models and gauge theories - October 14, 2020 at University of Liverpool, UK (Online via Zoom due to COVID-19 pandemic) (<a href="talks/Seminar_v2.pdf">PDF</a>)</li>
+  <li> Tensor Networks: Algorithm & Applications — June 10 and 11, 2020 – Two lectures [1.5 hours each] for CyberTraining Summer School 2020 at Rensselaer Polytechnic Institute, USA (Online due to COVID-19 pandemic) (<a href="talks/cs2020.pdf">PDF</a>) </li>
+  <li> Holographic aspects of supersymmetric gauge theories – October 4, 2019 - Perimeter Institute </li>
+  <li> Numerical Approaches to Holography — August 28, 2019 - Seminar at Ashoka University, Sonipat, India (<a href="talks/Talk_v1.pdf">PDF</a>) </li>
+  <li> Numerical Approaches to Holography — August 08, 2019 - Seminar at Indian Institute of Science Education and Research (IISER), Mohali, India </li>
+  <li> Holography, large $N$, and supersymmetry on the lattice — April 02, 2019 - Ph.D. thesis defense (<a href="talks/talk_v1_phd.pdf">PDF</a>) </li>
+  <li> Fundamentals of Quantum Entropy — March 29, 2019  </li>
+  <li> Holographic dualities and tensor renormalization group study of gauge theories — March 11, 2019 - Interdisciplinary Quantum Fields and Strings + Tensor Networks Initiative invited talk at Perimeter Institute (<a href="talks/PI_2019.pdf">PDF</a>) (<a href="https://www.perimeterinstitute.ca/videos/interdisciplinary-seminar-holographic-dualities-and-tensor-renormalization-group-study-gauge">PIRSA</a>) </li>
+  <li> Matrix Models — December 7, 2018 - Theory HEP Group talk at Syracuse University </li>
+  <li> Lattice gravity and scalar fields — July 23, 2018 at Annual Lattice Conference 2018, Michigan, USA (<a href="talks/edt.pdf">PDF</a>) </li>
+  <li> Supersymmetry breaking and gauge/gravity duality on the lattice — April 06, 2018 - Lattice beyond Standard Model 2018 at UC Boulder, Colorado (<a href="talks/lbsm18_jha.pdf">PDF</a>) </li> 
+  <li> Large $N$ gauge theories — March 09, 2018 - Theory HEP Group talk at Syracuse University </li>
+  <li> Recent results from lattice supersymmetry in $2 \le d < 4$ dimensions — January 31, 2018 - NUMSTRINGS I conference at ICTS, Bangalore
+  (<a href="talks/talk_ICTS_v1.pdf">PDF</a>) (<a href="https://www.youtube.com/watch?v=Zey6DAEiw0c">YouTube</a>)  </li>   
+  <li> Testing gauge/gravity duality using lattice simulations — July 22, 2017 at Annual Lattice Conference 2017 , Granada, Spain (<a href="talks/lattice2017_rgjha.pdf">PDF</a>) </li> 
+  <li> Testing holography through lattice simulations — April 04, 2017 at Quantum Gravity, String theory, and Holography conference at Yukawa Institute for Theoretical Physics, Kyoto, Japan (<a href="talks/kyoto_v1.pdf">PDF</a>) </li>
+  <li> Maximally supersymmetric Yang-Mills and dual gravitational theories — October 07, 2016 - Theory HEP Group talk at Syracuse University </li>
+  <li> Supersymmetry on the lattice — April 17, 2016 at the APS 2016 Meeting, Salt Lake City, Utah, USA (<a href="talks/aps_april.pdf">PDF</a>)</li>
+  <li> Lattice studies of $ \mathcal{N} = (8,8)$ SYM - April 08, 2016 — Theory HEP Group talk at Syracuse University </li>
+
+
+  <div class="w3-row w3-padding-100">
+      <div class="w3-third">
+      </div>
+      </div>
+    </div>
+  </div>
+
+  <p class="w3-justify">
+
+  <div class="w3-container w3-content w3-padding-64" style="max-width:900px" id="dsml">
+    <h2 class="w3-wide w3-center"> DATA SCIENCE STUFF </h2>
+
+    Apart from Physics, I am interested in data science especially supervised and unsupervised machine learning. 
+    A small collection of sample projects I have done are given below. 
+
+     <font size="+0"> 
+    <ol>
+  <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="https://www.github.com/rgjha" role="tablist" > <font size="+2"> EDA and Data Visualization </font>    <i class="fa fa-bar-chart" aria-hidden="true"></i></a> 
+
+  </p>
+     Exploratory Data Analysis (EDA) is the process of retrieving, processing, and 'knowing' the data. It makes full use of a famous DS/ML slogan - Visualize!!
+     Here, I present few examples from the projects I have done. For example, the first two figures are taken from the analysis of my own flight data (i.e., flight routes taken since 2009). It is obvious that I have spent major part of these 14 years traveling between India and where I did PhD (New York) and postdoc (Toronto). Unfortunately, I have not been to the southern hemisphere but crossed the Date Line several times. In the next figure, we see
+     about 1200 years of data predicting the day when the cherry will blossom in Kyoto, Japan. This project was inspired by a paper published which
+     studied the effect of global warming on this annual event. The next figure shows the histogram for the comparison of various statistical measures such -- Accuracy, F1 Score, Precision, Recall (attributes from the confusion matrix) for different algorithms. I mostly use Matplotlib, Plotly, and Seaborn for data visualization. I have carried out these EDA mostly on Jupyter notebooks, Google Colab, or on GCP. 
+
+    </font>
+
+  </p>
+
+  <ul>
+    <li>
+        <img src="gallery/map0.png" style="max-width:270px" alt="Image" class="center"/>  <img src="gallery/map1.png" style="max-width:350px" alt="Image" class="center"/>
+    </li>
+    <li>
+        <img src="gallery/cb.png" style="max-width:450px" alt="Image" class="center"/> 
+    </li>
+    <li>
+        <img src="gallery/compare.png" style="max-width:450px" alt="Image" class="center"/> 
+        <a href="#"> </a>
+    
+</ul>
+
+  </li>
+
+  </p>
+
+
+
+  <li class="nav-item"><a class="nav-link" data-toggle="tab" href="https://www.github.com/rgjha" role="tablist" > <font size="+2"> Natural Language Processing (NLP) </font> <i class="fa fa-language" aria-hidden="false"></i></a>
+
+  </p>
+
+    <font size="+0"> 
+
+    NLP is the field of data science/machine learning related to the analysis of texts, speech and drawing meaningful conclusions from it. 
+    In fact, advanced NLP models based on AGI (Artificial General Intelligence) can also suggest texts and answer questions based on 
+    trained models. This is why with Chat-GPT, the interest in LLM (large language models) have considerably increased. Below we see
+    a snapshot of the project involving the determination of whether a message is spam or not and glimpse of processing of such 
+    written texts. 
+
+    The packages I have used for NLP problems are the NL tool-kit (NLTK) (it is a leading platform for building Python 
+    programs to work with human language data) and spaCy. In the first figure, we see one step of how we clean the data 
+    through various columns based on removing punctuations, stop words, stemming/lemmatization, and tokenization. 
+    In the second figure, we see a word cloud of the papers written in Quantum Physics during the 1990s obtained from the dataset 
+    from arXiv preprint server, a short project I did to bring out the physicist in me! 
+
+    </p>
+
+
+
+    <ul>
+    <li>
+        <img src="gallery/spam.png" style="max-width:650px" alt="Image" class="center"/>  
+        <a href="#"> </a>
+    </li>
+
+    <li>
+        <img src="gallery/phy1.png" style="max-width:500px" alt="Image" class="center"/>  
+        <a href="#"> </a>
+    </li>
+
+
+</ul>
+
+    </font>
+
+
+  </li> 
+
+</p>
+
+  <li class="nav-item"><a class="nav-link" data-toggle="tab" href="https://www.github.com/rgjha" role="tablist" > <font size="+2"> Unsupervised and Deep Learning </font> <i class="fa fa-newspaper-o" aria-hidden="true"></i></a>  
+
+    </p>
+
+    <font size="+0"> 
+
+
+
+    One of the most popular unsupervised learning algorithms is k-means clustering. The goal of k-means is 
+    to group data points into distinct non-overlapping subgroups. This is very useful for problems like 
+    customer segmentation. In the first figure, we show an example based on k-means algorithm with five clusters
+    for a problem related to how people (customers) in some mall spend their money. The choice of number of clusters
+    is crucial since it can lead to overfitting (high variance) for large 'k' and will underfit for small 'k'. 
+    A method for making a good choice is the elbow method. 
+    
+
+    In the second figure, we show one of the simplest CNN architecture known as 'LeNet' network (deep learning).  
+    It consists of repeating convolution and pooling layers before the fully dense layer and logit output.
+    This can be used to identify a hand-drawn "8" [as shown] with good accuracy. In the last figure, we 
+    classify the single-channel (no RGB) fashion dataset image with deep learning models in PyTorch. 
+
+
+    <ul>
+    <li>
+        <img src="gallery/kmeans1.png" style="max-width:700px" alt="Image" class="center"/>  
+        <a href="#"> </a>
+    </li>
+
+
+
+    <li>
+        <img src="gallery/lenet.png" style="max-width:700px" alt="Image" class="center"/>  
+        <a href="#"> </a>
+    </li>
+
+
+
+
+    <li>
+        <img src="gallery/fashion.png" style="max-width:700px" alt="Image" class="center"/>  
+        <a href="#"> </a>
+    </li>
+
+    </font>
+
+  </p>
+
+
+</ul>
+<!-- Notes Section -->
+  <div class="w3-container w3-content w3-padding-20" style="max-width:900px" id="notes">
+    <h2 class="w3-wide w3-center">NOTES and LEARNING RESOURCES </h2>
+    <ul>
+  <li> Notes on path integral approach to QM due to Dirac/Feynman (<a href="notes/QMPI_Notes.pdf">read here, May 2013</a>)</li>
+  <li> Short introduction to large N limit of gauge theories (<a href="notes/largeN.pdf">read here, November 2017</a>)</li>
+  <li> Tensor networks, Entanglement, and Holography (<a href="notes/x.pdf"> In progress! </a>)</li>
+  <li> Introduction to Quantum Computing (<a href="https://arxiv.org/abs/2301.09679"> Check on arXiv </a>)</li> 
+  <li> Short review on holographic matrix models + fuzzy spheres (<a href="notes/mm_notes.pdf">read here, December 2018</a>)</li>
+  <li> Some scratch notes on Data Science and Machine Learning (<a href="notes/v0_ML.pdf">read here</a>)</li>
+  <li> Some notes on topological field theory (TFT)  (<a href="notes/tft_report.pdf">read here, April 2015</a>)</li>
+  <li> A brief review of lattice supersymmetry  (<a href="notes/F2014_rep.pdf">read here, December 2014</a>)</li>
+  <li> Note on SUSY quantum mechanics  (<a href="notes/susy_qm.pdf">read here, August 2014</a>)</li>
+  <li> Short note on ABJM integrability and 3d SYM  (<a href="notes/notes_SGT.pdf">read here, September 2019</a>)</li>
+  <li> Compilation of important $\mathcal{L}, \mathcal{H}$ of models in Physics (<a href="notes/physics_mod.pdf">read here, August 2019</a>)</li>
+  <li> Tensor network lectures at RPI (using Python) (<a href="notes/notes_rpi.pdf">read here, June 2020</a>)</li>
+  <li> Some worked out QFT problems in five parts from back in 2014-2015 (<a href="notes/last_qft_set.pdf">1, </a>
+    <a href="notes/set1.pdf"> 2, </a> <a href="notes/set2.pdf"> 3, </a> <a href="notes/set3.pdf"> 4, </a> 
+    <a href="notes/set4.pdf"> 5</a>, <a href="notes/QM_QFT.pdf"> 6</a>) </li>
+  <li> Textbook by Polyakov on gauge fields and strings (<a href="gallery/Polyakov_GFS.pdf"> PDF here</a>)</li>
+  <li> Textbook by Baxter on exactly solvable models (<a href="gallery/Baxter82.pdf"> PDF here</a>)</li>
+  <li> Aspects of Symmetry by Coleman (<a href="gallery/AOS_Coleman.pdf"> PDF here</a>)</li>
+  
+  <li> About 100+ advanced Physics e-books available on my GitHub. See README for details. (<a href="https://github.com/rgjha/PhysicsBooks">Click this link</a>)</li>
+  </ul>
+  
+  
+
+  <!-- Contact Section -->
+  <div class="w3-container w3-content w3-padding-64" style="max-width:900px" id="contact">
+    <h2 class="w3-wide w3-center">CONTACT</h2>
+
+    <div class="w3-row w3-padding-60">
+      <div class="w3-col m6 w3-large w3-margin-bottom">
+        <i class="fa fa-map-marker" style="width:30px"></i> A223, Jefferson Lab, Newport News, VA 23606 <br>
+        <i class="fa fa-skype" style="width:30px"></i> rgjha1989 <br>
+        <i class="fa fa-phone" style="width:30px"></i> Phone: +1 757 940 9624<br>
+        <i class="fa fa-twitter" style="width:30px"></i> <a href="https://www.twitter.com/rgjha1989">rgjha1989</a> <br>
+        <i class="fa fa-linkedin" style="width:30px"></i> <a href="https://www.linkedin.com/in/rgjha/">raghav-govind-jha</a> <br>
+        <i class="fa fa-envelope" style="width:30px"> </i> Email: <a href="mailto:raghav.govind.jha@gmail.com"> 
+        raghav.govind.jha@gmail.com </a> <br>
+
+<br><br> 
+<script>
+var date = document.lastModified;
+
+document.write("<i>Page last updated: </i> "+date, " EST");
+</script>
+
+
+<img style="float:left" alt="" src="gallery\stamp.jpeg" width="320" height="190" />
+
+
+
+</body>
+</html>
