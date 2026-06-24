@@ -7,6 +7,7 @@
   <meta name="description" content="A personal research page collecting the story behind each of my research publications" />
 
   <style>
+
     :root {
       --bg: #f7f3ee;
       --ink: #172033;
@@ -23,9 +24,7 @@
       --slate: #475569;
     }
 
-    * {
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; }
 
     body {
       margin: 0;
@@ -39,19 +38,14 @@
       line-height: 1.65;
     }
 
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
+    a { color: inherit; text-decoration: none; }
 
     .page {
       width: min(1120px, calc(100% - 36px));
       margin: 0 auto;
     }
 
-    header {
-      padding: 76px 0 36px;
-    }
+    header { padding: 76px 0 36px; }
 
     .eyebrow {
       display: inline-flex;
@@ -204,60 +198,24 @@
       background: rgba(104, 115, 134, 0.09);
     }
 
-    .tag-quantum {
-      color: var(--blue);
-      background: rgba(53, 92, 221, 0.11);
-    }
-
-    .tag-qinfo {
-      color: #2563eb;
-      background: rgba(37, 99, 235, 0.12);
-    }
-
-    .tag-lgt {
-      color: #b91c1c;
-      background: rgba(185, 28, 28, 0.12);
-    }
-
-    .tag-trg {
-      color: var(--green);
-      background: rgba(23, 132, 91, 0.12);
-    }
-
-    .tag-syk {
-      color: var(--purple);
-      background: rgba(124, 58, 237, 0.12);
-    }
-
-    .tag-holo {
-      color: var(--red);
-      background: rgba(194, 65, 93, 0.12);
-    }
-
-    .tag-cv {
-      color: var(--cyan);
-      background: rgba(8, 143, 171, 0.12);
-    }
-
-    .tag-ising {
-      color: var(--gold);
-      background: rgba(183, 121, 31, 0.14);
-    }
-
-    .tag-formal {
-      color: #9333ea;
-      background: rgba(147, 51, 234, 0.12);
-    }
-
-    .tag-teach {
-      color: var(--slate);
-      background: rgba(71, 85, 105, 0.12);
-    }
-
-    .tag-default {
-      color: var(--slate);
-      background: rgba(71, 85, 105, 0.12);
-    }
+    .tag-quantum { color: var(--blue); background: rgba(53, 92, 221, 0.11); }
+    .tag-qinfo { color: #2563eb; background: rgba(37, 99, 235, 0.12); }
+    .tag-lgt { color: #b91c1c; background: rgba(185, 28, 28, 0.12); }
+    .tag-lft { color: #a16207; background: rgba(161, 98, 7, 0.13); }
+    .tag-trg { color: var(--green); background: rgba(23, 132, 91, 0.12); }
+    .tag-syk { color: var(--purple); background: rgba(124, 58, 237, 0.12); }
+    .tag-holo { color: var(--red); background: rgba(194, 65, 93, 0.12); }
+    .tag-cv { color: var(--cyan); background: rgba(8, 143, 171, 0.12); }
+    .tag-ising { color: var(--gold); background: rgba(183, 121, 31, 0.14); }
+    .tag-formal { color: #9333ea; background: rgba(147, 51, 234, 0.12); }
+    .tag-teach { color: var(--slate); background: rgba(71, 85, 105, 0.12); }
+    .tag-stat { color: #047857; background: rgba(4, 120, 87, 0.12); }
+    .tag-matrix { color: #be123c; background: rgba(190, 18, 60, 0.12); }
+    .tag-code { color: #0f766e; background: rgba(15, 118, 110, 0.12); }
+    .tag-fermion { color: #4338ca; background: rgba(67, 56, 202, 0.12); }
+    .tag-amp { color: #7e22ce; background: rgba(126, 34, 206, 0.12); }
+    .tag-gravity { color: #334155; background: rgba(51, 65, 85, 0.12); }
+    .tag-default { color: var(--slate); background: rgba(71, 85, 105, 0.12); }
 
     h2 {
       margin: 0 0 12px;
@@ -288,10 +246,6 @@
       text-align: justify;
       text-justify: inter-word;
       hyphens: auto;
-    }
-
-    .story-box p:last-child {
-      margin-bottom: 0;
     }
 
     .links-row {
@@ -328,18 +282,9 @@
     }
 
     @media (max-width: 700px) {
-      .paper-card {
-        grid-template-columns: 1fr;
-      }
-
-      .paper-index {
-        width: 50px;
-        height: 50px;
-      }
-
-      .toolbar {
-        position: static;
-      }
+      .paper-card { grid-template-columns: 1fr; }
+      .paper-index { width: 50px; height: 50px; }
+      .toolbar { position: static; }
     }
 
     @media (prefers-color-scheme: dark) {
@@ -360,10 +305,9 @@
         background: rgba(255, 255, 255, 0.06);
       }
 
-      .story-box {
-        color: #dbe5ff;
-      }
+      .story-box { color: #dbe5ff; }
     }
+
   </style>
 </head>
 
@@ -385,11 +329,14 @@
           <button onclick="filterPapers('all')">All</button>
           <button onclick="filterPapers('Quantum simulation')">Quantum simulation</button>
           <button onclick="filterPapers('Quantum information')">Quantum information</button>
-          <button onclick="filterPapers('Tensor networks')">Tensor networks</button>
           <button onclick="filterPapers('Lattice gauge theories')">Lattice gauge theories</button>
-          <button onclick="filterPapers('Lattice / holography')">Lattice / holography</button>
+          <button onclick="filterPapers('Lattice field theory')">Lattice field theory</button>
+          <button onclick="filterPapers('Tensor networks')">Tensor networks</button>
+          <button onclick="filterPapers('Holography / SUSY')">Holography / SUSY</button>
           <button onclick="filterPapers('SYK / quantum chaos')">SYK</button>
           <button onclick="filterPapers('CV quantum computing')">CV/Qumodes</button>
+          <button onclick="filterPapers('Matrix models')">Matrix models</button>
+          <button onclick="filterPapers('Pedagogy')">Pedagogy</button>
         </div>
       </div>
     </section>
@@ -408,28 +355,14 @@
           <h2>Ground state preparation of random all-to-all Hamiltonians using ADAPT-VQE</h2>
 
           <div class="story-box" contenteditable="true" spellcheck="true">
-            <p><strong>Story behind the paper.</strong>
-            This paper started back in August 2024, when Sabhyata and I met while attending the QSIM conference
-            at the University of Rhode Island. She had seen my SYK paper from November 2023 and expressed interest
-            in related problems involving random all-to-all Hamiltonians.
-            Bharath and I initially thought that fixed-depth Cartan-inspired ideas might work for this model.
-            Sabhyata put in a lot of work, but we eventually reached the conclusion that this route was not working
-            well enough to form a publishable result. Around this time, Bharath started his postdoc at Virginia Tech,
-            and I had the thought that we should instead try ADAPT-VQE methods for studying models with random couplings.
-            </p>
+            <p><strong>Story behind the paper.</strong> This paper started back in August 2024, when Sabhyata and I met while attending the QSIM conference at the University of Rhode Island. She had seen my SYK paper from November 2023 and expressed interest in related problems involving random all-to-all Hamiltonians. Bharath and I initially thought that fixed-depth Cartan-inspired ideas might work for this model. Sabhyata put in a lot of work, but we eventually reached the conclusion that this route was not working well enough to form a publishable result. Around this time, Bharath started his postdoc at Virginia Tech, and I had the thought that we should instead try ADAPT-VQE methods for studying models with random couplings.</p>
           </div>
 
           <div class="links-row">
-            <a href="https://arxiv.org/abs/2606.18339"
-               target="_blank"
-               rel="noopener noreferrer"
-               aria-label="Open arXiv:2606.18339">
-              arXiv
-            </a>
+              <a href="https://arxiv.org/abs/2606.18339" target="_blank" rel="noopener noreferrer">arXiv</a>
           </div>
         </div>
       </article>
-
 
       <article class="paper-card" data-topics="Lattice gauge theories Quantum information Tensor networks">
         <div class="paper-index">02</div>
@@ -444,26 +377,890 @@
           <h2>Magic and entanglement in 1+1-dimensional SU(2) lattice gauge theory</h2>
 
           <div class="story-box" contenteditable="true" spellcheck="true">
-            <p><strong>Story behind the paper.</strong>
-            This paper grew out of the question of how quantum-information diagnostics behave in a genuinely gauge-invariant
-            many-body system. Instead of looking only at entanglement, we wanted to understand the role of magic as a separate
-            computational resource in a non-Abelian lattice gauge theory. We found a paper by Cataldi et al. where the authors
-            used a semi-link (rishon-type) dressed-site approach. I initially tried to generalize it for arbitrary cutoff but it was a bit messy. 
-            We were afraid of getting scooped (which we evaded by a week, see https://arxiv.org/abs/2606.14842), so we decided to just focus 
-            on jmax=1/2 and tried to finish the paper. I liked the project since it was very timely and connected tensor network simulations with 
-            ideas from stabilizer theory and quantum resources, giving us a way to ask which parts of the lattice gauge theory are hard for 
-            classical or Clifford-based descriptions. We finished this paper very quickly, in about two months, since we were writing the draft 
-            and coding the SRE/EE computation simulataneously. This was also Jaber's first paper. Congratulations to him!
-            </p>
+            <p><strong>Story behind the paper.</strong> This paper grew out of the question of how quantum-information diagnostics behave in a genuinely gauge-invariant lattice gauge theory going beyond quantum spin models. Instead of looking only at entanglement, we wanted to understand the role of magic as a separate computational resource in a non-Abelian lattice gauge theory. We found a paper by Cataldi et al. where the authors used a semi-link (rishon-type) dressed-site approach. I initially tried to generalize it for arbitrary cutoff but it was a bit messy. We were afraid of getting scooped (which we evaded by a week, see https://arxiv.org/abs/2606.14842), so we decided to just focus on jmax=1/2 and tried to finish the paper. I liked the project since it was very timely and connected tensor network simulations with ideas from stabilizer theory and quantum resources, giving us a way to ask which parts of the lattice gauge theory are hard for classical or Clifford-based descriptions. We finished this paper very quickly, in about two months, since we were writing the draft and coding the SRE/EE computation simulataneously. This was also Jaber&#x27;s first paper. Congratulations to him!</p>
           </div>
 
           <div class="links-row">
-            <a href="https://arxiv.org/abs/2606.09971"
-               target="_blank"
-               rel="noopener noreferrer"
-               aria-label="Open arXiv:2606.09971">
-              arXiv
-            </a>
+              <a href="https://arxiv.org/abs/2606.09971" target="_blank" rel="noopener noreferrer">arXiv</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="paper-card" data-topics="Quantum simulation Lattice field theory Fermions">
+        <div class="paper-index">03</div>
+        <div class="paper-content">
+          <div class="paper-meta">
+            <span class="paper-tag tag-quantum">Quantum simulation</span>
+            <span class="paper-tag tag-lft">Lattice field theory</span>
+            <span class="paper-tag tag-fermion">Fermions</span>
+            <span class="paper-status">arXiv</span>
+          </div>
+
+          <h2>Quantum simulation of massive Thirring and Gross--Neveu models for arbitrary number of flavors</h2>
+
+          <div class="story-box" contenteditable="true" spellcheck="true">
+            <p><strong>Story behind the paper.</strong> I started working on this project while I was at Jefferson Lab during June 2025. I started my new position at NC State in September 2025 and substantially expanded the paper to address dynamical Lie algebras (DLA), and also estimate costs with QSVT methods. 
+            Joao helped me with AVQITE simulations and we could push to 20 qubits. This project sits at the intersection of quantum simulation and relativistic fermionic QFTs. The motivation was to understand how far one can push Hamiltonian methods for field theories with an arbitrary number of flavors, rather than treating the flavor number as a small fixed parameter. The Thirring and Gross--Neveu models are useful toy models that are rich enough to contain nontrivial interaction structure, symmetries, and scaling questions. </p>
+          </div>
+
+          <div class="links-row">
+              <a href="https://arxiv.org/search/?query=Quantum+simulation+of+massive+Thirring+and+Gross--Neveu+models+for+arbitrary+number+of+flavors&amp;searchtype=all" target="_blank" rel="noopener noreferrer">arXiv search</a>
+              <a href="https://scholar.google.com/scholar?q=Quantum+simulation+of+massive+Thirring+and+Gross--Neveu+models+for+arbitrary+number+of+flavors" target="_blank" rel="noopener noreferrer">Scholar</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="paper-card" data-topics="Tensor networks Statistical physics TRG">
+        <div class="paper-index">04</div>
+        <div class="paper-content">
+          <div class="paper-meta">
+            <span class="paper-tag tag-trg">Tensor networks</span>
+            <span class="paper-tag tag-stat">Statistical physics</span>
+            <span class="paper-tag tag-formal">Symmetry twists</span>
+            <span class="paper-status">Phys. Rev. D</span>
+          </div>
+
+          <h2>Tensor renormalization group approach to critical phenomena via symmetry-twisted partition functions</h2>
+
+          <div class="story-box" contenteditable="true" spellcheck="true">
+            <p><strong>Story behind the paper.</strong> Shinichiro, Judah, and I had been collaborating on tensor projects since Summer 2023. This paper originated when Shinichiro presented our previous paper at Yukawa Institute in Kyoto. Yuya was very interested and suggested that we can likely probe critical behaviour if we can 
+            do twisted boundary conditions in the TRG setup. Shinichiro mostly worked out the detail and this was made easy based on the code I already had from 2d and 3d O(2) models previously. I checked the calculations independently. The basic idea is that 
+            this approach is a sharper diagnostics of criticality in tensor renormalization group calculations. Instead of relying only on conventional observables, the idea is to use symmetry-twisted partition functions as a controlled probe of universal information. The twist acts like a clean way to ask which sectors of the theory survive under coarse graining and how they reorganize near a critical point. What makes the story appealing is that the method is both numerical and conceptual: it gives a practical TRG observable, but it is also tied to symmetry and universality.</p>
+          </div>
+
+          <div class="links-row">
+              <a href="https://scholar.google.com/scholar?q=Tensor+renormalization+group+approach+to+critical+phenomena+via+symmetry-twisted+partition+functions" target="_blank" rel="noopener noreferrer">Scholar</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="paper-card" data-topics="CV quantum computing Quantum information Quantum simulation">
+        <div class="paper-index">05</div>
+        <div class="paper-content">
+          <div class="paper-meta">
+            <span class="paper-tag tag-cv">CV quantum computing</span>
+            <span class="paper-tag tag-qinfo">Quantum information</span>
+            <span class="paper-tag tag-quantum">Quantum simulation</span>
+            <span class="paper-status">arXiv</span>
+          </div>
+
+          <h2>Hybrid continuous-discrete-variable quantum computing: a guide to utility</h2>
+
+          <div class="story-box" contenteditable="true" spellcheck="true">
+            <p><strong>Story behind the paper.</strong> I had just accepted the offer from NC State to start as Assistant Research Scholar from September 2025. Lex and Yuan added me to the Slack channel for onboarding and research discussions. In one of those old chats in the channel, I found a link to Overleaf document. I requested 
+            Yuan and Lex to join the project and suggested that due to my previous papers on using continuous variables (CV) for lattice gauge theory, I can work on the review and details of that section. In this guide, we clarify range of problems where hybrid continuous-discrete-variable quantum computing can genuinely be useful
+            in the coming decades. The subject often has two communities speaking slightly different languages: qubits and gates on one side, qumodes, Gaussian operations, and bosonic encodings on the other. The goal of the paper is to organize the common ground and identify situations where the hybrid approach is not just elegant, but practically motivated. A useful story is that continuous variables are not merely another hardware platform; they can be a natural language for bosons, gauge links, fields, and oscillator-like degrees of freedom. This paper therefore plays the role of a map for deciding when CV resources should be part of a quantum algorithmic toolbox.</p>
+          </div>
+
+          <div class="links-row">
+              <a href="https://arxiv.org/search/?query=Hybrid+continuous-discrete-variable+quantum+computing%3A+a+guide+to+utility&amp;searchtype=all" target="_blank" rel="noopener noreferrer">arXiv search</a>
+              <a href="https://scholar.google.com/scholar?q=Hybrid+continuous-discrete-variable+quantum+computing%3A+a+guide+to+utility" target="_blank" rel="noopener noreferrer">Scholar</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="paper-card" data-topics="Lattice field theory Statistical physics Real time / Ising">
+        <div class="paper-index">06</div>
+        <div class="paper-content">
+          <div class="paper-meta">
+            <span class="paper-tag tag-lft">Lattice field theory</span>
+            <span class="paper-tag tag-stat">Statistical physics</span>
+            <span class="paper-tag tag-ising">Ising</span>
+            <span class="paper-status">arXiv</span>
+          </div>
+
+          <h2>On Ising model in magnetic field on the lattice</h2>
+
+          <div class="story-box" contenteditable="true" spellcheck="true">
+            <p><strong>Story behind the paper.</strong> I started thinking about the analytic expression for 2d classical Ising model partition function when we turn on the magnetic field during April-May 2020. I had the tool of TRG to my disposal, where
+            I could quickly generate the data for finite fields. I started with a hypergeometric closed form expression for Onsager's result and asked the following 
+            question -- what is the simplest extension of this result to admit magnetic field. 
+            After few trials, I could come up with a good guess which I later improved. This was worked out all before end of 2020 but I did not publish it since I thought
+            it was useless. However, in 2025, I thought there is no harm in posting on arXiv.
+            I tried to get this published, but no one saw value in this paper, so I have left it on arXiv. Surprisingly, some of my old friends and professors, emailed and mentioned this paper saying it was a great guess. 
+          </p>
+          </div>
+
+          <div class="links-row">
+              <a href="https://arxiv.org/search/?query=On+Ising+model+in+magnetic+field+on+the+lattice&amp;searchtype=all" target="_blank" rel="noopener noreferrer">arXiv search</a>
+              <a href="https://scholar.google.com/scholar?q=On+Ising+model+in+magnetic+field+on+the+lattice" target="_blank" rel="noopener noreferrer">Scholar</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="paper-card" data-topics="Matrix models Holography / SUSY Lattice field theory">
+        <div class="paper-index">07</div>
+        <div class="paper-content">
+          <div class="paper-meta">
+            <span class="paper-tag tag-matrix">Matrix models</span>
+            <span class="paper-tag tag-holo">Holography / SUSY</span>
+            <span class="paper-tag tag-lft">Lattice field theory</span>
+            <span class="paper-status">Phys. Rev. D</span>
+          </div>
+
+          <h2>Finite-temperature phase diagram of the Berenstein-Maldacena-Nastase matrix model on the lattice</h2>
+
+          <div class="story-box" contenteditable="true" spellcheck="true">
+            <p><strong>Story behind the paper.</strong> This paper belongs to the broader effort of using lattice methods to make gauge/gravity duality quantitative. The BMN matrix model is particularly attractive because it is a deformation of the BFSS matrix model with a rich finite-temperature structure. The central story is the attempt to map its phase diagram directly from the microscopic lattice formulation, without relying only on weak-coupling or gravity-side intuition. Finite-temperature matrix models are demanding because phase structure, large-N effects, and continuum extrapolations all interact. This paper is part of the long-term program of testing holography through nonperturbative simulation.</p>
+          </div>
+
+          <div class="links-row">
+              <a href="https://scholar.google.com/scholar?q=Finite-temperature+phase+diagram+of+the+Berenstein-Maldacena-Nastase+matrix+model+on+the+lattice" target="_blank" rel="noopener noreferrer">Scholar</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="paper-card" data-topics="Tensor networks Real time / Ising Lattice field theory">
+        <div class="paper-index">08</div>
+        <div class="paper-content">
+          <div class="paper-meta">
+            <span class="paper-tag tag-trg">Tensor networks</span>
+            <span class="paper-tag tag-ising">Real time</span>
+            <span class="paper-tag tag-lft">Lattice field theory</span>
+            <span class="paper-status">Phys. Rev. Research</span>
+          </div>
+
+          <h2>Real-Time Scattering in Ising Field Theory using Matrix Product States</h2>
+
+          <div class="story-box" contenteditable="true" spellcheck="true">
+            <p><strong>Story behind the paper.</strong> This project is a good example of using tensor networks not just for ground states, but for dynamical physics. Scattering is conceptually central in quantum field theory, yet real-time scattering from a lattice many-body wavefunction is technically delicate. The Ising field theory provides a clean setting where particles, bound states, and real-time propagation can be studied with matrix product states. A natural story for this paper is that it tries to bridge the language of field-theory scattering with the computational language of MPS time evolution. It also helped clarify what kinds of real-time observables can be extracted from tensor-network simulations before entanglement growth becomes the limiting factor.</p>
+          </div>
+
+          <div class="links-row">
+              <a href="https://scholar.google.com/scholar?q=Real-Time+Scattering+in+Ising+Field+Theory+using+Matrix+Product+States" target="_blank" rel="noopener noreferrer">Scholar</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="paper-card" data-topics="Lattice gauge theories CV quantum computing Quantum simulation">
+        <div class="paper-index">09</div>
+        <div class="paper-content">
+          <div class="paper-meta">
+            <span class="paper-tag tag-lgt">Lattice gauge theories</span>
+            <span class="paper-tag tag-cv">CV quantum computing</span>
+            <span class="paper-tag tag-quantum">Quantum simulation</span>
+            <span class="paper-status">JHEP</span>
+          </div>
+
+          <h2>Quantum computation of SU(2) lattice gauge theory with continuous variables</h2>
+
+          <div class="story-box" contenteditable="true" spellcheck="true">
+            <p><strong>Story behind the paper.</strong> This paper was motivated by the observation that gauge fields are not naturally qubits. Continuous-variable systems provide a more direct language for bosonic and gauge degrees of freedom, so SU(2) lattice gauge theory becomes a compelling test case. The story is about asking whether qumodes can represent non-Abelian gauge dynamics in a way that is closer to the underlying Hilbert space than a purely qubitized construction. The work connects quantum computation, representation theory, and lattice gauge constraints. In the broader arc, it is one of the papers that pushes quantum simulation beyond spin models and toward gauge theories with genuinely non-Abelian structure.</p>
+          </div>
+
+          <div class="links-row">
+              <a href="https://scholar.google.com/scholar?q=Quantum+computation+of+SU%282%29+lattice+gauge+theory+with+continuous+variables" target="_blank" rel="noopener noreferrer">Scholar</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="paper-card" data-topics="SYK / quantum chaos Quantum information Complexity">
+        <div class="paper-index">10</div>
+        <div class="paper-content">
+          <div class="paper-meta">
+            <span class="paper-tag tag-syk">SYK / quantum chaos</span>
+            <span class="paper-tag tag-qinfo">Quantum information</span>
+            <span class="paper-tag tag-formal">Complexity</span>
+            <span class="paper-status">Phys. Rev. D</span>
+          </div>
+
+          <h2>Sparsity dependence of Krylov state complexity in the SYK model</h2>
+
+          <div class="story-box" contenteditable="true" spellcheck="true">
+            <p><strong>Story behind the paper.</strong> This paper uses the SYK model as a controlled setting to ask how complexity depends on microscopic sparsity. SYK is often treated as a model of maximal chaos and holographic behavior, but the sparse variants allow one to tune how much of the all-to-all randomness is really needed. Krylov complexity gives a dynamical diagnostic that is sensitive to operator growth and the structure of the Hamiltonian. The story behind the paper is that sparsity is not just a computational convenience; it can change how the dynamics explores Hilbert space. This makes the work relevant both for quantum chaos and for quantum simulation, where sparse Hamiltonians are often the physically or algorithmically accessible ones.</p>
+          </div>
+
+          <div class="links-row">
+              <a href="https://scholar.google.com/scholar?q=Sparsity+dependence+of+Krylov+state+complexity+in+the+SYK+model" target="_blank" rel="noopener noreferrer">Scholar</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="paper-card" data-topics="SYK / quantum chaos Quantum simulation Variational algorithms">
+        <div class="paper-index">11</div>
+        <div class="paper-content">
+          <div class="paper-meta">
+            <span class="paper-tag tag-syk">SYK / quantum chaos</span>
+            <span class="paper-tag tag-quantum">Quantum simulation</span>
+            <span class="paper-tag tag-qinfo">VQA</span>
+            <span class="paper-status">arXiv</span>
+          </div>
+
+          <h2>Thermal state preparation of the SYK model using a variational quantum algorithm</h2>
+
+          <div class="story-box" contenteditable="true" spellcheck="true">
+            <p><strong>Story behind the paper.</strong> This paper asks how one can prepare not only ground states, but thermal states of a strongly interacting chaotic model on a quantum computer. The SYK model is a useful benchmark because it is highly nonlocal, strongly coupled, and connected to questions of black-hole physics. A variational algorithm for thermal states must balance expressibility, trainability, and physical diagnostics. The story can be framed as an attempt to move quantum algorithms closer to finite-temperature many-body physics rather than zero-temperature eigenstate preparation alone. It also connects to the broader question of what quantum computers can realistically teach us about thermalization and strongly coupled dynamics.</p>
+          </div>
+
+          <div class="links-row">
+              <a href="https://arxiv.org/search/?query=Thermal+state+preparation+of+the+SYK+model+using+a+variational+quantum+algorithm&amp;searchtype=all" target="_blank" rel="noopener noreferrer">arXiv search</a>
+              <a href="https://scholar.google.com/scholar?q=Thermal+state+preparation+of+the+SYK+model+using+a+variational+quantum+algorithm" target="_blank" rel="noopener noreferrer">Scholar</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="paper-card" data-topics="Tensor networks Non-Abelian field theory TRG">
+        <div class="paper-index">12</div>
+        <div class="paper-content">
+          <div class="paper-meta">
+            <span class="paper-tag tag-trg">Tensor networks</span>
+            <span class="paper-tag tag-lgt">Non-Abelian models</span>
+            <span class="paper-tag tag-stat">TRG</span>
+            <span class="paper-status">Phys. Rev. D</span>
+          </div>
+
+          <h2>SU(2) principal chiral model with tensor renormalization group on a cubic lattice</h2>
+
+          <div class="story-box" contenteditable="true" spellcheck="true">
+            <p><strong>Story behind the paper.</strong> This paper extends tensor renormalization methods into a non-Abelian setting where the group structure is central. The SU(2) principal chiral model is a valuable testbed because it has matrix-valued degrees of freedom and a rich continuum field-theory interpretation. The story is that TRG methods are not restricted to simple spin models; with the right representation-theoretic organization, they can handle more structured field theories. Working on a cubic lattice also makes the problem a bridge between lower-dimensional tests and genuinely higher-dimensional tensor-network calculations. This paper therefore sits in the methodological line of making TRG robust for non-Abelian physics.</p>
+          </div>
+
+          <div class="links-row">
+              <a href="https://scholar.google.com/scholar?q=SU%282%29+principal+chiral+model+with+tensor+renormalization+group+on+a+cubic+lattice" target="_blank" rel="noopener noreferrer">Scholar</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="paper-card" data-topics="Tensor networks Statistical physics TRG">
+        <div class="paper-index">13</div>
+        <div class="paper-content">
+          <div class="paper-meta">
+            <span class="paper-tag tag-trg">Tensor networks</span>
+            <span class="paper-tag tag-stat">Statistical physics</span>
+            <span class="paper-tag tag-stat">TRG</span>
+            <span class="paper-status">Phys. Rev. D</span>
+          </div>
+
+          <h2>Phase diagram of generalized XY model using tensor renormalization group</h2>
+
+          <div class="story-box" contenteditable="true" spellcheck="true">
+            <p><strong>Story behind the paper.</strong> This work uses the generalized XY model as a laboratory for tensor-network studies of phase structure. The XY family is especially useful because it contains vortex physics, continuous symmetries, and transitions that are subtle for many numerical methods. The story is that TRG can be used not only to locate phase boundaries, but also to build intuition for how different interactions reorganize the infrared behavior. Generalizing the model gives a way to stress-test the method across a broader parameter space. In the larger picture, this paper contributes to the use of tensor networks as precision tools for classical statistical systems with field-theory relevance.</p>
+          </div>
+
+          <div class="links-row">
+              <a href="https://scholar.google.com/scholar?q=Phase+diagram+of+generalized+XY+model+using+tensor+renormalization+group" target="_blank" rel="noopener noreferrer">Scholar</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="paper-card" data-topics="SYK / quantum chaos Quantum simulation Holography / SUSY">
+        <div class="paper-index">14</div>
+        <div class="paper-content">
+          <div class="paper-meta">
+            <span class="paper-tag tag-syk">SYK / quantum chaos</span>
+            <span class="paper-tag tag-quantum">Quantum simulation</span>
+            <span class="paper-tag tag-holo">Holography</span>
+            <span class="paper-status">Nucl. Phys. B</span>
+          </div>
+
+          <h2>Hamiltonian simulation of minimal holographic sparsified SYK model</h2>
+
+          <div class="story-box" contenteditable="true" spellcheck="true">
+            <p><strong>Story behind the paper.</strong> This paper is motivated by a practical and conceptual question: how small and sparse can a holographic toy model be while still retaining interesting chaotic dynamics? The SYK model is powerful but expensive, and sparsification offers a route toward more economical Hamiltonian simulation. The story is about designing a minimal model that is still meaningful for holography-inspired quantum dynamics. This is important for near-term and early fault-tolerant quantum simulation, where every term in the Hamiltonian matters. The work connects sparse random interactions, Hamiltonian simulation cost, and the search for compact models of quantum chaos.</p>
+          </div>
+
+          <div class="links-row">
+              <a href="https://scholar.google.com/scholar?q=Hamiltonian+simulation+of+minimal+holographic+sparsified+SYK+model" target="_blank" rel="noopener noreferrer">Scholar</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="paper-card" data-topics="Tensor networks Non-Abelian field theory TRG">
+        <div class="paper-index">15</div>
+        <div class="paper-content">
+          <div class="paper-meta">
+            <span class="paper-tag tag-trg">Tensor networks</span>
+            <span class="paper-tag tag-lgt">Non-Abelian models</span>
+            <span class="paper-tag tag-default">Proceedings</span>
+            <span class="paper-status">POS</span>
+          </div>
+
+          <h2>Tensor renormalization group study of 3D principal chiral model</h2>
+
+          <div class="story-box" contenteditable="true" spellcheck="true">
+            <p><strong>Story behind the paper.</strong> This proceedings contribution fits into the development of TRG methods for non-Abelian models in three dimensions. The principal chiral model is a natural benchmark because it contains group-valued fields and nontrivial symmetry structure. The story is about taking tools that work well for simpler spin systems and testing their reach in a more field-theoretic setting. Even when presented as a shorter contribution, the work captures an important methodological step: making tensor-network coarse graining compatible with richer local degrees of freedom. It also connects to the broader goal of using TRG for lattice field theories beyond Abelian examples.</p>
+          </div>
+
+          <div class="links-row">
+              <a href="https://scholar.google.com/scholar?q=Tensor+renormalization+group+study+of+3D+principal+chiral+model" target="_blank" rel="noopener noreferrer">Scholar</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="paper-card" data-topics="Holography / SUSY Lattice field theory Phase diagram">
+        <div class="paper-index">16</div>
+        <div class="paper-content">
+          <div class="paper-meta">
+            <span class="paper-tag tag-holo">Holography / SUSY</span>
+            <span class="paper-tag tag-lft">Lattice field theory</span>
+            <span class="paper-tag tag-stat">Phase diagram</span>
+            <span class="paper-status">Phys. Rev. D</span>
+          </div>
+
+          <h2>Nonperturbative phase diagram of two-dimensional N = (2,2) super-Yang-Mills theory</h2>
+
+          <div class="story-box" contenteditable="true" spellcheck="true">
+            <p><strong>Story behind the paper.</strong> This paper belongs to the lattice supersymmetry program: understanding supersymmetric gauge theories from first principles. Two-dimensional N=(2,2) super-Yang--Mills theory is simple enough to simulate, but still contains nontrivial supersymmetric and gauge dynamics. The story is about using nonperturbative lattice calculations to map a phase diagram that cannot be reliably inferred from perturbation theory alone. Such studies are important because supersymmetric theories often serve as controlled windows into holography and strongly coupled gauge dynamics. This paper is part of the effort to make those windows quantitative.</p>
+          </div>
+
+          <div class="links-row">
+              <a href="https://scholar.google.com/scholar?q=Nonperturbative+phase+diagram+of+two-dimensional+N+%3D+%282%2C2%29+super-Yang-Mills+theory" target="_blank" rel="noopener noreferrer">Scholar</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="paper-card" data-topics="SYK / quantum chaos Quantum simulation Noisy quantum hardware">
+        <div class="paper-index">17</div>
+        <div class="paper-content">
+          <div class="paper-meta">
+            <span class="paper-tag tag-syk">SYK / quantum chaos</span>
+            <span class="paper-tag tag-quantum">Quantum simulation</span>
+            <span class="paper-tag tag-qinfo">Noisy hardware</span>
+            <span class="paper-status">Phys. Rev. D</span>
+          </div>
+
+          <h2>Sachdev-Ye-Kitaev model on a noisy quantum computer</h2>
+
+          <div class="story-box" contenteditable="true" spellcheck="true">
+            <p><strong>Story behind the paper.</strong> This paper asks what happens when a model famous for strong chaos and holography is placed on real, noisy quantum hardware. The SYK model is theoretically elegant but experimentally demanding because of its all-to-all random interactions. The story is therefore about confronting the gap between an ideal Hamiltonian and the constraints of actual quantum devices. Noise, compilation, and measurement overhead become part of the physics workflow rather than afterthoughts. This work fits into the broader question of which many-body and field-theory models can be meaningfully explored before fully fault-tolerant quantum computation becomes available.</p>
+          </div>
+
+          <div class="links-row">
+              <a href="https://scholar.google.com/scholar?q=Sachdev-Ye-Kitaev+model+on+a+noisy+quantum+computer" target="_blank" rel="noopener noreferrer">Scholar</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="paper-card" data-topics="CV quantum computing Quantum simulation Lattice field theory">
+        <div class="paper-index">18</div>
+        <div class="paper-content">
+          <div class="paper-meta">
+            <span class="paper-tag tag-cv">CV quantum computing</span>
+            <span class="paper-tag tag-quantum">Quantum simulation</span>
+            <span class="paper-tag tag-lft">Lattice field theory</span>
+            <span class="paper-status">Phys. Rev. A</span>
+          </div>
+
+          <h2>Continuous variable quantum computation of the O(3) model in 1+1 dimensions</h2>
+
+          <div class="story-box" contenteditable="true" spellcheck="true">
+            <p><strong>Story behind the paper.</strong> This paper develops continuous-variable quantum computation as a language for simulating a nonlinear field theory. The O(3) model in 1+1 dimensions is a particularly interesting target because it has asymptotic freedom, nonperturbative mass generation, and a compact target-space structure. The story is that qumodes can sometimes represent field variables more naturally than a direct qubit truncation. This makes the paper part of a larger effort to match quantum hardware primitives to the degrees of freedom of lattice field theory. It also anticipates later work on using bosonic and hybrid architectures for gauge and sigma models.</p>
+          </div>
+
+          <div class="links-row">
+              <a href="https://scholar.google.com/scholar?q=Continuous+variable+quantum+computation+of+the+O%283%29+model+in+1%2B1+dimensions" target="_blank" rel="noopener noreferrer">Scholar</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="paper-card" data-topics="CV quantum computing Quantum simulation Lattice field theory">
+        <div class="paper-index">19</div>
+        <div class="paper-content">
+          <div class="paper-meta">
+            <span class="paper-tag tag-cv">CV quantum computing</span>
+            <span class="paper-tag tag-quantum">Quantum simulation</span>
+            <span class="paper-tag tag-default">Proceedings</span>
+            <span class="paper-status">arXiv / POS</span>
+          </div>
+
+          <h2>Quantum computations of the O(3) model using qumodes</h2>
+
+          <div class="story-box" contenteditable="true" spellcheck="true">
+            <p><strong>Story behind the paper.</strong> This work presents the O(3) model from the perspective of qumode-based quantum computation. The central idea is that continuous-variable systems provide a natural computational setting for models whose degrees of freedom are not intrinsically binary. The paper can be framed as a bridge between formal Hamiltonian constructions and implementable circuits or simulation primitives. It also helps communicate why CV methods are not just alternatives to qubits, but can be better aligned with certain field variables. In the larger research story, this paper is part of the development of quantum simulation tools for sigma models and lattice field theory.</p>
+          </div>
+
+          <div class="links-row">
+              <a href="https://arxiv.org/search/?query=Quantum+computations+of+the+O%283%29+model+using+qumodes&amp;searchtype=all" target="_blank" rel="noopener noreferrer">arXiv search</a>
+              <a href="https://scholar.google.com/scholar?q=Quantum+computations+of+the+O%283%29+model+using+qumodes" target="_blank" rel="noopener noreferrer">Scholar</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="paper-card" data-topics="Tensor networks Scientific computing Software">
+        <div class="paper-index">20</div>
+        <div class="paper-content">
+          <div class="paper-meta">
+            <span class="paper-tag tag-trg">Tensor networks</span>
+            <span class="paper-tag tag-code">Scientific computing</span>
+            <span class="paper-tag tag-code">Software</span>
+            <span class="paper-status">Computer Phys. Comm.</span>
+          </div>
+
+          <h2>GPU-Acceleration of Tensor Renormalization with PyTorch using CUDA</h2>
+
+          <div class="story-box" contenteditable="true" spellcheck="true">
+            <p><strong>Story behind the paper.</strong> This paper is about making tensor renormalization calculations faster and more accessible. TRG methods can be conceptually elegant, but the dominant cost is often large tensor contractions, making GPU acceleration extremely valuable. The story is that modern machine-learning infrastructure such as PyTorch and CUDA can be repurposed for lattice field theory and statistical mechanics. This changes the practical scale of calculations that can be attempted and lowers the barrier for experimentation. The work is also a reminder that algorithmic physics often advances through better software engineering as much as through new formulas.</p>
+          </div>
+
+          <div class="links-row">
+              <a href="https://scholar.google.com/scholar?q=GPU-Acceleration+of+Tensor+Renormalization+with+PyTorch+using+CUDA" target="_blank" rel="noopener noreferrer">Scholar</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="paper-card" data-topics="Quantum information Pedagogy">
+        <div class="paper-index">21</div>
+        <div class="paper-content">
+          <div class="paper-meta">
+            <span class="paper-tag tag-qinfo">Quantum information</span>
+            <span class="paper-tag tag-teach">Pedagogy</span>
+            <span class="paper-status">arXiv</span>
+          </div>
+
+          <h2>Notes on Quantum Computation and Information</h2>
+
+          <div class="story-box" contenteditable="true" spellcheck="true">
+            <p><strong>Story behind the paper.</strong> These notes are best understood as a teaching and organization project. Quantum computation and information contain many beautiful ideas, but the entry barrier can be high because notation, circuit identities, and physical intuition are often scattered across different sources. The story here is to collect the essential concepts in a form that is useful for students and researchers entering the field from physics. Writing notes also clarifies one&#x27;s own understanding: definitions become sharper when they must be explained cleanly. In the broader research arc, this kind of pedagogical work supports the quantum-simulation papers by building a common language for algorithms, entanglement, and quantum resources.</p>
+          </div>
+
+          <div class="links-row">
+              <a href="https://arxiv.org/search/?query=Notes+on+Quantum+Computation+and+Information&amp;searchtype=all" target="_blank" rel="noopener noreferrer">arXiv search</a>
+              <a href="https://scholar.google.com/scholar?q=Notes+on+Quantum+Computation+and+Information" target="_blank" rel="noopener noreferrer">Scholar</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="paper-card" data-topics="Holography / SUSY Lattice field theory Large N">
+        <div class="paper-index">22</div>
+        <div class="paper-content">
+          <div class="paper-meta">
+            <span class="paper-tag tag-holo">Holography / SUSY</span>
+            <span class="paper-tag tag-lft">Lattice field theory</span>
+            <span class="paper-tag tag-matrix">Large N</span>
+            <span class="paper-status">EPJST</span>
+          </div>
+
+          <h2>Supersymmetric Wilson loops on the lattice in the large N limit</h2>
+
+          <div class="story-box" contenteditable="true" spellcheck="true">
+            <p><strong>Story behind the paper.</strong> This paper focuses on Wilson loops as nonperturbative observables in lattice supersymmetric gauge theory. Wilson loops are central because they connect gauge dynamics, large-N physics, and holographic expectations. The story is about asking how much of the continuum supersymmetric structure can be accessed after lattice regularization and numerical simulation. The large-N limit gives the work an additional connection to gauge/gravity duality. This paper fits naturally into the program of turning holographic statements into lattice-measurable quantities.</p>
+          </div>
+
+          <div class="links-row">
+              <a href="https://scholar.google.com/scholar?q=Supersymmetric+Wilson+loops+on+the+lattice+in+the+large+N+limit" target="_blank" rel="noopener noreferrer">Scholar</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="paper-card" data-topics="Matrix models Holography / SUSY Phase diagram">
+        <div class="paper-index">23</div>
+        <div class="paper-content">
+          <div class="paper-meta">
+            <span class="paper-tag tag-matrix">Matrix models</span>
+            <span class="paper-tag tag-holo">Holography / SUSY</span>
+            <span class="paper-tag tag-stat">Phase diagram</span>
+            <span class="paper-status">JHEP</span>
+          </div>
+
+          <h2>Non-perturbative phase structure of the bosonic BMN matrix model</h2>
+
+          <div class="story-box" contenteditable="true" spellcheck="true">
+            <p><strong>Story behind the paper.</strong> This paper studies the bosonic BMN matrix model as a nonperturbative many-matrix system with rich thermal behavior. Matrix models are deceptively compact: they have no spatial lattice, but their large-N dynamics can encode gravitational and brane physics. The story is about mapping the phase structure directly, rather than relying only on analytic approximations. The bosonic model also provides a cleaner setting for isolating the role of matrix interactions and emergent geometry. This work is part of the broader line connecting lattice simulation, large-N dynamics, and holographic matrix models.</p>
+          </div>
+
+          <div class="links-row">
+              <a href="https://scholar.google.com/scholar?q=Non-perturbative+phase+structure+of+the+bosonic+BMN+matrix+model" target="_blank" rel="noopener noreferrer">Scholar</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="paper-card" data-topics="Holography / SUSY Matrix models Finite temperature">
+        <div class="paper-index">24</div>
+        <div class="paper-content">
+          <div class="paper-meta">
+            <span class="paper-tag tag-holo">Holography / SUSY</span>
+            <span class="paper-tag tag-matrix">Matrix models</span>
+            <span class="paper-tag tag-default">Proceedings</span>
+            <span class="paper-status">POS</span>
+          </div>
+
+          <h2>Thermal phase structure of dimensionally reduced super-Yang--Mills</h2>
+
+          <div class="story-box" contenteditable="true" spellcheck="true">
+            <p><strong>Story behind the paper.</strong> This proceedings paper addresses the finite-temperature behavior of dimensionally reduced super-Yang--Mills theory. Such theories are important because they provide matrix-model descriptions related to D-brane dynamics and holography. The story is about using lattice simulation to probe thermal phases that have both gauge-theory and gravity-side interpretations. Even in reduced dimensions, the interplay between supersymmetry, temperature, and large-N dynamics is highly nontrivial. This work contributes to the larger numerical effort to test gauge/gravity duality quantitatively.</p>
+          </div>
+
+          <div class="links-row">
+              <a href="https://scholar.google.com/scholar?q=Thermal+phase+structure+of+dimensionally+reduced+super-Yang--Mills" target="_blank" rel="noopener noreferrer">Scholar</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="paper-card" data-topics="Tensor networks Statistical physics TRG">
+        <div class="paper-index">25</div>
+        <div class="paper-content">
+          <div class="paper-meta">
+            <span class="paper-tag tag-trg">Tensor networks</span>
+            <span class="paper-tag tag-stat">Statistical physics</span>
+            <span class="paper-tag tag-stat">TRG</span>
+            <span class="paper-status">arXiv</span>
+          </div>
+
+          <h2>Tensor renormalization of three-dimensional Potts model</h2>
+
+          <div class="story-box" contenteditable="true" spellcheck="true">
+            <p><strong>Story behind the paper.</strong> The three-dimensional Potts model is a useful benchmark for tensor renormalization because it combines discrete symmetry with nontrivial critical behavior. This paper can be presented as part of the effort to push TRG methods beyond two dimensions. Three-dimensional tensor networks are substantially more expensive, so algorithmic choices and truncation strategies become central to the physics output. The story is about testing whether tensor coarse graining can reproduce known phase behavior while remaining computationally controlled. It also helps build confidence for applying TRG to less familiar three-dimensional lattice field theories.</p>
+          </div>
+
+          <div class="links-row">
+              <a href="https://arxiv.org/search/?query=Tensor+renormalization+of+three-dimensional+Potts+model&amp;searchtype=all" target="_blank" rel="noopener noreferrer">arXiv search</a>
+              <a href="https://scholar.google.com/scholar?q=Tensor+renormalization+of+three-dimensional+Potts+model" target="_blank" rel="noopener noreferrer">Scholar</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="paper-card" data-topics="Matrix models Pedagogy Monte Carlo">
+        <div class="paper-index">26</div>
+        <div class="paper-content">
+          <div class="paper-meta">
+            <span class="paper-tag tag-matrix">Matrix models</span>
+            <span class="paper-tag tag-teach">Pedagogy</span>
+            <span class="paper-tag tag-code">Monte Carlo</span>
+            <span class="paper-status">SciPost Lecture Notes</span>
+          </div>
+
+          <h2>Introduction to Monte Carlo for Matrix Models</h2>
+
+          <div class="story-box" contenteditable="true" spellcheck="true">
+            <p><strong>Story behind the paper.</strong> This lecture-note project is a pedagogical entry point into Monte Carlo simulations of matrix models. Matrix models appear in many areas, from large-N gauge theory to holography, but practical simulation details are often difficult to learn from research papers alone. The story is to make the computational workflow explicit: actions, updates, measurements, error estimates, and interpretation. Such notes are especially valuable because they help new students move from formal definitions to working code. In the broader arc, this work supports the lattice holography and matrix-model papers by making the numerical methods more transparent.</p>
+          </div>
+
+          <div class="links-row">
+              <a href="https://scholar.google.com/scholar?q=Introduction+to+Monte+Carlo+for+Matrix+Models" target="_blank" rel="noopener noreferrer">Scholar</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="paper-card" data-topics="Holography / SUSY Lattice field theory Large N">
+        <div class="paper-index">27</div>
+        <div class="paper-content">
+          <div class="paper-meta">
+            <span class="paper-tag tag-holo">Holography / SUSY</span>
+            <span class="paper-tag tag-lft">Lattice field theory</span>
+            <span class="paper-tag tag-matrix">Large N</span>
+            <span class="paper-status">POS</span>
+          </div>
+
+          <h2>Large-N limit of two-dimensional Yang--Mills theory with four supercharges</h2>
+
+          <div class="story-box" contenteditable="true" spellcheck="true">
+            <p><strong>Story behind the paper.</strong> This work studies a supersymmetric gauge theory in the large-N regime, where connections to holography become especially natural. Two-dimensional Yang--Mills theory with four supercharges offers a setting in which lattice methods can probe nonperturbative supersymmetric dynamics. The story is about controlling the large-N limit while preserving enough structure to ask meaningful continuum and holographic questions. Proceedings contributions like this often capture a focused stage of a larger research program. Here the larger program is clear: use lattice simulations to test and refine our understanding of supersymmetric gauge theories.</p>
+          </div>
+
+          <div class="links-row">
+              <a href="https://scholar.google.com/scholar?q=Large-N+limit+of+two-dimensional+Yang--Mills+theory+with+four+supercharges" target="_blank" rel="noopener noreferrer">Scholar</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="paper-card" data-topics="Tensor networks Statistical physics TRG">
+        <div class="paper-index">28</div>
+        <div class="paper-content">
+          <div class="paper-meta">
+            <span class="paper-tag tag-trg">Tensor networks</span>
+            <span class="paper-tag tag-stat">Statistical physics</span>
+            <span class="paper-tag tag-lft">O(2) model</span>
+            <span class="paper-status">Phys. Rev. D</span>
+          </div>
+
+          <h2>Tensor renormalization group study of the 3d O(2) model</h2>
+
+          <div class="story-box" contenteditable="true" spellcheck="true">
+            <p><strong>Story behind the paper.</strong> The 3d O(2) model is a central example for critical phenomena, superfluid universality, and lattice field-theory methods. This paper uses TRG to study a model where continuous symmetry and three-dimensional criticality make the calculation both important and challenging. The story is that tensor methods can provide a complementary route to Monte Carlo, especially in contexts where sign problems or dual formulations matter. Studying a well-known model is also a way to calibrate the method before applying it to more exotic systems. In the broader research narrative, this work strengthens the case for TRG as a general-purpose tool for statistical and quantum field theory.</p>
+          </div>
+
+          <div class="links-row">
+              <a href="https://scholar.google.com/scholar?q=Tensor+renormalization+group+study+of+the+3d+O%282%29+model" target="_blank" rel="noopener noreferrer">Scholar</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="paper-card" data-topics="Holography / SUSY Lattice field theory Gauge/gravity duality">
+        <div class="paper-index">29</div>
+        <div class="paper-content">
+          <div class="paper-meta">
+            <span class="paper-tag tag-holo">Holography / SUSY</span>
+            <span class="paper-tag tag-lft">Lattice field theory</span>
+            <span class="paper-tag tag-holo">Gauge/gravity</span>
+            <span class="paper-status">Phys. Rev. D</span>
+          </div>
+
+          <h2>Three-dimensional super-Yang-Mills theory on the lattice and dual black branes</h2>
+
+          <div class="story-box" contenteditable="true" spellcheck="true">
+            <p><strong>Story behind the paper.</strong> This paper is directly tied to one of the most concrete ambitions of lattice holography: comparing supersymmetric gauge theory with black-brane physics. Three-dimensional super-Yang--Mills theory provides a nontrivial thermal gauge theory whose strong-coupling behavior has a gravitational dual description. The story is about using lattice simulations to test that duality beyond formal arguments. Such calculations require care with continuum limits, finite-N effects, and the preservation or restoration of supersymmetry. The paper fits into the larger program of making holography into a quantitative numerical science.</p>
+          </div>
+
+          <div class="links-row">
+              <a href="https://scholar.google.com/scholar?q=Three-dimensional+super-Yang-Mills+theory+on+the+lattice+and+dual+black+branes" target="_blank" rel="noopener noreferrer">Scholar</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="paper-card" data-topics="Formal theory Scattering amplitudes">
+        <div class="paper-index">30</div>
+        <div class="paper-content">
+          <div class="paper-meta">
+            <span class="paper-tag tag-formal">Formal theory</span>
+            <span class="paper-tag tag-amp">Scattering amplitudes</span>
+            <span class="paper-status">Phys. Rev. Research</span>
+          </div>
+
+          <h2>Positive geometries for all scalar theories from twisted intersection theory</h2>
+
+          <div class="story-box" contenteditable="true" spellcheck="true">
+            <p><strong>Story behind the paper.</strong> This paper is different in flavor from the lattice and quantum-simulation works, but it shares a concern with hidden structure. Positive geometries and twisted intersection theory provide a geometric way to organize scattering amplitudes. The story is about finding unifying mathematical objects behind apparently different scalar theories. Instead of starting from a numerical lattice system, this work starts from the analytic and geometric structure of amplitudes. It broadens the research portfolio by connecting quantum field theory to modern ideas in geometry and scattering.</p>
+          </div>
+
+          <div class="links-row">
+              <a href="https://scholar.google.com/scholar?q=Positive+geometries+for+all+scalar+theories+from+twisted+intersection+theory" target="_blank" rel="noopener noreferrer">Scholar</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="paper-card" data-topics="Tensor networks Statistical physics TRG">
+        <div class="paper-index">31</div>
+        <div class="paper-content">
+          <div class="paper-meta">
+            <span class="paper-tag tag-trg">Tensor networks</span>
+            <span class="paper-tag tag-stat">Statistical physics</span>
+            <span class="paper-tag tag-ising">XY model</span>
+            <span class="paper-status">JSTAT</span>
+          </div>
+
+          <h2>Critical analysis of two-dimensional classical XY model using tensor renormalization group</h2>
+
+          <div class="story-box" contenteditable="true" spellcheck="true">
+            <p><strong>Story behind the paper.</strong> The two-dimensional XY model is a classic system because of the Berezinskii--Kosterlitz--Thouless transition and vortex physics. This paper uses TRG to examine how well tensor methods capture that subtle critical behavior. The story is not merely to reproduce a known result, but to understand the strengths and limitations of the method in a demanding benchmark. The XY model is especially important because conventional local order parameters do not tell the whole story. This work therefore helps clarify how tensor-network diagnostics should be interpreted in systems with topological critical behavior.</p>
+          </div>
+
+          <div class="links-row">
+              <a href="https://scholar.google.com/scholar?q=Critical+analysis+of+two-dimensional+classical+XY+model+using+tensor+renormalization+group" target="_blank" rel="noopener noreferrer">Scholar</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="paper-card" data-topics="Matrix models Holography / SUSY Finite temperature">
+        <div class="paper-index">32</div>
+        <div class="paper-content">
+          <div class="paper-meta">
+            <span class="paper-tag tag-matrix">Matrix models</span>
+            <span class="paper-tag tag-holo">Holography / SUSY</span>
+            <span class="paper-tag tag-stat">Finite temperature</span>
+            <span class="paper-status">POS</span>
+          </div>
+
+          <h2>Thermal phase structure of a supersymmetric matrix model</h2>
+
+          <div class="story-box" contenteditable="true" spellcheck="true">
+            <p><strong>Story behind the paper.</strong> This paper studies thermal phases in a supersymmetric matrix model, a compact setting for large-N and holographic dynamics. The finite-temperature behavior of such models is important because it can be related to black-hole or black-brane thermodynamics. The story is about using numerical simulation to identify phases and transitions in a regime where analytic control is limited. Supersymmetry adds both structure and numerical challenges, especially when studying thermal ensembles. This proceedings work fits into the broader sequence of lattice and matrix-model studies testing gauge/gravity duality.</p>
+          </div>
+
+          <div class="links-row">
+              <a href="https://scholar.google.com/scholar?q=Thermal+phase+structure+of+a+supersymmetric+matrix+model" target="_blank" rel="noopener noreferrer">Scholar</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="paper-card" data-topics="Matrix models Large N Formal theory">
+        <div class="paper-index">33</div>
+        <div class="paper-content">
+          <div class="paper-meta">
+            <span class="paper-tag tag-matrix">Matrix models</span>
+            <span class="paper-tag tag-formal">Finite N</span>
+            <span class="paper-tag tag-holo">Large N</span>
+            <span class="paper-status">arXiv</span>
+          </div>
+
+          <h2>Finite N unitary matrix models</h2>
+
+          <div class="story-box" contenteditable="true" spellcheck="true">
+            <p><strong>Story behind the paper.</strong> This paper focuses on unitary matrix models away from the strict large-N limit. Large-N results are powerful, but finite-N effects are essential for understanding how those limits emerge in real calculations. The story is about keeping track of the finite-size structure rather than treating it only as a nuisance. Unitary matrix models are also connected to confinement, thermal transitions, and effective descriptions of gauge theories. This work therefore provides useful intuition for both analytic matrix-model physics and numerical studies where N is necessarily finite.</p>
+          </div>
+
+          <div class="links-row">
+              <a href="https://arxiv.org/search/?query=Finite+N+unitary+matrix+models&amp;searchtype=all" target="_blank" rel="noopener noreferrer">arXiv search</a>
+              <a href="https://scholar.google.com/scholar?q=Finite+N+unitary+matrix+models" target="_blank" rel="noopener noreferrer">Scholar</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="paper-card" data-topics="Tensor networks Lattice gauge theories TRG">
+        <div class="paper-index">34</div>
+        <div class="paper-content">
+          <div class="paper-meta">
+            <span class="paper-tag tag-trg">Tensor networks</span>
+            <span class="paper-tag tag-lgt">Lattice gauge theories</span>
+            <span class="paper-tag tag-lgt">Non-Abelian models</span>
+            <span class="paper-status">Phys. Rev. D</span>
+          </div>
+
+          <h2>Tensor renormalization group study of the non-Abelian Higgs model in two dimensions</h2>
+
+          <div class="story-box" contenteditable="true" spellcheck="true">
+            <p><strong>Story behind the paper.</strong> This paper brings tensor renormalization methods to a non-Abelian Higgs model, where gauge and matter degrees of freedom interact nontrivially. The motivation is to understand whether TRG can handle the richer local constraints and representation structure of non-Abelian lattice field theories. The story is about moving beyond spin models toward gauge-matter systems that are closer to the theories of particle physics. Two dimensions provide a controlled setting in which the method can be developed and tested. In the broader arc, this work connects tensor-network coarse graining with the long-term goal of simulating non-Abelian gauge theories.</p>
+          </div>
+
+          <div class="links-row">
+              <a href="https://scholar.google.com/scholar?q=Tensor+renormalization+group+study+of+the+non-Abelian+Higgs+model+in+two+dimensions" target="_blank" rel="noopener noreferrer">Scholar</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="paper-card" data-topics="Quantum gravity Lattice field theory Formal theory">
+        <div class="paper-index">35</div>
+        <div class="paper-content">
+          <div class="paper-meta">
+            <span class="paper-tag tag-gravity">Quantum gravity</span>
+            <span class="paper-tag tag-lft">Lattice field theory</span>
+            <span class="paper-tag tag-default">Proceedings</span>
+            <span class="paper-status">POS</span>
+          </div>
+
+          <h2>Lattice quantum gravity with scalar fields</h2>
+
+          <div class="story-box" contenteditable="true" spellcheck="true">
+            <p><strong>Story behind the paper.</strong> This paper explores a lattice approach to quantum gravity coupled to scalar matter. The motivation is to ask how gravitational degrees of freedom and matter fields can be treated nonperturbatively in a discretized setting. The story is necessarily exploratory: quantum gravity on the lattice involves conceptual choices about geometry, measure, and observables. Including scalar fields makes the setup more physically informative and provides additional probes of the geometry. This work broadens the lattice theme beyond gauge theories and statistical systems into gravitational physics.</p>
+          </div>
+
+          <div class="links-row">
+              <a href="https://scholar.google.com/scholar?q=Lattice+quantum+gravity+with+scalar+fields" target="_blank" rel="noopener noreferrer">Scholar</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="paper-card" data-topics="Holography / SUSY Lattice field theory Gauge/gravity duality">
+        <div class="paper-index">36</div>
+        <div class="paper-content">
+          <div class="paper-meta">
+            <span class="paper-tag tag-holo">Holography / SUSY</span>
+            <span class="paper-tag tag-lft">Lattice field theory</span>
+            <span class="paper-tag tag-matrix">D-branes</span>
+            <span class="paper-status">POS</span>
+          </div>
+
+          <h2>The properties of D1-branes from lattice super-Yang-Mills theory using gauge/gravity duality</h2>
+
+          <div class="story-box" contenteditable="true" spellcheck="true">
+            <p><strong>Story behind the paper.</strong> This work uses lattice super-Yang--Mills theory to study physics associated with D1-branes. The key motivation is that gauge/gravity duality gives a precise but highly nontrivial relation between a strongly coupled gauge theory and gravitational brane dynamics. The story is about using numerical lattice calculations as a nonperturbative test of that relation. D-brane systems are particularly important because they connect matrix models, supersymmetric gauge theories, and black-brane thermodynamics. This proceedings contribution fits into the sustained effort to turn holographic duality into a quantitatively testable framework.</p>
+          </div>
+
+          <div class="links-row">
+              <a href="https://scholar.google.com/scholar?q=The+properties+of+D1-branes+from+lattice+super-Yang-Mills+theory+using+gauge%2Fgravity+duality" target="_blank" rel="noopener noreferrer">Scholar</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="paper-card" data-topics="Holography / SUSY Lattice field theory Lattice supersymmetry">
+        <div class="paper-index">37</div>
+        <div class="paper-content">
+          <div class="paper-meta">
+            <span class="paper-tag tag-holo">Holography / SUSY</span>
+            <span class="paper-tag tag-lft">Lattice field theory</span>
+            <span class="paper-tag tag-formal">N=4 SYM</span>
+            <span class="paper-status">Phys. Rev. D</span>
+          </div>
+
+          <h2>On the removal of the trace mode in lattice N = 4 super Yang-Mills theory</h2>
+
+          <div class="story-box" contenteditable="true" spellcheck="true">
+            <p><strong>Story behind the paper.</strong> This paper addresses a technical but important issue in lattice N=4 super Yang--Mills theory: the treatment of the trace mode. In lattice supersymmetry, seemingly small formulation details can strongly affect the stability and interpretation of simulations. The story is about identifying which degrees of freedom are physical for the target theory and which ones must be controlled or removed. Such work is essential because reliable numerical tests of supersymmetric gauge theories depend on clean lattice formulations. The paper therefore contributes to the foundations needed for later simulations of N=4 SYM and related holographic systems.</p>
+          </div>
+
+          <div class="links-row">
+              <a href="https://scholar.google.com/scholar?q=On+the+removal+of+the+trace+mode+in+lattice+N+%3D+4+super+Yang-Mills+theory" target="_blank" rel="noopener noreferrer">Scholar</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="paper-card" data-topics="Holography / SUSY Lattice field theory Supersymmetry breaking">
+        <div class="paper-index">38</div>
+        <div class="paper-content">
+          <div class="paper-meta">
+            <span class="paper-tag tag-holo">Holography / SUSY</span>
+            <span class="paper-tag tag-lft">Lattice field theory</span>
+            <span class="paper-tag tag-formal">SUSY breaking</span>
+            <span class="paper-status">Phys. Rev. D</span>
+          </div>
+
+          <h2>Nonperturbative study of dynamical SUSY breaking in N = (2,2) Yang-Mills theory</h2>
+
+          <div class="story-box" contenteditable="true" spellcheck="true">
+            <p><strong>Story behind the paper.</strong> This paper studies dynamical supersymmetry breaking using nonperturbative lattice methods. Supersymmetry breaking is a central question because it cannot always be decided reliably from perturbative reasoning. The story is about using lattice simulations to test whether the quantum theory preserves or breaks supersymmetry dynamically. The N=(2,2) Yang--Mills setting provides a structured but accessible arena for this question. This work fits into the broader lattice supersymmetry program by showing how numerical observables can address conceptual questions about the vacuum structure of supersymmetric theories.</p>
+          </div>
+
+          <div class="links-row">
+              <a href="https://scholar.google.com/scholar?q=Nonperturbative+study+of+dynamical+SUSY+breaking+in+N+%3D+%282%2C2%29+Yang-Mills+theory" target="_blank" rel="noopener noreferrer">Scholar</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="paper-card" data-topics="Holography / SUSY Lattice field theory Lattice supersymmetry">
+        <div class="paper-index">39</div>
+        <div class="paper-content">
+          <div class="paper-meta">
+            <span class="paper-tag tag-holo">Holography / SUSY</span>
+            <span class="paper-tag tag-lft">Lattice field theory</span>
+            <span class="paper-tag tag-formal">N=4 SYM</span>
+            <span class="paper-status">EPJC</span>
+          </div>
+
+          <h2>Truncation of lattice N = 4 super Yang-Mills</h2>
+
+          <div class="story-box" contenteditable="true" spellcheck="true">
+            <p><strong>Story behind the paper.</strong> This paper examines how truncation affects lattice N=4 super Yang--Mills theory. In practical simulations, one often has to control flat directions, regulate fields, or restrict parts of the configuration space. The story is about understanding which truncations are harmless numerical devices and which ones risk changing the target theory. This is a foundational issue for any attempt to simulate highly supersymmetric gauge theories. The paper contributes to the careful formulation work needed before one can make strong physics claims from lattice N=4 calculations.</p>
+          </div>
+
+          <div class="links-row">
+              <a href="https://scholar.google.com/scholar?q=Truncation+of+lattice+N+%3D+4+super+Yang-Mills" target="_blank" rel="noopener noreferrer">Scholar</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="paper-card" data-topics="Holography / SUSY Lattice field theory Gauge/gravity duality">
+        <div class="paper-index">40</div>
+        <div class="paper-content">
+          <div class="paper-meta">
+            <span class="paper-tag tag-holo">Holography / SUSY</span>
+            <span class="paper-tag tag-lft">Lattice field theory</span>
+            <span class="paper-tag tag-holo">Gauge/gravity</span>
+            <span class="paper-status">EPJC</span>
+          </div>
+
+          <h2>Testing the holographic principle using lattice simulations</h2>
+
+          <div class="story-box" contenteditable="true" spellcheck="true">
+            <p><strong>Story behind the paper.</strong> This paper is framed around a broad and ambitious question: can the holographic principle be tested using lattice simulations? The motivation is that gauge/gravity duality makes strong predictions about quantum gravity using nongravitational gauge theories. Lattice methods provide a first-principles way to compute the gauge-theory side at strong coupling. The story is about turning a deep conceptual duality into a numerical program with observables, limits, and error bars. This work represents part of the early bridge between lattice field theory and quantitative holography.</p>
+          </div>
+
+          <div class="links-row">
+              <a href="https://scholar.google.com/scholar?q=Testing+the+holographic+principle+using+lattice+simulations" target="_blank" rel="noopener noreferrer">Scholar</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="paper-card" data-topics="Holography / SUSY Lattice field theory Gauge/gravity duality">
+        <div class="paper-index">41</div>
+        <div class="paper-content">
+          <div class="paper-meta">
+            <span class="paper-tag tag-holo">Holography / SUSY</span>
+            <span class="paper-tag tag-lft">Lattice field theory</span>
+            <span class="paper-tag tag-holo">Gauge/gravity</span>
+            <span class="paper-status">Phys. Rev. D</span>
+          </div>
+
+          <h2>Testing holography using the lattice with super-Yang-Mills theory on a 2-torus</h2>
+
+          <div class="story-box" contenteditable="true" spellcheck="true">
+            <p><strong>Story behind the paper.</strong> In the summer of 2015 when I was roaming around India meeting friends, I was poised to start my first Phd project. My advisor emailed and asked me to read papers on how one can use lattice super Yang-Mills to probe black holes. In Fall of 2015, I started with the simulations. 
+            The computations were challenging (numerically, it is probably the hardest thing I have done yet in my life) and took close to one year to finish around Fall 2016. We had a nice phase space exploration, however, we realized that the action was likely not correct. We then changed the lattice action in Fall 2016. The next round of simulations ended around February 2017. I visited Yukawa Institute in Kyoto in April 2017 and discussed the draft with Toby. We soon realized that we had to 
+            still do the mass extrapolations (in order to send one hyperparameter to zero which was added to control the flat directions in lattice SUSY models). Eventually, 
+            on September 20, 2017 I posted the paper. This paper had data tables that were 
+            17 pages long. You can still find them on arXiv in ancilliary files.</p>
+          </div>
+
+          <div class="links-row">
+              <a href="https://scholar.google.com/scholar?q=Testing+holography+using+the+lattice+with+super-Yang-Mills+theory+on+a+2-torus" target="_blank" rel="noopener noreferrer">Scholar</a>
           </div>
         </div>
       </article>
