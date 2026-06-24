@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Research Stories | Raghav G. Jha</title>
+  <meta name="description" content="A personal research page collecting the story behind each of my research publications" />
+
+  <style>
+    :root {
+      --bg: #f7f3ee;
+      --ink: #172033;
+      --muted: #687386;
+      --card: rgba(255, 255, 255, 0.84);
+      --line: rgba(23, 32, 51, 0.12);
+      --shadow: 0 24px 60px rgba(26, 33, 52, 0.10);
+      --blue: #355cdd;
+      --cyan: #088fab;
+      --purple: #7c3aed;
+      --red: #c2415d;
+      --green: #17845b;
+      --gold: #b7791f;
+      --slate: #475569;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 0% 0%, rgba(53, 92, 221, 0.18), transparent 32rem),
+        radial-gradient(circle at 85% 8%, rgba(194, 65, 93, 0.15), transparent 28rem),
+        radial-gradient(circle at 50% 100%, rgba(23, 132, 91, 0.13), transparent 30rem),
+        var(--bg);
+      line-height: 1.65;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .page {
+      width: min(1120px, calc(100% - 36px));
+      margin: 0 auto;
+    }
+
+    header {
+      padding: 76px 0 36px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 7px 13px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.58);
+      color: var(--muted);
+      font-size: 0.86rem;
+      letter-spacing: 0.02em;
+      backdrop-filter: blur(8px);
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--blue), var(--red));
+      box-shadow: 0 0 0 5px rgba(53, 92, 221, 0.10);
+    }
+
+    h1 {
+      max-width: 920px;
+      margin: 24px 0 14px;
+      font-size: clamp(2.4rem, 6vw, 5.2rem);
+      line-height: 0.95;
+      letter-spacing: -0.07em;
+    }
+
+    .intro {
+      max-width: 780px;
+      margin: 0;
+      color: var(--muted);
+      font-size: 1.1rem;
+    }
+
+    .toolbar {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      margin: 22px 0 34px;
+      padding: 12px;
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      background: rgba(255, 255, 255, 0.72);
+      backdrop-filter: blur(14px);
+      box-shadow: 0 12px 38px rgba(26, 33, 52, 0.07);
+    }
+
+    .toolbar-inner {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .filter-note {
+      color: var(--muted);
+      font-size: 0.92rem;
+      padding-left: 6px;
+    }
+
+    .filter-buttons {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    button {
+      border: 1px solid var(--line);
+      background: #fff;
+      color: var(--ink);
+      border-radius: 999px;
+      padding: 8px 12px;
+      cursor: pointer;
+      font: inherit;
+      font-size: 0.88rem;
+      transition: transform 0.15s ease, background 0.15s ease, border-color 0.15s ease;
+    }
+
+    button:hover {
+      transform: translateY(-1px);
+      border-color: rgba(53, 92, 221, 0.35);
+      background: rgba(53, 92, 221, 0.07);
+    }
+
+    .papers {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 18px;
+      padding-bottom: 72px;
+    }
+
+    .paper-card {
+      display: grid;
+      grid-template-columns: 78px 1fr;
+      gap: 18px;
+      padding: 22px;
+      border: 1px solid var(--line);
+      border-radius: 28px;
+      background: var(--card);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(10px);
+      transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+    }
+
+    .paper-card:hover {
+      transform: translateY(-2px);
+      border-color: rgba(53, 92, 221, 0.28);
+      box-shadow: 0 30px 76px rgba(26, 33, 52, 0.14);
+    }
+
+    .paper-index {
+      width: 58px;
+      height: 58px;
+      display: grid;
+      place-items: center;
+      border-radius: 18px;
+      background: linear-gradient(135deg, rgba(53,92,221,0.12), rgba(194,65,93,0.10));
+      color: var(--blue);
+      font-weight: 800;
+      letter-spacing: -0.04em;
+    }
+
+    .paper-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 9px;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+
+    .paper-tag,
+    .paper-status {
+      display: inline-flex;
+      align-items: center;
+      padding: 5px 10px;
+      border-radius: 999px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.01em;
+    }
+
+    .paper-status {
+      color: var(--muted);
+      background: rgba(104, 115, 134, 0.09);
+    }
+
+    .tag-quantum {
+      color: var(--blue);
+      background: rgba(53, 92, 221, 0.11);
+    }
+
+    .tag-qinfo {
+      color: #2563eb;
+      background: rgba(37, 99, 235, 0.12);
+    }
+
+    .tag-lgt {
+      color: #b91c1c;
+      background: rgba(185, 28, 28, 0.12);
+    }
+
+    .tag-trg {
+      color: var(--green);
+      background: rgba(23, 132, 91, 0.12);
+    }
+
+    .tag-syk {
+      color: var(--purple);
+      background: rgba(124, 58, 237, 0.12);
+    }
+
+    .tag-holo {
+      color: var(--red);
+      background: rgba(194, 65, 93, 0.12);
+    }
+
+    .tag-cv {
+      color: var(--cyan);
+      background: rgba(8, 143, 171, 0.12);
+    }
+
+    .tag-ising {
+      color: var(--gold);
+      background: rgba(183, 121, 31, 0.14);
+    }
+
+    .tag-formal {
+      color: #9333ea;
+      background: rgba(147, 51, 234, 0.12);
+    }
+
+    .tag-teach {
+      color: var(--slate);
+      background: rgba(71, 85, 105, 0.12);
+    }
+
+    .tag-default {
+      color: var(--slate);
+      background: rgba(71, 85, 105, 0.12);
+    }
+
+    h2 {
+      margin: 0 0 12px;
+      font-size: clamp(1.16rem, 2.2vw, 1.55rem);
+      line-height: 1.25;
+      letter-spacing: -0.03em;
+    }
+
+    .story-box {
+      padding: 16px 18px;
+      border: 1px dashed rgba(23, 32, 51, 0.20);
+      border-radius: 20px;
+      background: rgba(255, 255, 255, 0.62);
+      color: #2b3447;
+      outline: none;
+      text-align: justify;
+      text-justify: inter-word;
+      hyphens: auto;
+    }
+
+    .story-box:focus {
+      border-color: rgba(53, 92, 221, 0.55);
+      box-shadow: 0 0 0 4px rgba(53, 92, 221, 0.10);
+    }
+
+    .story-box p {
+      margin: 0 0 8px;
+      text-align: justify;
+      text-justify: inter-word;
+      hyphens: auto;
+    }
+
+    .story-box p:last-child {
+      margin-bottom: 0;
+    }
+
+    .links-row {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 13px;
+    }
+
+    .links-row a {
+      padding: 7px 11px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.78);
+      color: var(--muted);
+      font-size: 0.86rem;
+      font-weight: 700;
+    }
+
+    .links-row a:hover {
+      color: var(--blue);
+      border-color: rgba(53, 92, 221, 0.35);
+    }
+
+    footer {
+      padding: 30px 0 64px;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    footer a {
+      color: var(--blue);
+      font-weight: 700;
+    }
+
+    @media (max-width: 700px) {
+      .paper-card {
+        grid-template-columns: 1fr;
+      }
+
+      .paper-index {
+        width: 50px;
+        height: 50px;
+      }
+
+      .toolbar {
+        position: static;
+      }
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #0e1220;
+        --ink: #edf2ff;
+        --muted: #a5afc0;
+        --card: rgba(19, 26, 43, 0.78);
+        --line: rgba(237, 242, 255, 0.13);
+        --shadow: 0 24px 60px rgba(0, 0, 0, 0.24);
+      }
+
+      .story-box,
+      .toolbar,
+      .eyebrow,
+      button,
+      .links-row a {
+        background: rgba(255, 255, 255, 0.06);
+      }
+
+      .story-box {
+        color: #dbe5ff;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="page">
+    <header>
+      <div class="eyebrow">Last edited: 23 June, 2026 (work in progress!!)</div>
+      <h1>The story behind papers</h1>
+      <p class="intro">
+        This page collects short, personal notes behind each publication: the puzzle that motivated it,
+        the technical challenge, the surprising point, and how it fits into the research landscape.
+      </p>
+    </header>
+
+    <section class="toolbar" aria-label="Publication filters">
+      <div class="toolbar-inner">
+        <div class="filter-note">Filter by theme</div>
+        <div class="filter-buttons">
+          <button onclick="filterPapers('all')">All</button>
+          <button onclick="filterPapers('Quantum simulation')">Quantum simulation</button>
+          <button onclick="filterPapers('Quantum information')">Quantum information</button>
+          <button onclick="filterPapers('Tensor networks')">Tensor networks</button>
+          <button onclick="filterPapers('Lattice gauge theories')">Lattice gauge theories</button>
+          <button onclick="filterPapers('Lattice / holography')">Lattice / holography</button>
+          <button onclick="filterPapers('SYK / quantum chaos')">SYK</button>
+          <button onclick="filterPapers('CV quantum computing')">CV/Qumodes</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="papers" id="papers">
+
+      <article class="paper-card" data-topics="Quantum simulation SYK / quantum chaos">
+        <div class="paper-index">01</div>
+        <div class="paper-content">
+          <div class="paper-meta">
+            <span class="paper-tag tag-quantum">Quantum simulation</span>
+            <span class="paper-tag tag-syk">SYK / random Hamiltonians</span>
+            <span class="paper-status">arXiv:2606.18339</span>
+          </div>
+
+          <h2>Ground state preparation of random all-to-all Hamiltonians using ADAPT-VQE</h2>
+
+          <div class="story-box" contenteditable="true" spellcheck="true">
+            <p><strong>Story behind the paper.</strong>
+            This paper started back in August 2024, when Sabhyata and I met while attending the QSIM conference
+            at the University of Rhode Island. She had seen my SYK paper from November 2023 and expressed interest
+            in related problems involving random all-to-all Hamiltonians.
+            Bharath and I initially thought that fixed-depth Cartan-inspired ideas might work for this model.
+            Sabhyata put in a lot of work, but we eventually reached the conclusion that this route was not working
+            well enough to form a publishable result. Around this time, Bharath started his postdoc at Virginia Tech,
+            and I had the thought that we should instead try ADAPT-VQE methods for studying models with random couplings.
+            </p>
+          </div>
+
+          <div class="links-row">
+            <a href="https://arxiv.org/abs/2606.18339"
+               target="_blank"
+               rel="noopener noreferrer"
+               aria-label="Open arXiv:2606.18339">
+              arXiv
+            </a>
+          </div>
+        </div>
+      </article>
+
+
+      <article class="paper-card" data-topics="Lattice gauge theories Quantum information Tensor networks">
+        <div class="paper-index">02</div>
+        <div class="paper-content">
+          <div class="paper-meta">
+            <span class="paper-tag tag-lgt">Lattice gauge theories</span>
+            <span class="paper-tag tag-qinfo">Quantum information</span>
+            <span class="paper-tag tag-trg">Tensor networks</span>
+            <span class="paper-status">arXiv:2606.09971</span>
+          </div>
+
+          <h2>Magic and entanglement in 1+1-dimensional SU(2) lattice gauge theory</h2>
+
+          <div class="story-box" contenteditable="true" spellcheck="true">
+            <p><strong>Story behind the paper.</strong>
+            This paper grew out of the question of how quantum-information diagnostics behave in a genuinely gauge-invariant
+            many-body system. Instead of looking only at entanglement, we wanted to understand the role of magic as a separate
+            computational resource in a non-Abelian lattice gauge theory. I found nice paper by Cataldi et al. where we could
+            use the dressed-site approach. I initially tried to generalize it for arbitrary cutoff but it was a bit messy. We were
+            afraid of getting scooped, so we restricted to jmax=1/2 and tried to finish the paper. I liked the project since it was
+            very timely and connected tensor network simulations with ideas from stabilizer theory and quantum resources,
+            giving us a way to ask which parts of the lattice gauge theory are hard for classical or Clifford-based descriptions.
+            We finished this paper very quickly, in about two months, since I was writing the draft as I was coding the SRE computation
+            and dressed formulation. This was also Jaber's first paper. Congratulations to him!
+            </p>
+          </div>
+
+          <div class="links-row">
+            <a href="https://arxiv.org/abs/2606.09971"
+               target="_blank"
+               rel="noopener noreferrer"
+               aria-label="Open arXiv:2606.09971">
+              arXiv
+            </a>
+          </div>
+        </div>
+      </article>
+
+    </section>
+
+    <footer>
+      Visit <a href="https://rgjha.github.io" target="_blank" rel="noopener noreferrer">rgjha.github.io</a>
+      for more details. Email:
+      <a href="mailto:raghav.govind.jha@gmail.com">raghav.govind.jha@gmail.com</a>
+    </footer>
+  </main>
+
+  <script>
+    function filterPapers(topic) {
+      const cards = document.querySelectorAll('.paper-card');
+
+      cards.forEach(card => {
+        const topics = card.dataset.topics || card.dataset.topic || "";
+        const show = topic === 'all' || topics.includes(topic);
+        card.style.display = show ? 'grid' : 'none';
+      });
+    }
+  </script>
+</body>
+</html>
