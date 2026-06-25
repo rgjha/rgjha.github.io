@@ -377,7 +377,7 @@
           <h2>Magic and entanglement in 1+1-dimensional SU(2) lattice gauge theory</h2>
 
           <div class="story-box" contenteditable="true" spellcheck="true">
-            <p><strong>Story behind the paper.</strong> This paper grew out of the question of how quantum-information diagnostics behave in a genuinely gauge-invariant lattice gauge theory going beyond quantum spin models. Instead of looking only at entanglement, we wanted to understand the role of magic as a separate computational resource in a non-Abelian lattice gauge theory. We found a paper by Cataldi et al. where the authors used a semi-link (rishon-type) dressed-site approach. I initially tried to generalize it for arbitrary cutoff but it was a bit messy. We were afraid of getting scooped (which we evaded by a week, see https://arxiv.org/abs/2606.14842), so we decided to just focus on jmax=1/2 and tried to finish the paper. I liked the project since it was very timely and connected tensor network simulations with ideas from stabilizer theory and quantum resources, giving us a way to ask which parts of the lattice gauge theory are hard for classical or Clifford-based descriptions. We finished this paper very quickly, in about two months, since we were writing the draft and coding the SRE/EE computation simulataneously. This was also Jaber&#x27;s first paper. Congratulations to him!</p>
+            <p><strong>Story behind the paper.</strong> This paper grew out of the question of how quantum-information diagnostics behave in a genuinely gauge-invariant lattice gauge theory going beyond quantum spin models. Instead of looking only at entanglement, we wanted to understand the role of magic as a separate computational resource in a non-Abelian lattice gauge theory. We found a paper by Cataldi et al. where the authors used a semi-link (rishon-type) dressed-site approach. I initially tried to generalize it for arbitrary cutoff but it was a bit messy. We were afraid of getting scooped (which we evaded by a week, see https://arxiv.org/abs/2606.14842), so we decided to just focus on jmax=1/2 and tried to finish the paper. I liked the project since it was very timely and connected tensor network simulations with ideas from stabilizer theory and quantum resources, giving us a way to ask which parts of the lattice gauge theory are hard for classical or Clifford-based descriptions. We finished this paper very quickly, in about two months, since we were writing the draft and coding the SRE/EE computation simulataneously. This was also Jaber's first paper. Congratulations to him!</p>
           </div>
 
           <div class="links-row">
@@ -523,11 +523,15 @@
           <h2>Real-Time Scattering in Ising Field Theory using Matrix Product States</h2>
 
           <div class="story-box" contenteditable="true" spellcheck="true">
-            <p><strong>Story behind the paper.</strong> This project is a good example of using tensor networks not just for ground states, but for dynamical physics. Scattering is conceptually central in quantum field theory, yet real-time scattering from a lattice many-body wavefunction is technically delicate. The Ising field theory provides a clean setting where particles, bound states, and real-time propagation can be studied with matrix product states. A natural story for this paper is that it tries to bridge the language of field-theory scattering with the computational language of MPS time evolution. It also helped clarify what kinds of real-time observables can be extracted from tensor-network simulations before entanglement growth becomes the limiting factor.</p>
+            <p><strong>Story behind the paper.</strong> I started as a postdoc at Perimeter in Fall 2019.
+            At Perimeter, I was assigned to Pedro Viera and Guifre Vidal as my mentors. In October 2019, Pedro mentioned about a very interesting gapped quantum field theory which is integrable in two limits and non-integrable otherwise. He suggested that it would be really interesting to 
+            do some scattering in this model using tensor networks. Soon, Dominik, Stefan and I started working on this. We obtained some initial results but then COVID happened and the institute closed and we started working on other projects. After about 7-8 months, we came across a paper where Ash, Guifre, Junyu, and John studied scattering in spin model using MPS methods
+            (arXiv:2012.07243). We (Pedro, Dominik, and I) invited Ash to give a talk on this in February 2021 and we soon arranged a meeting and started working on this project. This project took a long time to finish but the kind of inelastic scattering which we probed in an interacting quantum field theory interpolating between two integrable limits has resulted in this paper becoming a flagship scattering computation in 1+1-dimensions for both high-energy theorists and tensor network folks. 
+            </p>
           </div>
 
           <div class="links-row">
-              <a href="https://scholar.google.com/scholar?q=Real-Time+Scattering+in+Ising+Field+Theory+using+Matrix+Product+States" target="_blank" rel="noopener noreferrer">Scholar</a>
+              <a href="https://arxiv.org/abs/2411.13645" target="_blank" rel="noopener noreferrer"> arXiv</a>
           </div>
         </div>
       </article>
@@ -567,11 +571,16 @@
           <h2>Sparsity dependence of Krylov state complexity in the SYK model</h2>
 
           <div class="story-box" contenteditable="true" spellcheck="true">
-            <p><strong>Story behind the paper.</strong> This paper uses the SYK model as a controlled setting to ask how complexity depends on microscopic sparsity. SYK is often treated as a model of maximal chaos and holographic behavior, but the sparse variants allow one to tune how much of the all-to-all randomness is really needed. Krylov complexity gives a dynamical diagnostic that is sensitive to operator growth and the structure of the Hamiltonian. The story behind the paper is that sparsity is not just a computational convenience; it can change how the dynamics explores Hilbert space. This makes the work relevant both for quantum chaos and for quantum simulation, where sparse Hamiltonians are often the physically or algorithmically accessible ones.</p>
+            <p><strong>Story behind the paper.</strong> In the summer of 2024, I was thinking of following up on my recent papers and probe a sharper way of determining how much sparse
+            can we make SYK model and still retain holographic features. I started looking at the literature and found that there is a new notion of complexity called "Krylov complexity"
+            that can be useful. From my initial tests, I found that it was in the same range as
+            was shown using other methods. We were partially scooped but could finish the paper
+            in the same month. This was my longest PRD peer-review process lasting close to one year.
+            This was also Ranadeep's first paper. Congratulations to him! </p>
           </div>
 
           <div class="links-row">
-              <a href="https://scholar.google.com/scholar?q=Sparsity+dependence+of+Krylov+state+complexity+in+the+SYK+model" target="_blank" rel="noopener noreferrer">Scholar</a>
+              <a href="https://arxiv.org/abs/2407.20569">arXiv</a>
           </div>
         </div>
       </article>
@@ -589,12 +598,18 @@
           <h2>Thermal state preparation of the SYK model using a variational quantum algorithm</h2>
 
           <div class="story-box" contenteditable="true" spellcheck="true">
-            <p><strong>Story behind the paper.</strong> This paper asks how one can prepare not only ground states, but thermal states of a strongly interacting chaotic model on a quantum computer. The SYK model is a useful benchmark because it is highly nonlocal, strongly coupled, and connected to questions of black-hole physics. A variational algorithm for thermal states must balance expressibility, trainability, and physical diagnostics. The story can be framed as an attempt to move quantum algorithms closer to finite-temperature many-body physics rather than zero-temperature eigenstate preparation alone. It also connects to the broader question of what quantum computers can realistically teach us about thermalization and strongly coupled dynamics.</p>
+            <p><strong>Story behind the paper.</strong> In Fall 2023, as I was finishing the paper studying Trotter complexity and out-of-time-order correlators (OTOCs) 
+            in the SYK model on IBM hardware with Asad and Bharath, I was talking to Jack
+            in the Jefferson Lab cafe. He had been constructing thermal states using VQE methods
+            following a particular approach. We joined hands with Bharath and Felix to prepare
+            thermal and TFD states for SYK model. Surprisingly, we found that the quantum community 
+            had moved away from 6-10 qubit simulations and demonstrations, so we could not get this
+            published. This likely also marks my last paper with such small systems. 
+            Only time will tell! </p>
           </div>
 
           <div class="links-row">
-              <a href="https://arxiv.org/search/?query=Thermal+state+preparation+of+the+SYK+model+using+a+variational+quantum+algorithm&amp;searchtype=all" target="_blank" rel="noopener noreferrer">arXiv search</a>
-              <a href="https://scholar.google.com/scholar?q=Thermal+state+preparation+of+the+SYK+model+using+a+variational+quantum+algorithm" target="_blank" rel="noopener noreferrer">Scholar</a>
+              <a href="https://arxiv.org/abs/2406.15545">arXiv</a>
           </div>
         </div>
       </article>
