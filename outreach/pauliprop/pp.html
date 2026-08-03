@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="en" class="boot">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pauli propagation — computing real-time correlators without the wavefunction</title>
+<meta name="description" content="An explainer for Kemper, Jha, Bachhar, Toga, Guerrero Perez and Mayhall (arXiv:2607.24924): computing real-time two-point correlators by evolving operators as sums of Pauli strings, taming their explosion with truncation and a positivity-based super-resolution trick.">
+<meta name="color-scheme" content="light">
+<link rel="preload" as="font" type="font/woff2" href="fonts/bricolage-latin-3eafbb15.woff2" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="fonts/sourceserif-latin-a15d607a.woff2" crossorigin>
+<link rel="stylesheet" href="vendor/katex/katex.min.css">
+<link rel="stylesheet" href="css/fonts.css">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<a class="skip" href="#main">Skip to content</a>
+<canvas id="plane" aria-hidden="true"></canvas>
+
+<div class="page">
+<main id="main">
+
+<!-- ============================ HERO ============================ -->
+<header class="hero wrap" data-mood="0.85,0">
+  <div class="hero__grid">
+    <div class="hero__col">
+      <p class="eyebrow">Quantum many-body dynamics · classical simulation</p>
+      <h1>Pauli<br>propagation<span class="thin">for real-time correlators</span></h1>
+      <p class="lede">
+        To predict what a neutron-scattering experiment will see, you need how a
+        material responds over time. That calculation is notoriously expensive.
+        This paper evolves the <em>question</em> instead of the state — and keeps
+        the cost in check with two ideas.
+      </p>
+      <div class="actions">
+        <a class="btn" href="#pipeline">The strategy in four stages</a>
+        <a class="btn btn--ghost" href="paper/2607.24924v1.pdf">Read the paper</a>
+      </div>
+    </div>
+
+    <figure class="figure hero__fig" id="f1">
+      <div class="figure__head">
+        <span class="figure__id">F1</span>
+        <span class="figure__title">The pipeline (after Fig. 1)</span>
+      </div>
+      <div class="stage" id="f1-stage"></div>
+      <figcaption>
+        The full strategy. <b>1</b> Evolve the operator in the Heisenberg picture as a
+        growing sum of Pauli strings, truncated to stay tractable. <b>2</b> A
+        Clifford-augmented MPS supplies a cheap, accurate ground state to measure
+        against. <b>3</b> A positivity-based fit super-resolves the short-time signal
+        out to late times, dodging the Pauli explosion. <b>4</b> The result is the
+        dynamical structure factor <b>S(k, ω)</b> — exactly what experiments measure.
+      </figcaption>
+    </figure>
+  </div>
+
+  <div class="scope">
+    <div>
+      <span class="k">Evolve the operator</span>
+      <p>Work in the Heisenberg picture: the observable carries the time
+         dependence, so a single-site probe can be tracked without ever writing
+         down the full wavefunction.</p>
+    </div>
+    <div>
+      <span class="k">Two brakes on the growth</span>
+      <p>Truncation on coefficient and weight controls the short-time cost; a
+         positivity super-resolution reaches the long-time spectrum from a handful
+         of points.</p>
+    </div>
+    <div>
+      <span class="k">Where it pays off</span>
+      <p>1D as a proving ground, but the real target is 2D and beyond, where the
+         usual tensor-network methods run out of room — here, an 8×8 lattice.</p>
+    </div>
+  </div>
+</header>
+
+<!-- ========================= 1. THE QUANTITY ========================= -->
+<section class="section wrap" id="correlator" data-mood="0.9,0">
+  <div class="rail"><span>01</span></div>
+  <div class="col">
+    <h2 class="reveal">What we actually want</h2>
+
+    <p class="reveal">Almost everything an experiment measures about a material — how it
+    scatters neutrons, absorbs light, conducts a current — is some version of the same
+    quantity: a <strong>correlation function</strong>. Poke the system at one place and
+    time, ask how it answers somewhere else, a little later. Written down, it is</p>
+
+    <div class="eq reveal">
+      <div class="eq__body">$$C(t) \;=\; \operatorname{Tr}\big[\rho\, A(t)\, B\big]$$</div>
+      <span class="eqn">(1)</span>
+    </div>
+
+    <p class="reveal">where $A$ and $B$ are the pokes — say, a spin flip at two sites — and
+    $\rho$ is the state the system starts in. Its Fourier transform $C(\omega)$ is what a
+    spectrometer actually plots. Correlation functions are, in the authors' phrase, the
+    <em>connective tissue</em> between the theory on the page and the data in the lab.</p>
+
+    <p class="reveal">The catch is the $A(t)$. Getting there means running the system's
+    dynamics in real time, and real-time quantum dynamics is one of the hardest things we
+    know how to ask a computer to do. The three standard tools each hit a wall:</p>
+
+    <div class="tbl-wrap reveal">
+      <table>
+        <caption>Why real-time correlators are hard. Each classical workhorse fails for a
+        different reason, and all three fail worst in more than one dimension.</caption>
+        <thead>
+          <tr><th>Method</th><th>Where it breaks</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Exact diagonalization</td><td>Memory: the Hilbert space doubles with every spin.</td></tr>
+          <tr><td>Real-time quantum Monte Carlo</td><td>The sign (phase) problem: contributions cancel catastrophically.</td></tr>
+          <tr><td>Tensor networks (DMRG/TDVP)</td><td>Entanglement growth: the bond dimension explodes past 1D.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p class="reveal">So the usual move — evolve the <em>state</em> $|\psi(t)\rangle$ forward
+    in time — is expensive precisely because the state gets complicated fast. This paper
+    takes the other door.</p>
+  </div>
+</section>
+
+<!-- ========================= 2. FLIP THE PICTURE ========================= -->
+<section class="section wrap" id="heisenberg" data-mood="0.75,0">
+  <div class="rail"><span>02</span></div>
+  <div class="col">
+    <h2 class="reveal">Evolve the question, not the state</h2>
+
+    <p class="reveal">Quantum mechanics offers two equivalent bookkeeping schemes. In the
+    <strong>Schrödinger picture</strong>, the state moves and the observable sits still. In
+    the <strong>Heisenberg picture</strong>, you freeze the state and let the observable
+    carry the time dependence instead:</p>
+
+    <div class="eq reveal">
+      <div class="eq__body">$$A(t) \;=\; e^{iHt}\, A\, e^{-iHt}$$</div>
+      <span class="eqn">(2)</span>
+    </div>
+
+    <p class="reveal">Same physics, different labor. And for a <em>local</em> probe — a single
+    spin flip — the Heisenberg side has a real advantage. An operator does not instantly
+    smear across the whole system; it spreads outward at a finite speed, its reach bounded
+    by a light cone (the Lieb–Robinson bound). For a while, $A(t)$ stays small. The trick is
+    to work inside that window.</p>
+
+    <div class="hinge reveal">
+      <span class="tag">The reframing</span>
+      <p>Instead of tracking an ever-more-entangled wavefunction, track the operator
+      $A(t)$ and write it in a convenient basis. If it stays modestly sized, the whole
+      correlation function is cheap. The basis that makes this work is the one built from
+      <strong>Pauli strings</strong>.</p>
+    </div>
+
+    <p class="reveal">A Pauli string is just a choice, at every site, of one of four
+    one-qubit operators — identity $I$, or $X$, $Y$, $Z$ — multiplied together, like
+    $X_0\,Z_1\,I_2\,Y_3\cdots$. Any operator can be written as a weighted sum of them:</p>
+
+    <div class="eq reveal">
+      <div class="eq__body">$$A(t) \;=\; \sum_i a_i(t)\, P_i$$</div>
+      <span class="eqn">(3)</span>
+    </div>
+
+    <p class="reveal">Pauli strings are a beautiful basis for this job. Any two of them either
+    commute or anticommute; multiply two and you get a third (up to a phase); and all the
+    algebra reduces to flipping bits. The number of non-identity sites in a string is its
+    <strong>weight</strong> — a direct measure of how far the operator has spread.</p>
+  </div>
+</section>
+
+<!-- ========================= 3. PROPAGATION ========================= -->
+<section class="section wrap" id="propagation" data-mood="0.95,0">
+  <div class="rail"><span>03</span></div>
+  <div class="col">
+    <h2 class="reveal">Pauli propagation, one rotation at a time</h2>
+
+    <p class="reveal">Now evolve. Chop the time evolution $e^{-iHt}$ into a long sequence of
+    tiny rotations, one per term in the Hamiltonian, each of the form $e^{-i\theta P_k}$
+    with a small angle $\theta$. Feeding a Pauli string $P$ through one such rotation does
+    one of exactly two things:</p>
+
+    <ul class="checks reveal">
+      <li><div><strong>If $P$ commutes with $P_k$, nothing happens.</strong>
+        <span class="sub">The string passes through untouched. No new terms, no cost.</span></div></li>
+      <li><div><strong>If $P$ anticommutes with $P_k$, it splits in two.</strong>
+        <span class="sub">One copy stays as $P$; a second, brand-new string $P_kP$ is born
+        alongside it, and the weight $\cos 2\theta$ / $\sin 2\theta$ is shared between
+        them.</span></div></li>
+    </ul>
+
+    <div class="eq reveal">
+      <div class="eq__body">$$e^{i\theta P_k}\, P\, e^{-i\theta P_k} \;=\; \cos(2\theta)\,P \;+\; i\sin(2\theta)\,P_k P$$</div>
+      <span class="eqn">(4)</span>
+    </div>
+
+    <p class="reveal">A concrete case makes it tangible. Rotate the single-site operator
+    $X$ by an angle about $Z$. Since $X$ and $Z$ anticommute, $X$ splits — and because
+    $ZX = iY$, the newborn term is a $Y$:</p>
+
+    <div class="eq eq--plain reveal">
+      <div class="eq__body">$$e^{i\theta Z}\, X\, e^{-i\theta Z} \;=\; \cos(2\theta)\,X \;-\; \sin(2\theta)\,Y$$</div>
+    </div>
+
+    <p class="reveal">One operator became two. Do this again and again, across every rotation
+    in the sequence, and each anticommuting step branches a string into two. The result is a
+    <strong>binary tree</strong> whose leaves are all the Pauli strings making up $A(t)$.
+    That is Pauli propagation: no wavefunction anywhere, just an operator growing through its
+    own space.</p>
+
+    <figure class="figure figure--wide reveal" id="f2">
+      <div class="figure__head">
+        <span class="figure__id">F2</span>
+        <span class="figure__title">Playground — watch a string branch</span>
+      </div>
+      <div class="split split--stage-first">
+        <div class="stage" id="f2-stage"></div>
+        <div>
+          <div class="controls" style="border-top:none;padding-top:0;margin-top:0">
+            <div class="ctl">
+              <label for="f2-theta">angle θ</label>
+              <input type="range" id="f2-theta" min="1" max="44" step="1" value="8">
+              <output id="f2-theta-out" for="f2-theta">8°</output>
+            </div>
+            <div class="ctl">
+              <label for="f2-depth">rotations</label>
+              <input type="range" id="f2-depth" min="1" max="6" step="1" value="4">
+              <output id="f2-depth-out" for="f2-depth">4</output>
+            </div>
+          </div>
+          <div class="readout">
+            <div><span class="k">Leaves (Pauli strings)</span><span class="v" id="f2-leaves">—</span><span class="u">grows like 2ᵈ</span></div>
+            <div><span class="k">Kept above ε</span><span class="v good" id="f2-kept">—</span><span class="u">the sin branches fade</span></div>
+            <div><span class="k">Biggest branch weight</span><span class="v" id="f2-w">—</span><span class="u">cos vs sin split</span></div>
+          </div>
+          <p class="vh" id="f2-desc" aria-live="polite"></p>
+        </div>
+      </div>
+      <figcaption>
+        Each anticommuting rotation splits a string into a <b>cos 2θ</b> branch (it stays
+        the same) and a smaller <b>sin 2θ</b> branch (a new, heavier string). For small
+        angles the sin branches are faint, so the tree is dominated by a handful of thick
+        paths. Turn <b>θ</b> up and the split evens out — the tree fills in and the cost
+        explodes. The green count keeps only branches above a coefficient cutoff
+        <b>ε ≈ 10⁻³</b>, which is exactly what makes the method affordable.
+      </figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- ========================= 4. THE EXPLOSION ========================= -->
+<section class="section wrap" id="truncation" data-mood="0.7,0">
+  <div class="rail"><span>04</span></div>
+  <div class="col">
+    <h2 class="reveal">The catch, and two brakes</h2>
+
+    <p class="reveal">The tree is the whole story, good and bad. Left alone, the number of
+    Pauli strings grows exponentially — after enough time it would fill the entire operator
+    space, which is itself exponentially large. Nobody can store that. The method only works
+    because two things can be thrown away without much harm:</p>
+
+    <ul class="checks reveal">
+      <li><div><strong>Coefficient cutoff ε.</strong>
+        <span class="sub">After each step, discard any string whose coefficient has shrunk
+        below ε. These are the dynamically negligible terms — the faint sin branches. Exact
+        as ε → 0.</span></div></li>
+      <li><div><strong>Weight cutoff w.</strong>
+        <span class="sub">Discard any string spread over more than w sites. This caps how
+        far the operator is allowed to reach in operator space. Exact as w → N.</span></div></li>
+    </ul>
+
+    <p class="reveal">Both are honest knobs: tighten them and you converge to the exact
+    answer; loosen them and you trade accuracy for speed. In the paper's 1D tests, a
+    coefficient cutoff of $\varepsilon = 10^{-4}$ already reproduces the exact correlator;
+    loosen it to $10^{-2}$ and the early oscillations are still right, but the signal soon
+    peels away from the truth.</p>
+
+    <figure class="figure figure--wide reveal" id="f3">
+      <div class="figure__head">
+        <span class="figure__id">F3</span>
+        <span class="figure__title">The cost of honesty — string count vs cutoff</span>
+      </div>
+      <div class="stage" id="f3-stage"></div>
+      <div class="controls">
+        <div class="ctl">
+          <label for="f3-eps">coefficient cutoff ε</label>
+          <input type="range" id="f3-eps" min="0" max="4" step="1" value="2">
+          <output id="f3-eps-out" for="f3-eps">1e−2</output>
+        </div>
+        <div class="ctl">
+          <label for="f3-w">weight cutoff w</label>
+          <input type="range" id="f3-w" min="2" max="12" step="1" value="6">
+          <output id="f3-w-out" for="f3-w">6</output>
+        </div>
+      </div>
+      <div class="readout">
+        <div><span class="k">Peak Pauli strings</span><span class="v" id="f3-peak">—</span><span class="u">at the chosen cutoffs</span></div>
+        <div><span class="k">Accuracy window</span><span class="v good" id="f3-acc">—</span><span class="u">how long it stays exact</span></div>
+      </div>
+      <p class="verdict" id="f3-verdict" role="status" aria-live="polite"></p>
+      <p class="vh" id="f3-desc" aria-live="polite"></p>
+      <figcaption>
+        A schematic of the central trade-off. The curve is the number of retained Pauli
+        strings against time; tightening either cutoff pushes the peak up (more strings,
+        more cost) but buys a longer window in which the propagation stays faithful. Loose
+        cutoffs are cheap but go wrong early; tight cutoffs are accurate but expensive.
+        <b>Schematic</b>, illustrating the behavior reported for the N = 64 chain — not the
+        raw counts.
+      </figcaption>
+    </figure>
+
+    <p class="reveal">This buys a good short-time signal. But a spectrum needs long times —
+    so how do you get a sharp $C(\omega)$ out of a correlator you can only trust for a
+    little while? That is the second idea, and it is the clever one.</p>
+  </div>
+</section>
+
+<!-- ========================= 5. SUPER-RESOLUTION ========================= -->
+<section class="section wrap" id="extension" data-mood="1,0">
+  <div class="rail"><span>05</span></div>
+  <div class="col">
+    <h2 class="reveal">Super-resolution from a handful of points</h2>
+
+    <p class="reveal">Two facts about real correlators rescue the calculation. First, they
+    <strong>decay</strong> — the system leaks information to its surroundings, so $C(t)$ dies
+    away, and a spectrum only ever needs the times before it does. The paper enforces this
+    honestly by multiplying in a damping window $e^{-t/\tau}$, which keeps the Fourier
+    transform anchored on the early, accurate data.</p>
+
+    <p class="reveal">Second, and more powerfully: many correlators contain only a
+    <strong>few frequencies</strong>. A recent result (by one of the authors) says that a
+    correlator of the form $\operatorname{Tr}[\rho\,A^\dagger(t)A]$ is a <em>positive
+    function</em>. Line its time samples up into a matrix and that matrix is positive
+    semi-definite with Toeplitz structure — and a classical theorem, running back to
+    Carathéodory, Toeplitz and Pisarenko, says such a matrix is fixed uniquely by just a
+    few numbers. Concretely: if the signal is a sum of $r$ oscillations, then $2r$ clean
+    samples pin down all of them.</p>
+
+    <div class="hinge reveal">
+      <span class="tag">The payoff</span>
+      <p>You do not need the long-time signal — you need to <em>identify the frequencies</em>,
+      and a short accurate window is enough. Fit a few oscillations to the early data
+      (a Prony-style / low-rank decomposition), then extend the correlator to any later
+      time for free. In the 2D calculation, <strong>seven</strong> time points are stretched
+      out to a full spectrum.</p>
+    </div>
+
+    <figure class="figure figure--wide reveal" id="f4">
+      <div class="figure__head">
+        <span class="figure__id">F4</span>
+        <span class="figure__title">Playground — reconstruct from short data</span>
+      </div>
+      <div class="stage" id="f4-stage"></div>
+      <div class="controls">
+        <div class="ctl">
+          <label for="f4-pts">points measured</label>
+          <input type="range" id="f4-pts" min="3" max="30" step="1" value="7">
+          <output id="f4-pts-out" for="f4-pts">7</output>
+        </div>
+        <div class="ctl">
+          <label for="f4-rank">frequencies (rank r)</label>
+          <input type="range" id="f4-rank" min="1" max="3" step="1" value="1">
+          <output id="f4-rank-out" for="f4-rank">1</output>
+        </div>
+      </div>
+      <div class="readout">
+        <div><span class="k">Samples needed (2r)</span><span class="v" id="f4-need">—</span><span class="u">to fix the frequencies</span></div>
+        <div><span class="k">Reconstruction</span><span class="v good" id="f4-ok">—</span><span class="u">enough data?</span></div>
+      </div>
+      <p class="verdict" id="f4-verdict" role="status" aria-live="polite"></p>
+      <p class="vh" id="f4-desc" aria-live="polite"></p>
+      <figcaption>
+        The blue markers are the short, accurate window Pauli propagation actually computes;
+        the solid curve is the full correlator recovered by fitting <b>r</b> oscillations and
+        extending. Once you have <b>2r</b> good samples the reconstruction locks on and runs
+        out to any time you like. Ask for more frequencies than the data can support and the
+        fit becomes underdetermined — the readout turns red. This is why momentum space is so
+        friendly: there, each mode is usually a single sharp frequency, so <b>r = 1</b> often
+        suffices.
+      </figcaption>
+    </figure>
+
+    <p class="reveal note">Where it fails, honestly: when the spectrum is a <em>continuum</em>
+    rather than a few sharp lines — like the spinon excitations of the 1D antiferromagnet —
+    there is no small $r$ to find, and the low-rank trick loses its grip. The method is at its
+    best when the physics really is a handful of modes.</p>
+  </div>
+</section>
+
+<!-- ========================= 6. GROUND STATE ========================= -->
+<section class="section wrap" id="ground" data-mood="0.75,0">
+  <div class="rail"><span>06</span></div>
+  <div class="col">
+    <h2 class="reveal">One more obstacle: the ground state</h2>
+
+    <p class="reveal">There is a subtlety unique to equilibrium correlators. Equation (1) asks
+    for a trace against $\rho$ — usually the true ground state. If that ground state is a
+    simple product state (as for the 1D ferromagnet), measuring a giant sum of Pauli strings
+    against it is trivial. But for an antiferromagnet, or anything in 2D, the ground state is
+    itself richly entangled, and evaluating those expectation values becomes the new
+    bottleneck — sometimes a worse one than the propagation.</p>
+
+    <p class="reveal">The fix is a recent tool called a <strong>Clifford-augmented matrix
+    product state</strong> (CAMPS). Clifford operations are the "free" moves of quantum
+    computing — they shuffle Pauli strings into other Pauli strings without ever increasing
+    their number. CAMPS peels off a Clifford circuit that absorbs much of the entanglement,
+    leaving a far cheaper (low-bond-dimension) matrix product state to represent the rest.
+    Because the Clifford part acts directly on the Pauli operators for free, it is an
+    unusually good match for Pauli propagation. That pairing is what lets the authors reach
+    an $8\times 8$ antiferromagnet — the edge of what other methods can do.</p>
+  </div>
+</section>
+
+<!-- ========================= 7. RESULTS ========================= -->
+<section class="section wrap" id="results" data-mood="0.6,0">
+  <div class="rail"><span>07</span></div>
+  <div class="col">
+    <h2 class="reveal">What comes out</h2>
+
+    <p class="reveal">The end product is the <strong>dynamical structure factor</strong>
+    $S(k,\omega)$ — the intensity of the system's response, sorted by momentum $k$ and
+    frequency $\omega$. It is precisely the picture a neutron-scattering experiment builds up.
+    Across the test cases, the recipe recovers the physics:</p>
+
+    <ul class="plain reveal">
+      <li><strong>1D Heisenberg ferromagnet.</strong> Even loose truncations reproduce the
+      smoothly dispersing single-magnon band, $\omega(k) = 4(1-\cos k)$. Momenta appear at
+      the right frequencies; short-time data plus the positivity extension nails the
+      spectrum.</li>
+      <li><strong>1D Heisenberg antiferromagnet.</strong> A harder, entangled ground state.
+      Pauli propagation captures the strongly dispersing mode and its spinon continuum near
+      the band top — the honest place where the few-frequency assumption strains, and where
+      tensor-network methods still hold the lead in 1D.</li>
+      <li><strong>2D antiferromagnet, 8×8.</strong> The showcase. Seven time points, extended
+      by a rank-1 fit, give a full $S(k,\omega)$ matching linear spin-wave theory: a
+      Goldstone mode at $\Gamma$, a rise out to $X$, a softening at $M$. This is the regime
+      where tensor networks struggle and the approach earns its keep.</li>
+    </ul>
+
+    <figure class="figure figure--bleed reveal" id="f5">
+      <div class="figure__head">
+        <span class="figure__id">F5</span>
+        <span class="figure__title">The dynamical structure factor</span>
+      </div>
+      <div class="presets" id="f5-mode" role="group" aria-label="Choose the spectrum"
+           style="margin-bottom:0.9rem">
+        <button type="button" class="chip" data-mode="fm" aria-pressed="true">1D magnon band</button>
+        <button type="button" class="chip" data-mode="sw2d" aria-pressed="false">2D spin waves</button>
+      </div>
+      <div class="stage" id="f5-stage"></div>
+      <div class="controls">
+        <div class="ctl">
+          <label for="f5-tau">damping τ</label>
+          <input type="range" id="f5-tau" min="0.3" max="4" step="0.1" value="1.5">
+          <output id="f5-tau-out" for="f5-tau">1.5</output>
+        </div>
+      </div>
+      <div class="readout">
+        <div><span class="k">Dispersion</span><span class="v mono" id="f5-disp">—</span><span class="u">peak frequency vs k</span></div>
+        <div><span class="k">Linewidth ≈ 1/τ</span><span class="v" id="f5-width">—</span><span class="u">set by damping</span></div>
+      </div>
+      <p class="vh" id="f5-desc" aria-live="polite"></p>
+      <figcaption>
+        <b>Schematic reconstruction</b> of the extracted spectra. The bright ridge is where
+        the response concentrates — the magnon dispersion <b>ω(k) = 4(1 − cos k)</b> for the
+        1D chain, and the linear-spin-wave curve <b>ω(k) = A√(1 − γₖ²)</b> across the 2D
+        Brillouin zone, with its Goldstone zero at Γ and soft mode at M. The damping <b>τ</b>
+        sets the linewidth: shorter windows blur the ridge (a Lorentzian of width 1/τ), longer
+        ones sharpen it. Curves follow the functional forms reported in the paper; intensities
+        are illustrative.
+      </figcaption>
+    </figure>
+
+    <p class="reveal">The honest summary the authors give: in 1D, mature tensor-network methods
+    are hard to beat and this will not displace them. The interest is <strong>higher
+    dimensions</strong>, where those methods lose efficiency and the combination here —
+    Pauli-propagated dynamics, a CAMPS ground state, and positivity-based signal processing —
+    opens a path to correlators on large 2D lattices that were previously out of reach. The
+    operators' limited spreading even suggests far bigger systems are within range; a
+    $100\times 100$ ferromagnet in the appendix recovers the full magnon spectrum.</p>
+
+    <div class="preprint reveal">
+      <div>
+        <h3>Read it yourself</h3>
+        <p><cite>Efficient computation of real-time correlators using Pauli propagation</cite>
+        — Alexander F. Kemper, Raghav G. Jha, Arnab Bachhar, Goksu C. Toga, Mariano Guerrero
+        Perez, and Nicholas J. Mayhall (NC State University and Indiana University).
+        <a href="https://arxiv.org/abs/2607.24924">arXiv:2607.24924 [quant-ph]</a>.</p>
+      </div>
+      <a class="btn" href="paper/2607.24924v1.pdf">Open the PDF</a>
+    </div>
+  </div>
+</section>
+
+<!-- ========================= 8. REFERENCES ========================= -->
+<section class="section wrap" id="references" data-mood="0.5,0">
+  <div class="rail"><span>08</span></div>
+  <div class="col">
+    <h2 class="reveal">Selected references</h2>
+    <p class="reveal">The load-bearing citations, from the paper's bibliography.</p>
+
+    <ul class="refs reveal">
+      <li><span class="tagno">LR72</span><div>E. H. Lieb and D. W. Robinson, <cite>The finite
+        group velocity of quantum spin systems</cite>. Commun. Math. Phys. <strong>28</strong>
+        (1972) 251. <em>The light cone that keeps operators local.</em></div></li>
+      <li><span class="tagno">RLCK19</span><div>P. Rall, D. Liang, J. Cook and W. Kretschmer,
+        <cite>Simulation of qubit quantum circuits via Pauli propagation</cite>. Phys. Rev. A
+        <strong>99</strong> (2019) 062337. <em>Where the method originates.</em></div></li>
+      <li><span class="tagno">Kim23</span><div>Y. Kim <em>et al.</em>, <cite>Evidence for the
+        utility of quantum computing before fault tolerance</cite>. Nature <strong>618</strong>
+        (2023) 500. <em>The IBM Eagle experiment that sparked the classical race.</em></div></li>
+      <li><span class="tagno">BC23</span><div>T. Begušić and G. K.-L. Chan, <cite>Fast classical
+        simulation of evidence for the utility of quantum computing before fault
+        tolerance</cite> (2023). <a href="https://arxiv.org/abs/2306.16372">arXiv:2306.16372</a>.</div></li>
+      <li><span class="tagno">BC25</span><div>T. Begušić and G. Kin-Lic Chan, <cite>Real-time
+        operator evolution in two and three dimensions via sparse Pauli dynamics</cite>. PRX
+        Quantum <strong>6</strong> (2025) 020302.
+        <a href="https://arxiv.org/abs/2409.03097">arXiv:2409.03097</a>.</div></li>
+      <li><span class="tagno">RJTAH25</span><div>M. S. Rudolph, T. Jones, Y. Teng, A. Angrisani
+        and Z. Holmes, <cite>Pauli propagation: a computational framework for simulating
+        quantum systems</cite> (2025).
+        <a href="https://arxiv.org/abs/2505.21606">arXiv:2505.21606</a>.</div></li>
+      <li><span class="tagno">SBJVM26</span><div>C. Shrikhande, A. Bachhar, A. R. Jimenez,
+        E. F. Valeev and N. J. Mayhall, <cite>Pauli propagation enables fast classical
+        simulation of strongly correlated quantum systems</cite> (2026).
+        <a href="https://arxiv.org/abs/2511.21651">arXiv:2511.21651</a>.</div></li>
+      <li><span class="tagno">KYG24</span><div>A. F. Kemper, C. Yang and E. Gull, <cite>Denoising
+        and extension of response functions in the time domain</cite>. Phys. Rev. Lett.
+        <strong>132</strong> (2024) 160403. <em>The positivity result behind the
+        super-resolution.</em></div></li>
+      <li><span class="tagno">Car11</span><div>C. Carathéodory, <cite>Über den
+        Variabilitätsbereich der Fourier'schen Konstanten von positiven harmonischen
+        Funktionen</cite>. Rend. Circ. Mat. Palermo <strong>32</strong> (1911) 193.</div></li>
+      <li><span class="tagno">Pis73</span><div>V. F. Pisarenko, <cite>The retrieval of harmonics
+        from a covariance function</cite>. Geophys. J. Int. <strong>33</strong> (1973) 347.
+        <em>Few-frequency retrieval, a.k.a. Prony.</em></div></li>
+      <li><span class="tagno">QHQ24</span><div>X. Qian, J. Huang and M. Qin, <cite>Augmenting
+        density matrix renormalization group with Clifford circuits</cite>. Phys. Rev. Lett.
+        <strong>133</strong> (2024) 190402. <em>CAMPS, the ground-state engine.</em></div></li>
+      <li><span class="tagno">KKFK24</span><div>E. Kökcü, H. A. Labib, J. Freericks and
+        A. F. Kemper, <cite>A linear response framework for quantum simulation of bosonic and
+        fermionic correlation functions</cite>. Nat. Commun. <strong>15</strong> (2024) 3881.</div></li>
+      <li><span class="tagno">KJBTGM26</span><div>A. F. Kemper, R. G. Jha, A. Bachhar, G. C. Toga,
+        M. Guerrero Perez and N. J. Mayhall, <cite>Efficient computation of real-time correlators
+        using Pauli propagation</cite> (2026).
+        <a href="https://arxiv.org/abs/2607.24924">arXiv:2607.24924</a>.
+        <em>The paper this page explains.</em></div></li>
+    </ul>
+  </div>
+</section>
+
+</main>
+
+<!-- ============================ TALLY ============================ -->
+<section class="tally wrap" id="visits" data-mood="0.6,0.22" hidden>
+  <div class="tally__count">
+    <span class="k">Visits</span>
+    <p class="tally__num mono"><span id="visit-count">0</span></p>
+  </div>
+</section>
+</div>
+
+<script src="vendor/d3/d3.min.js"></script>
+<script src="vendor/katex/katex.min.js"></script>
+<script src="vendor/katex/auto-render.min.js"></script>
+<script src="js/plane.js"></script>
+<script src="js/figures-pp.js"></script>
+<script src="js/counter.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>
