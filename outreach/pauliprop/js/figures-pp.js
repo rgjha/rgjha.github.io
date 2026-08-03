@@ -341,15 +341,21 @@
     var verdict = document.getElementById("f3-verdict");
     var desc = document.getElementById("f3-desc");
 
-    var EPS_VALS = [1e-2, 5e-3, 1e-3, 5e-4, 1e-4];
-    var EPS_LBL = ["1e−2", "5e−3", "1e−3", "5e−4", "1e−4"];
+    // Slider position increases left-to-right, so ε must GROW left-to-right:
+    // a larger ε discards more strings and gives a worse approximation.
+    var EPS_VALS = [1e-4, 5e-4, 1e-3, 5e-3, 1e-2];
+    var EPS_LBL = ["1e−4", "5e−4", "1e−3", "5e−3", "1e−2"];
     var svg = d3.select(host).append("svg").attr("role", "img");
 
     function render() {
       var ei = +epsIn.value, w = +wIn.value;
       var eps = EPS_VALS[ei];
-      // schematic: peak count rises as eps->0 and w->N; accuracy window likewise
-      var tightness = (4 - ei) / 4 * 0.6 + (w - 2) / 10 * 0.4; // 0..1
+      // Reliability grows as ε shrinks (ei -> 0) and as w grows (w -> N).
+      // Both the retained-string count and the faithful window follow it,
+      // so raising ε makes things worse and raising w makes things better.
+      var epsTight = (4 - ei) / 4;          // 1 at ε=1e-4, 0 at ε=1e-2
+      var wTight = (w - 2) / 10;            // 0 at w=2,   1 at w=12
+      var tightness = 0.6 * epsTight + 0.4 * wTight; // 0..1
       var peak = Math.round(200 * Math.pow(80, tightness));     // ~200 .. 16000
       var accWindow = 1.2 + tightness * 8.5;                    // time it stays exact
 
