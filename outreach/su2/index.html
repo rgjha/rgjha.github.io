@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="en" class="boot">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Magic and entanglement in SU(2) lattice gauge theory — where does quantum advantage live?</title>
+<meta name="description" content="An explainer for Jha, Toga, Taher, Bakalov and Kemper (arXiv:2606.09971): gauge-invariant entanglement entropy and stabilizer Rényi entropy of the ground state of (1+1)-dimensional SU(2) lattice gauge theory, and the crossover coupling g* where magic and entanglement decouple.">
+<meta name="color-scheme" content="light">
+<link rel="preload" as="font" type="font/woff2" href="fonts/bricolage-latin-3eafbb15.woff2" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="fonts/sourceserif-latin-a15d607a.woff2" crossorigin>
+<link rel="stylesheet" href="vendor/katex/katex.min.css">
+<link rel="stylesheet" href="css/fonts.css">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<a class="skip" href="#main">Skip to content</a>
+<canvas id="plane" aria-hidden="true"></canvas>
+
+<div class="page">
+<main id="main">
+
+<!-- ============================ HERO ============================ -->
+<header class="hero wrap" data-mood="0.85,0">
+  <div class="hero__grid">
+    <div class="hero__col">
+      <p class="eyebrow">Lattice gauge theory · quantum information</p>
+      <h1>Magic and<br>entanglement<span class="thin">in a gauge theory</span></h1>
+      <p class="lede">
+        Two different resources make a quantum state hard to fake on a classical
+        computer. A new study measures both in the ground state of a non-Abelian
+        gauge theory, on lattices worth 300 qubits — and finds they come apart.
+      </p>
+      <div class="actions">
+        <a class="btn" href="#crossover">The main result</a>
+        <a class="btn btn--ghost" href="paper/2606.09971v1.pdf">Read the paper</a>
+      </div>
+    </div>
+
+    <figure class="figure hero__fig" id="f1">
+      <div class="figure__head">
+        <span class="figure__id">F1</span>
+        <span class="figure__title">The picture to hold in mind</span>
+      </div>
+      <div class="stage" id="f1-stage"></div>
+      <figcaption>
+        Entanglement entropy <b>S</b> and magic density <b>M₂/L</b> of the ground
+        state, against the coupling <b>g</b>. Both start high at <b>g = 0</b> and
+        vanish at strong coupling — but not together. Entanglement falls steadily;
+        magic holds a plateau, then drops after a crossover coupling
+        <b>g<sub>⋆</sub> ≈ 1.9</b>. <b>Schematic</b>, after Fig. 1 of the paper.
+      </figcaption>
+    </figure>
+  </div>
+
+  <div class="scope">
+    <div>
+      <span class="k">Non-Abelian, with matter</span>
+      <p>SU(2) gauge fields coupled to staggered fermions in 1+1 dimensions —
+         the first large-scale study of magic in a non-Abelian gauge theory
+         that includes matter.</p>
+    </div>
+    <div>
+      <span class="k">Gauss's law exact</span>
+      <p>A dressed-site basis enforces gauge invariance identically: only
+         6 of 36 local states survive, and every state kept is physical.</p>
+    </div>
+    <div>
+      <span class="k">Large scale</span>
+      <p>Tensor-network ground states up to <span class="mono">L = 100</span>
+         sites — 300 qubits' worth of Hilbert space — at bond dimension
+         <span class="mono">χ = 100</span>.</p>
+    </div>
+  </div>
+</header>
+
+<!-- ========================= 1. TWO RESOURCES ========================= -->
+<section class="section wrap" id="resources" data-mood="0.9,0">
+  <div class="rail"><span>01</span></div>
+  <div class="col">
+    <h2 class="reveal">Two kinds of quantum</h2>
+
+    <p class="reveal">Why are quantum computers hard to simulate? The reflex answer is
+    <strong>entanglement</strong> — the non-local correlations that have no classical
+    counterpart. Entangle enough particles, the story goes, and no classical machine can
+    keep up.</p>
+
+    <p class="reveal">The story is wrong, or at least incomplete. The Gottesman–Knill
+    theorem says that a large family of quantum circuits — Clifford circuits acting on
+    <strong>stabilizer states</strong> — can be simulated efficiently on a laptop, no matter
+    how much entanglement they generate. A highly entangled stabilizer state is classically
+    easy. What makes quantum computation genuinely intractable is a second resource:
+    the distance from that easy set, called <strong>non-stabilizerness</strong> or, in the
+    standard bit of quantum-information whimsy, <strong>magic</strong>.</p>
+
+    <p class="reveal">Magic can be measured. The <strong>stabilizer Rényi entropy</strong>
+    (SRE) of a pure state $|\psi\rangle$ of $N$ qubits asks how the state spreads over all
+    Pauli strings $P$:</p>
+
+    <div class="eq reveal">
+      <div class="eq__body">$$M_{2} \;=\; -\log_{2}\!\left(\frac{1}{2^{N}}
+      \sum_{P \in \mathcal{P}_{N}} \langle\psi|P|\psi\rangle^{4}\right)$$</div>
+      <span class="eqn">(1)</span>
+    </div>
+
+    <p class="reveal">For a stabilizer state the sum concentrates on a few Pauli strings and
+    $M_2 = 0$; the more evenly the state smears over the Pauli group, the larger $M_2$
+    grows. Entanglement and magic capture different departures from classicality, and a
+    state can be rich in one and poor in the other. Where magic lives in physically
+    relevant theories tells us where a quantum computer might one day earn its keep —
+    which is exactly the question for lattice gauge theories, the quantum-field-theory
+    workhorses that future quantum simulators are being built for.</p>
+
+    <figure class="figure figure--wide reveal" id="f2">
+      <div class="figure__head">
+        <span class="figure__id">F2</span>
+        <span class="figure__title">Playground — one qubit of magic</span>
+      </div>
+      <div class="split split--stage-first">
+        <div class="stage" id="f2-stage"></div>
+        <div>
+          <div class="presets" id="f2-presets" role="group" aria-label="Load a preset state">
+            <button type="button" class="chip" data-preset="zero" aria-pressed="false">|0⟩</button>
+            <button type="button" class="chip" data-preset="plus" aria-pressed="false">|+⟩</button>
+            <button type="button" class="chip" data-preset="t" aria-pressed="false">T state</button>
+            <button type="button" class="chip" data-preset="max" aria-pressed="true">max magic</button>
+          </div>
+          <div class="controls">
+            <div class="ctl">
+              <label for="f2-theta">polar θ</label>
+              <input type="range" id="f2-theta" min="0" max="180" step="1" value="55">
+              <output id="f2-theta-out" for="f2-theta">55°</output>
+            </div>
+            <div class="ctl">
+              <label for="f2-phi">azimuth φ</label>
+              <input type="range" id="f2-phi" min="0" max="360" step="1" value="45">
+              <output id="f2-phi-out" for="f2-phi">45°</output>
+            </div>
+          </div>
+          <div class="readout">
+            <div><span class="k">⟨X⟩, ⟨Y⟩, ⟨Z⟩</span><span class="v" id="f2-xyz">—</span><span class="u">Pauli expectations</span></div>
+            <div><span class="k">Magic M₂</span><span class="v good" id="f2-m2">0.000</span><span class="u">max ≈ 0.585</span></div>
+          </div>
+          <p class="verdict" id="f2-verdict" role="status" aria-live="polite">Stabilizer.</p>
+          <p class="vh" id="f2-desc" aria-live="polite"></p>
+        </div>
+      </div>
+      <figcaption>
+        A single qubit state on the Bloch sphere, with its magic computed live from
+        equation (1): <b>M₂ = −log₂[(⟨X⟩⁴ + ⟨Y⟩⁴ + ⟨Z⟩⁴ + 1)/2]</b>. The six
+        stabilizer states — the poles and the four equatorial axes points — have
+        <b>M₂ = 0</b>: classically easy. Everything else is magical. The maximum,
+        <b>M₂ = log₂(3) − 1 ≈ 0.585</b>, is reached at the eight points where
+        <b>⟨X⟩ = ±⟨Y⟩ = ±⟨Z⟩</b>, the face-diagonal directions. Drag the sliders and
+        watch the state leave and re-enter the easy set. Entanglement never appears here —
+        one qubit has none — which is the point: magic is a different resource.
+      </figcaption>
+    </figure>
+
+    <p class="reveal">Magic has a shorter history than entanglement, and its history in
+    gauge theories is shorter still.</p>
+
+    <div class="timeline reveal">
+      <ol>
+        <li>
+          <span class="yr">1998</span>
+          <div>
+            <span class="who">Gottesman; Aaronson &amp; Gottesman</span>
+            <p class="what">Clifford circuits with stabilizer inputs and Pauli measurements
+            are efficiently classically simulable — entanglement alone is not enough.</p>
+            <span class="bound">the easy set is defined</span>
+          </div>
+        </li>
+        <li>
+          <span class="yr">2005</span>
+          <div>
+            <span class="who">Bravyi &amp; Kitaev</span>
+            <p class="what">Magic states: feed a non-stabilizer state into a Clifford
+            machine and universal fault-tolerant quantum computation follows. Magic
+            becomes a resource, literally.</p>
+            <span class="bound">magic = fuel</span>
+          </div>
+        </li>
+        <li>
+          <span class="yr">2022</span>
+          <div>
+            <span class="who">Leone, Oliviero, Hamma</span>
+            <p class="what">The stabilizer Rényi entropy — a measure of magic that can
+            actually be computed for many-body states, later via Pauli sampling of matrix
+            product states.</p>
+            <span class="bound">magic becomes measurable</span>
+          </div>
+        </li>
+        <li>
+          <span class="yr">2023–25</span>
+          <div>
+            <span class="who">Many groups</span>
+            <p class="what">Magic mapped in spin chains and critical systems; first gauge
+            theories — Abelian U(1), string breaking in the Schwinger model, discrete and
+            pure non-Abelian theories on ladders.</p>
+            <span class="bound">gauge theories, but no non-Abelian matter</span>
+          </div>
+        </li>
+        <li class="is-now">
+          <span class="yr">Now</span>
+          <div>
+            <span class="who">Jha, Toga, Taher, Bakalov, Kemper</span>
+            <p class="what">Magic and gauge-invariant entanglement across the full
+            parameter space of SU(2) lattice gauge theory with dynamical matter, up to
+            L = 100 sites.</p>
+            <span class="bound">non-Abelian + matter, at scale</span>
+          </div>
+        </li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<!-- ========================= 2. THE THEORY ========================= -->
+<section class="section wrap" id="theory" data-mood="0.75,0">
+  <div class="rail"><span>02</span></div>
+  <div class="col">
+    <h2 class="reveal">The theory: SU(2) on a line</h2>
+
+    <p class="reveal">The stage is a one-dimensional chain of $L$ sites. Fermionic matter
+    ("quarks", in two colors) lives on the sites; SU(2) gauge fields live on the links
+    between them. The Hamiltonian is the Kogut–Susskind one:</p>
+
+    <div class="eq reveal">
+      <div class="eq__body">$$H \;=\; g^{2}\sum_{n,A}\big(E^{A}_{n,n+1}\big)^{2}
+      \;+\; m\sum_{n}(-1)^{n}\,\psi^{\dagger}_{n}\psi_{n}
+      \;+\; \sum_{n}\big(\psi^{\dagger}_{n}\,U_{n,n+1}\,\psi_{n+1} + \mathrm{h.c.}\big)$$</div>
+      <span class="eqn">(2)</span>
+    </div>
+
+    <p class="reveal note"><span class="mono">Reading guide.</span> Three terms, three
+    jobs. The first is the <em>electric field energy</em> on each link, weighted by the
+    coupling $g^2$ — turning $g$ up makes flux expensive. The second is the <em>mass
+    term</em>; the alternating sign is the staggered-fermion trick for putting particles
+    and antiparticles on one lattice. The third <em>hops</em> a quark to the neighboring
+    site, with the link operator $U$ along for the ride to keep everything
+    gauge-covariant. Color indices are suppressed. In one spatial dimension there are no
+    plaquettes, so no magnetic term.</p>
+
+    <p class="reveal">Gauge theories come with a constraint, not just a Hamiltonian.
+    <strong>Gauss's law</strong> demands that physical states are annihilated by every
+    local generator: $G^{A}_{n}|\psi\rangle = 0$. On the lattice this becomes a
+    beautifully concrete rule. Each site sees three spins — the SU(2) flux $j_L$ on its
+    left half-link, its matter charge $j_M$, and the flux $j_R$ on its right half-link —
+    and they must fuse to a color singlet:</p>
+
+    <div class="eq reveal">
+      <div class="eq__body">$$j_{L}\,\otimes\, j_{M}\,\otimes\, j_{R}\;\supset\;\mathbf{0}
+      \qquad\Longleftrightarrow\qquad
+      |j_{L}-j_{M}|\le j_{R}\le j_{L}+j_{M}
+      \;\;\text{and}\;\; j_{L}+j_{M}+j_{R}\in\mathbb{Z}$$</div>
+      <span class="eqn">(3)</span>
+    </div>
+
+    <p class="reveal">The gauge fields are truncated at $j_{\max} = \tfrac12$ — the
+    <em>hardcore gluon</em> approximation: each half-link carries spin $0$ or
+    $\tfrac12$ and nothing higher. A site with its two half-links then has
+    $6 \times 3 \times 2 = 36$ naive states, but the singlet rule (3) cuts that to
+    exactly <strong>6</strong>. Fusing site and half-links into one composite object —
+    a <strong>dressed site</strong> — builds Gauss's law into the basis itself: no
+    constraint to police, no unphysical states to leak into.</p>
+
+    <figure class="figure figure--wide reveal" id="f3">
+      <div class="figure__head">
+        <span class="figure__id">F3</span>
+        <span class="figure__title">Playground — build a physical state</span>
+      </div>
+      <div class="split split--stage-first">
+        <div class="stage" id="f3-stage"></div>
+        <div>
+          <div class="controls" style="border-top:none;padding-top:0;margin-top:0">
+            <div class="ctl" style="flex-direction:column;align-items:flex-start;gap:0.3rem">
+              <label>left flux j<sub>L</sub></label>
+              <div class="presets" id="f3-jl" role="group" aria-label="left flux">
+                <button type="button" class="chip" data-v="0" aria-pressed="true">0</button>
+                <button type="button" class="chip" data-v="0.5" aria-pressed="false">1/2</button>
+              </div>
+            </div>
+            <div class="ctl" style="flex-direction:column;align-items:flex-start;gap:0.3rem">
+              <label>matter n<sub>M</sub></label>
+              <div class="presets" id="f3-nm" role="group" aria-label="matter occupation">
+                <button type="button" class="chip" data-v="0" aria-pressed="true">empty</button>
+                <button type="button" class="chip" data-v="1" aria-pressed="false">1 quark</button>
+                <button type="button" class="chip" data-v="2" aria-pressed="false">2 quarks</button>
+              </div>
+            </div>
+            <div class="ctl" style="flex-direction:column;align-items:flex-start;gap:0.3rem">
+              <label>right flux j<sub>R</sub></label>
+              <div class="presets" id="f3-jr" role="group" aria-label="right flux">
+                <button type="button" class="chip" data-v="0" aria-pressed="true">0</button>
+                <button type="button" class="chip" data-v="0.5" aria-pressed="false">1/2</button>
+              </div>
+            </div>
+          </div>
+          <div class="readout">
+            <div><span class="k">matter spin j_M</span><span class="v" id="f3-jm">0</span><span class="u">from occupation</span></div>
+            <div><span class="k">triangle rule</span><span class="v" id="f3-tri">✓</span><span class="u">|j_L−j_M| ≤ j_R ≤ j_L+j_M</span></div>
+            <div><span class="k">integer rule</span><span class="v" id="f3-int">✓</span><span class="u">j_L+j_M+j_R ∈ ℤ</span></div>
+          </div>
+          <p class="verdict" id="f3-verdict" role="status" aria-live="polite">Physical: a gauge singlet.</p>
+          <p class="vh" id="f3-desc" aria-live="polite"></p>
+        </div>
+      </div>
+      <figcaption>
+        One dressed site: left half-link, matter site, right half-link. Pick the three
+        quantum numbers and the two conditions of (3) are checked live. An empty or
+        doubly occupied site is a color singlet (<b>j_M = 0</b>), so its fluxes must
+        match; a single quark is a color doublet (<b>j_M = 1/2</b>), so the flux must
+        change by half a unit across it — the quark is a source of flux, which is
+        Gauss's law doing its job. Exactly <b>6</b> of the 36 combinations pass.
+      </figcaption>
+    </figure>
+
+    <div class="tbl-wrap reveal">
+      <table>
+        <caption>The six physical states of one dressed site at j_max = 1/2, labeled
+        |j_L, n_M, j_R⟩. Four have matched fluxes and singlet matter; in the two
+        single-quark states the flux steps by 1/2 across the site.</caption>
+        <thead>
+          <tr><th>State</th><th>Matter</th><th class="num">j_M</th><th>Flux across site</th></tr>
+        </thead>
+        <tbody>
+          <tr><td class="mono">|0, 0, 0⟩</td><td>empty</td><td class="num">0</td><td>0 → 0</td></tr>
+          <tr><td class="mono">|1/2, 0, 1/2⟩</td><td>empty</td><td class="num">0</td><td>1/2 → 1/2</td></tr>
+          <tr><td class="mono">|0, 2, 0⟩</td><td>baryon (2 quarks)</td><td class="num">0</td><td>0 → 0</td></tr>
+          <tr><td class="mono">|1/2, 2, 1/2⟩</td><td>baryon (2 quarks)</td><td class="num">0</td><td>1/2 → 1/2</td></tr>
+          <tr class="is-key"><td class="mono">|0, 1, 1/2⟩</td><td>single quark</td><td class="num">1/2</td><td>0 → 1/2</td></tr>
+          <tr class="is-key"><td class="mono">|1/2, 1, 0⟩</td><td>single quark</td><td class="num">1/2</td><td>1/2 → 0</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p class="reveal">Two knobs remain: the mass $m$ and the coupling $g$. The whole study
+    is a map of quantum resources over the $(m, g)$ plane, computed with tensor networks
+    (DMRG) — with three observables tracked throughout: the <strong>gauge-invariant
+    entanglement entropy</strong> $S$ across a cut link, the <strong>magic density</strong>
+    $M_2/L$, and the <strong>particle density</strong> $\rho$, which counts
+    quark–antiquark (meson) and two-quark (baryon) fluctuations in the vacuum.</p>
+  </div>
+</section>
+
+<!-- ========================= 3. THE FREE POINT ========================= -->
+<section class="section wrap" id="cft" data-mood="0.95,0">
+  <div class="rail"><span>03</span></div>
+  <div class="col">
+    <h2 class="reveal">The critical point, where everything is maximal</h2>
+
+    <p class="reveal">Set both knobs to zero, $m = g = 0$. All that survives of (2) is
+    hopping, and the theory flows to a <strong>conformal field theory</strong> (CFT) with
+    central charge $c = 1$ — a gapless, scale-free critical state. Criticality is where
+    quantum correlations are at their most extravagant, and there is an exact prediction
+    for how the entanglement of a block of length $l$ grows with system size:</p>
+
+    <div class="eq reveal">
+      <div class="eq__body">$$S(l) \;=\; \frac{c}{6}\,
+      \ln\!\left[\frac{2L}{\pi}\sin\!\left(\frac{\pi l}{L}\right)\right] + \text{const}$$</div>
+      <span class="eqn">(4)</span>
+    </div>
+
+    <p class="reveal">This is a stringent test: fit the measured entropies to (4) and the
+    slope hands you the central charge. The magic obeys its own scaling law at
+    criticality,</p>
+
+    <div class="eq reveal">
+      <div class="eq__body">$$M_{2} \;=\; \alpha L + \beta \ln L + \gamma$$</div>
+      <span class="eqn">(5)</span>
+    </div>
+
+    <p class="reveal">— an extensive bulk piece, a logarithmic correction, and a constant.</p>
+
+    <figure class="figure figure--wide reveal" id="f4">
+      <div class="figure__head">
+        <span class="figure__id">F4</span>
+        <span class="figure__title">The CFT point, m = g = 0</span>
+      </div>
+      <div class="split">
+        <div class="stage" id="f4-stage"></div>
+        <div class="stage" id="f4-plot"></div>
+      </div>
+      <div class="controls">
+        <div class="ctl">
+          <label for="f4-L">system size L</label>
+          <input type="range" id="f4-L" min="20" max="100" step="10" value="60">
+          <output id="f4-L-out" for="f4-L">60</output>
+        </div>
+        <div class="ctl">
+          <label for="f4-cut">cut position l</label>
+          <input type="range" id="f4-cut" min="5" max="95" step="1" value="50">
+          <output id="f4-cut-out" for="f4-cut">L/2</output>
+        </div>
+      </div>
+      <div class="readout">
+        <div><span class="k">S(l) from eq. (4)</span><span class="v good" id="f4-s">—</span><span class="u">c = 1, fitted const</span></div>
+        <div><span class="k">central charge (measured)</span><span class="v good">0.990(5)</span><span class="u">expected: 1</span></div>
+        <div><span class="k">M₂ from eq. (5)</span><span class="v" id="f4-m2">—</span><span class="u">α=0.29, β=−0.69, γ=0.88</span></div>
+      </div>
+      <p class="vh" id="f4-desc" aria-live="polite"></p>
+      <figcaption>
+        Left: the Calabrese–Cardy arc (4) for the chosen <b>L</b>, with the cut marker
+        riding it; entanglement is largest for a cut in the middle and grows
+        logarithmically with <b>L</b>. Right: the magic scaling law (5) with the paper's
+        fitted coefficients <b>α = 0.29(1)</b>, <b>β = −0.69(22)</b>, <b>γ = 0.88(59)</b> —
+        magic is <b>extensive</b>: every site contributes about 0.29 bits. Curves are drawn
+        from the fitted formulas; the underlying data reaches <b>L = 100</b>.
+      </figcaption>
+    </figure>
+
+    <p class="reveal">The checks all pass, which is worth pausing on.</p>
+
+    <ul class="checks reveal">
+      <li><div><strong>The central charge comes out right.</strong>
+        <span class="sub">Fitting (4) at the central cut across system sizes gives
+        c = 0.990(5), against the exact c = 1 — even though the gauge fields are truncated
+        to spin 1/2. The hardcore-gluon theory sits in the same universality class.</span></div></li>
+      <li><div><strong>The critical state is the most magical state.</strong>
+        <span class="sub">Both S and M₂/L are maximized at m = g = 0. Critical ground
+        states are the hardest states this theory owns, by both measures at once.</span></div></li>
+      <li><div><strong>The opposite corner is free.</strong>
+        <span class="sub">As g → ∞ the ground state becomes a product stabilizer state:
+        S = 0 and M₂ = 0 exactly. The two ends of the dial are settled analytically; the
+        interest is everything in between.</span></div></li>
+    </ul>
+  </div>
+</section>
+
+<!-- ========================= 4. THE CROSSOVER ========================= -->
+<section class="section wrap" id="crossover" data-mood="1,0">
+  <div class="rail"><span>04</span></div>
+  <div class="col">
+    <h2 class="reveal">The main result: magic and entanglement come apart</h2>
+
+    <p class="reveal">Now fix a small mass, $m = 0.2$, and turn up the coupling $g$,
+    walking the theory from its critical point toward strong coupling — toward
+    <strong>confinement</strong>, where flux is so expensive that the vacuum empties out.
+    Both resources must die on this journey. The discovery is <em>how</em> they die.</p>
+
+    <p class="reveal">Entanglement dies the way you would expect: monotonically, tracking
+    the particle density, as the gap opens and correlations shorten. Magic does something
+    else. It holds an <strong>plateau</strong> through the intermediate regime — the
+    wavefunction stays firmly non-stabilizer even as its entanglement drains away — and
+    only then drops, past a crossover coupling $g_{\star}$.</p>
+
+    <div class="hinge reveal">
+      <span class="tag">The finding</span>
+      <p>The coupling where magic begins its sharp decline coincides with the coupling
+      where the entanglement entropy is changing <em>fastest</em>: $g_{\star} \approx 1.9$,
+      read off from the extrema of $dM_2/dg$ and $dS/dg$ alike, and echoed by the particle
+      density. Confinement suppresses quantum correlations and quantum computational
+      complexity at <strong>different rates</strong>, but their milestones line up at one
+      coupling.</p>
+    </div>
+
+    <figure class="figure figure--bleed reveal" id="f5">
+      <div class="figure__head">
+        <span class="figure__id">F5</span>
+        <span class="figure__title">Walk the coupling — three observables, one crossover</span>
+      </div>
+      <div class="stage" id="f5-stage"></div>
+      <div class="controls">
+        <div class="ctl" style="flex:2 1 300px">
+          <label for="f5-g">coupling g</label>
+          <input type="range" id="f5-g" min="0" max="10" step="0.05" value="1.0">
+          <output id="f5-g-out" for="f5-g">1.00</output>
+        </div>
+      </div>
+      <div class="readout">
+        <div><span class="k">Entanglement S</span><span class="v good" id="f5-s">—</span><span class="u">falls monotonically</span></div>
+        <div><span class="k">Magic M₂/L</span><span class="v good" id="f5-m">—</span><span class="u">plateau, then drop</span></div>
+        <div><span class="k">Particle density ρ</span><span class="v" id="f5-rho">—</span><span class="u">vacuum fluctuations</span></div>
+        <div><span class="k">|dS/dg|</span><span class="v" id="f5-ds">—</span><span class="u">maximal at g⋆</span></div>
+      </div>
+      <p class="verdict" id="f5-verdict" role="status" aria-live="polite"></p>
+      <p class="vh" id="f5-desc" aria-live="polite"></p>
+      <figcaption>
+        The three observables at <b>m = 0.2</b> against the coupling, with the crossover
+        <b>g⋆ ≈ 1.9</b> marked. Drag the slider: left of <b>g⋆</b> the state is
+        <b>magic-rich</b> — entanglement is already falling but <b>M₂/L</b> barely moves.
+        At <b>g⋆</b> the entanglement is falling at its fastest, and magic begins its
+        decline. Far right, the confined vacuum approaches a product stabilizer state and
+        everything vanishes. <b>Schematic reconstruction</b> of Fig. 5 of the paper: the
+        curves follow the behavior and values described there (S from ≈1.3, M₂/L ≈ 0.3
+        plateau, ρ from ≈0.4), not the raw data. The paper's version shows
+        L = 20…100 collapsing onto these curves — no drift with volume, the signature of
+        a crossover rather than a phase transition.
+      </figcaption>
+    </figure>
+
+    <p class="reveal">The interpretation offered is that the sustained plateau reflects the
+    structure of the confinement crossover itself: even as the correlation length
+    shortens, the vacuum remains a genuinely non-classical superposition of meson and
+    baryon fluctuations. Only when the electric term crushes those fluctuations entirely
+    does the state finally become classically easy. Magic, in other words, outlives
+    entanglement.</p>
+  </div>
+</section>
+
+<!-- ========================= 5. THE PHASE PLANE ========================= -->
+<section class="section wrap" id="plane-map" data-mood="0.7,0">
+  <div class="rail"><span>05</span></div>
+  <div class="col">
+    <h2 class="reveal">The whole phase plane</h2>
+
+    <p class="reveal">One slice is suggestive; the paper maps the entire $(m, g)$ plane at
+    $L = 70$. The picture is consistent everywhere: magic is maximal at the critical
+    corner $m = g = 0$ and decays outward — at different rates on either side of
+    $g_{\star}$ — while entanglement decreases monotonically with $g$, fastest near the
+    same $g_{\star} \approx 1.9$. The crossover is not an accident of one parameter
+    choice; it is a feature of the theory's resource landscape.</p>
+
+    <figure class="figure figure--wide reveal" id="f6">
+      <div class="figure__head">
+        <span class="figure__id">F6</span>
+        <span class="figure__title">Resource maps over (m, g)</span>
+      </div>
+      <div class="presets" id="f6-mode" role="group" aria-label="Choose the observable"
+           style="margin-bottom:0.9rem">
+        <button type="button" class="chip" data-mode="magic" aria-pressed="true">magic M₂/L</button>
+        <button type="button" class="chip" data-mode="ee" aria-pressed="false">entanglement S</button>
+      </div>
+      <div class="stage" id="f6-stage"></div>
+      <div class="readout">
+        <div><span class="k">at (m, g)</span><span class="v mono" id="f6-at">—</span><span class="u">hover / tap the map</span></div>
+        <div><span class="k">value</span><span class="v good" id="f6-v">—</span><span class="u" id="f6-u">M₂/L</span></div>
+      </div>
+      <p class="vh" id="f6-desc" aria-live="polite"></p>
+      <figcaption>
+        <b>Schematic reconstruction</b> of Fig. 6 of the paper: the observable over the
+        <b>(m, g)</b> plane at <b>L = 70</b>, darkest where largest. The dashed white lines
+        are slices of constant <b>m/g</b> — the paths one walks toward the continuum limit
+        — and the vertical dashed line marks <b>g⋆</b>. Both maps peak at the critical
+        corner and fade toward strong coupling; the magic map fades with a visible change
+        of rate across <b>g⋆</b>, the entanglement map smoothly. In the paper the colors
+        are drawn from data at the marked grid of simulated points, with χ = 100.
+      </figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- ========================= 6. WHY IT MATTERS ========================= -->
+<section class="section wrap" id="outlook" data-mood="0.6,0">
+  <div class="rail"><span>06</span></div>
+  <div class="col">
+    <h2 class="reveal">Why it matters, and what still needs doing</h2>
+
+    <p class="reveal">The practical stakes are about <strong>where quantum computers will
+    pay off</strong>. Simulating lattice gauge theories — especially non-Abelian ones with
+    matter, where sign problems and real-time dynamics defeat classical Monte Carlo — is a
+    headline application for quantum hardware. But a quantum computer only earns an
+    advantage where the states involved are classically hard, and this work draws that map
+    for a non-Abelian theory: hardness of both kinds concentrated near criticality and the
+    continuum limit, a magic-rich intermediate regime, and a classically easy strong-coupling
+    region. For fault-tolerant machines the point is sharper still: in error-corrected
+    architectures Clifford operations are cheap and it is magic, injected through costly
+    distilled states, that sets the budget. $M_2/L \approx 0.3$ bits per site is a
+    statement about the resources a simulation of this theory will consume.</p>
+
+    <p class="reveal">There is also a physics payoff. In this 1+1-dimensional model there
+    is no deconfinement transition — the theory confines for all $g &gt; 0$, and nothing
+    here is a phase transition, only a crossover. But the demonstrated sensitivity of
+    $dS/dg$ and of magic to the confinement structure suggests both as <strong>probes of
+    phase diagrams</strong> in theories that do have transitions, such as SU(2) in 2+1
+    dimensions.</p>
+
+    <p class="reveal">Honesty about scope, in the paper and here.</p>
+
+    <ul class="plain reveal">
+      <li><strong>The truncation.</strong> Everything is at $j_{\max} = \tfrac12$, the
+      hardcore gluon. The correct central charge is encouraging and preliminary checks
+      suggest corrections are modest, but a systematic study at larger $j_{\max}$ is
+      explicitly left to future work.</li>
+      <li><strong>Finite bond dimension.</strong> Ground states are matrix product states
+      at $\chi = 100$; SRE is estimated by Pauli sampling. Both are controlled but not
+      exact.</li>
+      <li><strong>This page's figures.</strong> F1, F5 and F6 are schematic
+      reconstructions drawn from the functional forms and values reported in the paper,
+      built for legibility — the quantitative record is the paper's own figures.</li>
+    </ul>
+
+    <p class="reveal">Next steps the authors flag: pushing $j_{\max}$ up, SU(3) in 1+1
+    dimensions for a step toward QCD, higher dimensions where tensor networks hit the
+    entanglement barrier and neural quantum states may take over, and better sampling
+    algorithms for magic itself.</p>
+
+    <div class="preprint reveal">
+      <div>
+        <h3>Read it yourself</h3>
+        <p><cite>Magic and entanglement in 1+1-dimensional SU(2) lattice gauge
+        theory</cite> — Raghav G. Jha, Goksu C. Toga, Jaber I. Taher, Bojko N. Bakalov,
+        and Alexander F. Kemper (North Carolina State University).
+        <a href="https://arxiv.org/abs/2606.09971">arXiv:2606.09971 [quant-ph]</a>.
+        Appendices A–C carry the representation theory, the dressed-site Hamiltonian, and
+        the observables.</p>
+      </div>
+      <a class="btn" href="paper/2606.09971v1.pdf">Open the PDF</a>
+    </div>
+  </div>
+</section>
+
+<!-- ========================= 7. REFERENCES ========================= -->
+<section class="section wrap" id="references" data-mood="0.5,0">
+  <div class="rail"><span>07</span></div>
+  <div class="col">
+    <h2 class="reveal">Selected references</h2>
+    <p class="reveal">The load-bearing citations, from the paper's bibliography.</p>
+
+    <ul class="refs reveal">
+      <li><span class="tagno">KS75</span><div>J. B. Kogut and L. Susskind, <cite>Hamiltonian
+        formulation of Wilson's lattice gauge theories</cite>. Phys. Rev. D
+        <strong>11</strong> (1975) 395. <em>The Hamiltonian.</em></div></li>
+      <li><span class="tagno">Got98</span><div>D. Gottesman, <cite>The Heisenberg representation
+        of quantum computers</cite> (1998).
+        <a href="https://arxiv.org/abs/quant-ph/9807006">arXiv:quant-ph/9807006</a>.
+        <em>Stabilizer circuits are classically easy.</em></div></li>
+      <li><span class="tagno">AG04</span><div>S. Aaronson and D. Gottesman, <cite>Improved
+        simulation of stabilizer circuits</cite>. Phys. Rev. A <strong>70</strong> (2004)
+        052328. <a href="https://arxiv.org/abs/quant-ph/0406196">arXiv:quant-ph/0406196</a>.</div></li>
+      <li><span class="tagno">BK05</span><div>S. Bravyi and A. Kitaev, <cite>Universal quantum
+        computation with ideal Clifford gates and noisy ancillas</cite>. Phys. Rev. A
+        <strong>71</strong> (2005) 022316.
+        <a href="https://arxiv.org/abs/quant-ph/0403025">arXiv:quant-ph/0403025</a>.
+        <em>Magic states.</em></div></li>
+      <li><span class="tagno">LOH22</span><div>L. Leone, S. F. E. Oliviero and A. Hamma,
+        <cite>Stabilizer Rényi entropy</cite>. Phys. Rev. Lett. <strong>128</strong> (2022)
+        050402. <a href="https://arxiv.org/abs/2106.12587">arXiv:2106.12587</a>.
+        <em>The measure used throughout.</em></div></li>
+      <li><span class="tagno">Don12</span><div>W. Donnelly, <cite>Decomposition of entanglement
+        entropy in lattice gauge theory</cite>. Phys. Rev. D <strong>85</strong> (2012)
+        085004. <a href="https://arxiv.org/abs/1109.0036">arXiv:1109.0036</a>.
+        <em>The gauge-invariant entanglement entropy.</em></div></li>
+      <li><span class="tagno">CC09</span><div>P. Calabrese and J. Cardy, <cite>Entanglement
+        entropy and conformal field theory</cite>. J. Phys. A <strong>42</strong> (2009)
+        504005. <a href="https://arxiv.org/abs/0905.4013">arXiv:0905.4013</a>.
+        <em>Equation (4).</em></div></li>
+      <li><span class="tagno">WCS21</span><div>C. D. White, C. Cao and B. Swingle,
+        <cite>Conformal field theories are magical</cite>. Phys. Rev. B <strong>103</strong>
+        (2021) 075145. <a href="https://arxiv.org/abs/2007.01303">arXiv:2007.01303</a>.</div></li>
+      <li><span class="tagno">CMRS24</span><div>G. Calajò, G. Magnifico, C. Edmunds,
+        M. Ringbauer, S. Montangero and P. Silvi, <cite>Digital quantum simulation of a
+        (1+1)D SU(2) lattice gauge theory with ion qudits</cite>. PRX Quantum
+        <strong>5</strong> (2024) 040309.
+        <a href="https://arxiv.org/abs/2402.07987">arXiv:2402.07987</a>.
+        <em>The dressed-site basis and the hardcore gluon.</em></div></li>
+      <li><span class="tagno">FTF+25</span><div>P. R. N. Falcão, P. S. Tarabunga, M. Frau,
+        E. Tirrito, J. Zakrzewski and M. Dalmonte, <cite>Nonstabilizerness in U(1) lattice
+        gauge theory</cite>. Phys. Rev. B <strong>111</strong> (2025) L081102.
+        <a href="https://arxiv.org/abs/2409.01789">arXiv:2409.01789</a>.
+        <em>The Abelian predecessor.</em></div></li>
+      <li><span class="tagno">THP23</span><div>P. S. Tarabunga, E. Tirrito, T. Chanda and
+        M. Dalmonte, <cite>Many-body magic via Pauli–Markov chains — from criticality to
+        gauge theories</cite>. PRX Quantum <strong>4</strong> (2023) 040317.
+        <a href="https://arxiv.org/abs/2305.18541">arXiv:2305.18541</a>.</div></li>
+      <li><span class="tagno">CMS24</span><div>G. Cataldi, G. Magnifico, P. Silvi and
+        S. Montangero, <cite>Simulating (2+1)D SU(2) Yang–Mills lattice gauge theory at
+        finite density with tensor networks</cite>. Phys. Rev. Res. <strong>6</strong>
+        (2024) 033057. <a href="https://arxiv.org/abs/2307.09396">arXiv:2307.09396</a>.
+        <em>Where a real transition awaits these probes.</em></div></li>
+      <li><span class="tagno">JTT+26</span><div>R. G. Jha, G. C. Toga, J. I. Taher,
+        B. N. Bakalov and A. F. Kemper, <cite>Magic and entanglement in 1+1-dimensional
+        SU(2) lattice gauge theory</cite> (2026).
+        <a href="https://arxiv.org/abs/2606.09971">arXiv:2606.09971</a>.
+        <em>The paper this page explains.</em></div></li>
+    </ul>
+  </div>
+</section>
+
+</main>
+
+<!-- ============================ TALLY ============================ -->
+<section class="tally wrap" id="visits" data-mood="0.6,0.22" hidden>
+  <div class="tally__count">
+    <span class="k">Visits</span>
+    <p class="tally__num mono"><span id="visit-count">0</span></p>
+  </div>
+</section>
+</div>
+
+<script src="vendor/d3/d3.min.js"></script>
+<script src="vendor/katex/katex.min.js"></script>
+<script src="vendor/katex/auto-render.min.js"></script>
+<script src="js/plane.js"></script>
+<script src="js/figures-su2.js"></script>
+<script src="js/counter.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>
