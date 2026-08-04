@@ -43,7 +43,10 @@
 </div>
 </div>
 </section>
+
+
 <section class="papers" id="papers">
+
 <article class="paper-card" data-topics="Quantum simulation Tensor networks Quantum information">
 <div class="paper-index"></div>
 <div class="paper-content">
@@ -54,19 +57,19 @@
 <span class="paper-status"><a href="https://arxiv.org/abs/2607.24924" rel="noopener noreferrer" target="_blank">arXiv: 2607.24924</a></span>
 </div>
 <h2>Efficient computation of real-time correlators using Pauli propagation</h2>
+<a href="https://rgjha.github.io/outreach/pauliprop/pp.html" rel="noopener noreferrer" target="_blank">Read the paper summary</a>
 <p class="authors"><strong>Authors:</strong> Alexander F. Kemper, <span class="me">Raghav G. Jha</span>, Arnab Bachhar, Goksu C. Toga, Mariano Guerrero Perez, Nicholas J. Mayhall</p>
 <div class="story-box" contenteditable="true" spellcheck="true">
-<p><strong>Story behind the paper.</strong> This project brought together Lex Kemper's group (including Goksu, me, and Mariano) at NC State with Nick Mayhall's group at Indiana (with Arnab), who have been developing Pauli propagation as a classical simulation tool and recently finished a paper in early 2026. We started having online meetings starting end of 2025 and early 2026. 
-
-The question we set out to answer was whether Pauli propagation could be turned into a practical way to compute real-time two-point correlation functions, the quantities that connect theory to experiments. The obvious obstacle is that the number of Pauli strings explodes beyond short times. Our workaround was to lean on the accurate short-time data and then extend it: a positivity-based (PSD / Prony-type) fit that super-resolves the long-time signal from only a handful of points, combined with Clifford-augmented matrix product states (CAMPS) to prepare the ground states we measure against. Putting these together let us reach the dynamical structure factor of an 8x8 Heisenberg antiferromagnet, which was impressive. Lex led the project and I helped with CAMPS computation and bit of writing. This was also Mariano's first paper, congrats to him! 
-
-For a general-audience summary of this work, please
-<a href="https://rgjha.github.io/outreach/pauliprop/pp.html">click here</a>.
-
-</p>
+<p><strong>Story behind the paper.</strong> This project brought together Lex Kemper's group (including Goksu, me, and Mariano) at NC State with Nick Mayhall's group at Indiana (with Arnab), who had recently developed Pauli propagation as a classical simulation tool. We began meeting regularly in late 2025 and early 2026 to explore whether the method could be extended to compute real-time two-point correlation functions, the quantities that directly connect quantum many-body theory with experiments.</p>
+<p>The main challenge is that the number of Pauli strings grows rapidly with time, making straightforward propagation impractical. Our approach was to combine accurate short-time Pauli propagation with a positivity-based (PSD/Prony-type) time-extension method that reconstructs the long-time signal from only a limited time window. We also used Clifford-augmented matrix product states (CAMPS) to efficiently prepare the ground states needed for the correlators. Together, these ingredients enabled us to compute the dynamical structure factor of an 8&times;8 Heisenberg antiferromagnet, a system well beyond the reach of conventional exact methods.</p>
+<p>Lex led the project, while I worked primarily on the CAMPS calculations and contributed to the writing. This was also Mariano's first paper&mdash;congratulations to him!</p>
+</div>
+<div class="links-row">
 </div>
 </div>
 </article>
+
+
 <article class="paper-card" data-topics="Quantum simulation SYK / quantum chaos">
 <div class="paper-index"></div>
 <div class="paper-content">
@@ -92,6 +95,7 @@ For a general-audience summary of this work, please
             <span class="paper-status"><a href="https://arxiv.org/abs/2606.09971" rel="noopener noreferrer" target="_blank">arXiv: 2606.09971</a></span>
           </div>
 <h2>Magic and entanglement in 1+1-dimensional SU(2) lattice gauge theory</h2>
+<a href="https://rgjha.github.io/outreach/su2/index.html" rel="noopener noreferrer" target="_blank">Read the paper summary</a>
 <p class="authors"><strong>Authors:</strong> <span class="me">Raghav G. Jha</span>, Goksu C. Toga, Jaber I. Taher, Bojko Bakalov, Alexander Kemper</p>
 <div class="story-box" contenteditable="true" spellcheck="true">
 <p><strong>Story behind the paper.</strong> This paper grew out of the question of how quantum-information diagnostics behave in a genuinely gauge-invariant lattice gauge theory going beyond quantum spin models. Instead of looking only at entanglement, we wanted to understand the role of magic as a separate computational resource in a non-Abelian lattice gauge theory. We found a paper by Cataldi et al. where the authors used a semi-link (rishon-type) dressed-site approach. I initially tried to generalize it for arbitrary cutoff but it was a bit messy. We were afraid of getting scooped (which we evaded by a week, see https://arxiv.org/abs/2606.14842), so we decided to just focus on jmax=1/2 and tried to finish the paper. I liked the project since it was very timely and connected tensor network simulations with ideas from stabilizer theory and quantum resources, giving us a way to ask which parts of the lattice gauge theory are hard for classical or Clifford-based descriptions. We finished this paper very quickly, in about two months, since we were writing the draft and coding the SRE/EE computation simulataneously. This was also Jaber's first paper. Congratulations to him!</p>
