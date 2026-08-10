@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="en" class="boot">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Watching particles collide — real-time scattering in Ising Field Theory</title>
+<meta name="description" content="An explainer for Jha, Milsted, Neuenfeld, Preskill and Vieira (arXiv:2411.13645): simulating wave-packet collisions in Ising Field Theory with matrix product states, and reading scattering off the space-time pictures of energy density.">
+<meta name="color-scheme" content="light">
+<link rel="preload" as="font" type="font/woff2" href="fonts/bricolage-latin-3eafbb15.woff2" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="fonts/sourceserif-latin-a15d607a.woff2" crossorigin>
+<link rel="stylesheet" href="vendor/katex/katex.min.css">
+<link rel="stylesheet" href="css/fonts.css">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<a class="skip" href="#main">Skip to content</a>
+<canvas id="plane" aria-hidden="true"></canvas>
+
+<div class="page">
+<main id="main">
+
+<!-- ============================ HERO ============================ -->
+<header class="hero wrap" data-mood="0.85,0">
+  <div class="hero__grid">
+    <div class="hero__col">
+      <p class="eyebrow">Quantum field theory · tensor networks</p>
+      <h1>Watching<br>particles<span class="thin">collide</span></h1>
+      <p class="lede">
+        Fire two particles at each other inside a strongly-coupled quantum field
+        theory and film the wreckage, frame by frame. Tensor networks make the
+        movie — and the movie is a measurement.
+      </p>
+      <div class="actions">
+        <a class="btn" href="#read">How to read the picture</a>
+        <a class="btn btn--ghost" href="paper/2411.13645v1.pdf">Read the paper</a>
+      </div>
+    </div>
+
+    <figure class="figure hero__fig" id="f1">
+      <div class="figure__head">
+        <span class="figure__id">F1</span>
+        <span class="figure__title">Three collisions (after Fig. 1)</span>
+      </div>
+      <div class="stage" id="f1-stage"></div>
+      <figcaption>
+        Energy density in space and time — <b>time runs upward</b>, position runs across,
+        color is the energy above the vacuum. Two wave packets fall in and cross.
+        <b>Left:</b> a clean elastic bounce. <b>Middle:</b> the collision energy sits on a
+        resonance, so a bright lump lingers before decaying. <b>Right:</b> above threshold,
+        extra tracks appear — new particles are produced. Recreated in the site's palette
+        from the paper's opening figure.
+      </figcaption>
+    </figure>
+  </div>
+
+  <div class="scope">
+    <div>
+      <span class="k">A tunable theory</span>
+      <p>Ising Field Theory is one knob, <span class="mono">η</span>, sweeping from a free
+         theory where nothing really scatters to Zamolodchikov's remarkable
+         <span class="mono">E₈</span> theory with eight particles.</p>
+    </div>
+    <div>
+      <span class="k">The movie is the data</span>
+      <p>Time delays, resonance lifetimes and particle-production rates are all read
+         directly off the space-time pictures — the dynamics, not just the in/out states.</p>
+    </div>
+    <div>
+      <span class="k">Strong coupling, real time</span>
+      <p>A regime where Feynman diagrams fail and most methods can't follow real-time
+         evolution. In 1+1 dimensions, matrix product states can.</p>
+    </div>
+  </div>
+</header>
+
+<!-- ========================= 1. READING ========================= -->
+<section class="section wrap" id="read" data-mood="0.9,0">
+  <div class="rail"><span>01</span></div>
+  <div class="col">
+    <h2 class="reveal">How to read the picture</h2>
+
+    <p class="reveal">Every image on this page is a map of <strong>energy density in space and
+    time</strong>. Position runs left-to-right. Time runs <strong>bottom-to-top</strong>: the
+    bottom edge is the start of the experiment, and as your eye travels up, the clock ticks
+    forward. Color shows how much energy sits at each place and moment, measured relative to
+    the empty vacuum — blank means vacuum, bright means a particle is there.</p>
+
+    <p class="reveal">A particle moving at constant velocity traces a straight <strong>slanted
+    line</strong> — a worldline. Two particles fired toward each other from opposite sides make
+    two lines that meet: an <strong>X</strong>. What happens at and after the crossing is the
+    entire story of the collision, and different collisions draw visibly different X's.</p>
+
+    <div class="hinge reveal">
+      <span class="tag">Why this is unusual</span>
+      <p>The textbook way to think about scattering compares the particles long before and long
+      after they meet — the asymptotic "in" and "out" states — and never looks in between. Here
+      we get to <em>watch the middle</em>: the moment of contact, resolved in space and time.
+      As Preskill put it, "seeing processes unfold in real time provides an edifying
+      perspective."</p>
+    </div>
+
+    <figure class="figure figure--wide reveal" id="f2">
+      <div class="figure__head">
+        <span class="figure__id">F2</span>
+        <span class="figure__title">Anatomy of a collision</span>
+      </div>
+      <div class="split split--stage-first">
+        <div class="stage" id="f2-stage"></div>
+        <div>
+          <div class="controls" style="border-top:none;padding-top:0;margin-top:0">
+            <div class="ctl">
+              <label for="f2-t">watch the clock</label>
+              <input type="range" id="f2-t" min="0" max="100" step="1" value="100">
+              <output id="f2-t-out" for="f2-t">end</output>
+            </div>
+          </div>
+          <div class="readout">
+            <div><span class="k">Before the cross</span><span class="v" id="f2-a">two incoming</span><span class="u">packets approach</span></div>
+            <div><span class="k">At the cross</span><span class="v good" id="f2-b">contact</span><span class="u">they interact</span></div>
+            <div><span class="k">After</span><span class="v" id="f2-c">two outgoing</span><span class="u">packets recede</span></div>
+          </div>
+          <p class="vh" id="f2-desc" aria-live="polite"></p>
+        </div>
+      </div>
+      <figcaption>
+        The simplest event: an elastic bounce. Drag the clock to sweep a time-cursor up the
+        diagram — the horizontal line shows "now," and the dots mark where the particles are at
+        that instant. Two packets come together, touch at the vertex, and leave. Everything more
+        interesting is a variation on this X.
+      </figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- ========================= 2. THE THEORY ========================= -->
+<section class="section wrap" id="theory" data-mood="0.75,0">
+  <div class="rail"><span>02</span></div>
+  <div class="col">
+    <h2 class="reveal">One theory, one knob</h2>
+
+    <p class="reveal">The playground is <strong>Ising Field Theory</strong> (IFT) — the
+    continuum theory you get by sitting the famous two-dimensional Ising model right at its
+    critical point and then nudging it with two perturbations: a "thermal" one that moves the
+    temperature off critical, and a "magnetic" one, an external field. Their relative strength
+    is captured by a single dimensionless number,</p>
+
+    <div class="eq reveal">
+      <div class="eq__body">$$\eta \;=\; \frac{\tau}{|h|^{8/15}}$$</div>
+      <span class="eqn">(1)</span>
+    </div>
+
+    <p class="reveal">and turning that one knob sweeps through a whole family of theories.</p>
+
+    <p class="reveal">The two ends are special and, in different ways, easy. At
+    $\eta = \infty$ (pure thermal) IFT is just a <strong>free massive fermion</strong>:
+    particles pass through each other and nothing happens. At $\eta = 0$ (pure magnetic) lies
+    one of the jewels of mathematical physics — Zamolodchikov's <strong>$E_8$ theory</strong>,
+    an integrable theory with <strong>eight</strong> species of stable particle whose mass
+    ratios are fixed by the $E_8$ Lie algebra. The lightest two are in the golden ratio:
+    $m_2/m_1 = \tfrac{1+\sqrt5}{2} \approx 1.618$. (This spectrum isn't a fantasy — it has been
+    seen in neutron scattering off quasi-1D Ising magnets.)</p>
+
+    <p class="reveal">Everywhere <em>between</em> those ends, IFT is <strong>non-integrable and
+    strongly coupled</strong> — the hard, interesting regime, and the one this work targets. As
+    $\eta$ grows the theory even sheds particles: three stable species near $E_8$, then two,
+    then one.</p>
+
+    <figure class="figure figure--wide reveal" id="f3">
+      <div class="figure__head">
+        <span class="figure__id">F3</span>
+        <span class="figure__title">Slide the knob (after Fig. 2)</span>
+      </div>
+      <div class="stage" id="f3-stage"></div>
+      <div class="controls">
+        <div class="ctl" style="flex:2 1 320px">
+          <label for="f3-eta">coupling η</label>
+          <input type="range" id="f3-eta" min="0" max="100" step="1" value="12">
+          <output id="f3-eta-out" for="f3-eta">0.10</output>
+        </div>
+      </div>
+      <div class="readout">
+        <div><span class="k">Regime</span><span class="v good" id="f3-regime">—</span><span class="u">where on the line</span></div>
+        <div><span class="k">Stable particles</span><span class="v" id="f3-nstable">—</span><span class="u">species below threshold</span></div>
+        <div><span class="k">Character</span><span class="v" id="f3-char">—</span><span class="u">integrable?</span></div>
+      </div>
+      <p class="verdict" id="f3-verdict" role="status" aria-live="polite"></p>
+      <p class="vh" id="f3-desc" aria-live="polite"></p>
+      <figcaption>
+        The IFT line from the integrable $E_8$ theory (<b>η = 0</b>, left) to the free fermion
+        (<b>η → ∞</b>, right). The bars show the mass spectrum in units of the lightest particle
+        $m_1$; the dashed line is the two-particle threshold $2m_1$, above which heavier species
+        survive only at the integrable point. The count of stable particles drops
+        <b>3 → 2 → 1</b> at <b>η₃ ≈ 0.022</b> and <b>η₂ ≈ 0.333</b>. Between the ends the theory
+        is non-integrable — no exact answers, which is exactly why one simulates.
+      </figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- ========================= 3. THE METHOD ========================= -->
+<section class="section wrap" id="method" data-mood="0.7,0">
+  <div class="rail"><span>03</span></div>
+  <div class="col">
+    <h2 class="reveal">Building a collider out of a spin chain</h2>
+
+    <p class="reveal">IFT can be grown from something very concrete: a long chain of quantum
+    spins with a simple, tunable interaction. Tuned near its critical point, the chain's
+    low-energy behavior <em>is</em> Ising Field Theory. So a scattering experiment becomes a
+    numerical experiment on a spin chain, in three moves.</p>
+
+    <ul class="checks reveal">
+      <li><div><strong>Write the state as a matrix product state (MPS).</strong>
+        <span class="sub">A one-dimensional state that isn't too entangled can be captured
+        compactly by a chain of small matrices. That compression is what makes any of this
+        tractable — and gapped particles are exactly this kind of state.</span></div></li>
+      <li><div><strong>Build wave packets and aim them.</strong>
+        <span class="sub">On top of the vacuum, insert two localized lumps — particles — with
+        opposite momenta, wide and well-separated, so they start far apart and head toward each
+        other. Real packets span ~70–120 sites in a window of 1000–2000.</span></div></li>
+      <li><div><strong>Let time run, with TDVP.</strong>
+        <span class="sub">The time-dependent variational principle evolves the MPS forward,
+        keeping it inside the compressible family at each step. Record the energy density at
+        every frame — that record is the space-time picture.</span></div></li>
+    </ul>
+
+    <p class="reveal">The method has a natural ceiling: as particles collide they generate
+    entanglement, the matrices must grow, and eventually the compression stops paying off. But
+    up to that point you get the real-time evolution of a <em>strongly coupled</em> field
+    theory in full spatial and temporal detail — something diagrammatic methods simply cannot
+    deliver.</p>
+  </div>
+</section>
+
+<!-- ========================= 4. THREE PROCESSES ========================= -->
+<section class="section wrap" id="processes" data-mood="1,0">
+  <div class="rail"><span>04</span></div>
+  <div class="col">
+    <h2 class="reveal">Three things a collision can do</h2>
+
+    <p class="reveal">Dial up the collision energy and the character of the X changes. The
+    explorer below is the heart of it: set the energy and the coupling, and watch the space-time
+    picture — and the numbers — respond.</p>
+
+    <figure class="figure figure--bleed reveal" id="f4">
+      <div class="figure__head">
+        <span class="figure__id">F4</span>
+        <span class="figure__title">Collision explorer</span>
+      </div>
+      <div class="stage" id="f4-stage"></div>
+      <div class="controls">
+        <div class="ctl" style="flex:2 1 300px">
+          <label for="f4-E">collision energy E</label>
+          <input type="range" id="f4-E" min="60" max="360" step="1" value="150">
+          <output id="f4-E-out" for="f4-E">1.50 m₁</output>
+        </div>
+        <div class="ctl">
+          <label for="f4-eta">coupling η</label>
+          <input type="range" id="f4-eta" min="1" max="100" step="1" value="10">
+          <output id="f4-eta-out" for="f4-eta">0.08</output>
+        </div>
+      </div>
+      <div class="readout">
+        <div><span class="k">Regime</span><span class="v good" id="f4-regime">—</span><span class="u">what the X shows</span></div>
+        <div><span class="k">Elastic prob. P₁₁→₁₁</span><span class="v" id="f4-prob">—</span><span class="u">stays two particles</span></div>
+        <div><span class="k">Time delay Δt</span><span class="v" id="f4-delay">—</span><span class="u">Wigner delay</span></div>
+      </div>
+      <p class="verdict" id="f4-verdict" role="status" aria-live="polite"></p>
+      <p class="vh" id="f4-desc" aria-live="polite"></p>
+      <figcaption>
+        Raise <b>E</b> to move through the three regimes; raise <b>η</b> to move away from the
+        $E_8$ point (sharpening or dissolving the resonance and shifting where production turns
+        on). <b>Low E:</b> a clean elastic X with a small <b>time delay</b> — the outgoing tracks
+        emerge slightly later than a straight crossing would, and that delay encodes the
+        scattering phase. <b>Near a resonance:</b> a lump of energy sits at the collision point
+        and decays. <b>Above threshold:</b> extra outgoing tracks — particle production. Schematic
+        recreation; the behaviors follow the paper's Fig. 1 and results.
+      </figcaption>
+    </figure>
+
+    <!-- ELASTIC / TIME DELAY -->
+    <div class="move reveal">
+      <span class="move__no">Process 1</span>
+      <h3>Elastic — a bounce with a delay</h3>
+      <p>At low energy the only thing that can happen is an elastic bounce: two particles in,
+      the same two out. But the collision still leaves a fingerprint. The outgoing tracks are
+      shifted in time relative to a naïve straight-through crossing — a <strong>time delay</strong>,
+      first studied by Wigner. Its size is set by how the scattering phase changes with energy,</p>
+      <div class="eq">
+        <div class="eq__body">$$\Delta t \;=\; -i\,\partial_E \log S_{11\to11}(E,\eta)$$</div>
+        <span class="eqn">(2)</span>
+      </div>
+      <p>so measuring the delay across energies reconstructs the phase of the S-matrix — the
+      thing that actually characterizes the interaction. Near the integrable ends the extracted
+      delays agree with form-factor perturbation theory; in between, the simulation goes where
+      no formula reaches.</p>
+
+      <figure class="figure figure--wide" id="f5">
+        <div class="figure__head">
+          <span class="figure__id">F5</span>
+          <span class="figure__title">Time delay vs energy</span>
+        </div>
+        <div class="stage" id="f5-stage"></div>
+        <div class="controls">
+          <div class="ctl">
+            <label for="f5-E">energy E</label>
+            <input type="range" id="f5-E" min="60" max="240" step="1" value="150">
+            <output id="f5-E-out" for="f5-E">1.50 m₁</output>
+          </div>
+        </div>
+        <div class="readout">
+          <div><span class="k">Time delay Δt</span><span class="v good" id="f5-val">—</span><span class="u">at this energy</span></div>
+          <div><span class="k">Sign</span><span class="v" id="f5-sign">—</span><span class="u">advance or delay</span></div>
+        </div>
+        <p class="vh" id="f5-desc" aria-live="polite"></p>
+        <figcaption>
+          The elastic time delay as a function of collision energy (schematic, following the
+          paper's extracted trend). A positive delay means the particles linger in the
+          interaction region; a dip toward a resonance energy is where the phase turns most
+          sharply. Reading this curve off the pictures is equivalent to measuring the derivative
+          of the S-matrix phase.
+        </figcaption>
+      </figure>
+    </div>
+
+    <!-- RESONANCE -->
+    <div class="move reveal">
+      <span class="move__no">Process 2</span>
+      <h3>Resonance — a particle that almost exists</h3>
+      <p>Near the $E_8$ point some of the heavy particles sit just above the two-particle
+      threshold. Away from integrability they are no longer quite stable: they become
+      <strong>resonances</strong>, short-lived states that form and then fall apart. Tune the
+      collision energy onto one and the space-time picture shows it directly — a bright
+      <strong>lump of energy</strong> parks itself at the collision point and fades, and from
+      the fade rate you read the resonance's <strong>lifetime</strong>, hence its width $\Gamma$
+      and mass. The paper pins down the mass $m_4$ and width $\Gamma_4$ of the lightest
+      resonance as $\eta$ varies.</p>
+      <p class="plain-version">
+        <span class="tag">In Preskill's words</span>
+        "A lump of energy density appears, which gradually dissipates as the resonance decays to
+        outgoing particles. By fitting the decay rate of the lump, we can determine the lifetime
+        of the resonance."
+      </p>
+
+      <figure class="figure figure--wide" id="f6">
+        <div class="figure__head">
+          <span class="figure__id">F6</span>
+          <span class="figure__title">Resonance lifetime</span>
+        </div>
+        <div class="split split--stage-first">
+          <div class="stage" id="f6-stage"></div>
+          <div>
+            <div class="controls" style="border-top:none;padding-top:0;margin-top:0">
+              <div class="ctl">
+                <label for="f6-width">width Γ (∝ η)</label>
+                <input type="range" id="f6-width" min="4" max="60" step="1" value="16">
+                <output id="f6-width-out" for="f6-width">0.16</output>
+              </div>
+            </div>
+            <div class="readout">
+              <div><span class="k">Lifetime ≈ 1/Γ</span><span class="v good" id="f6-life">—</span><span class="u">how long the lump lasts</span></div>
+              <div><span class="k">Resonance</span><span class="v" id="f6-state">—</span><span class="u">sharp or broad</span></div>
+            </div>
+            <p class="vh" id="f6-desc" aria-live="polite"></p>
+          </div>
+        </div>
+        <figcaption>
+          The lump's brightness decays exponentially in time; a narrow resonance (small width)
+          lingers, a broad one is gone almost at once. Widen $\Gamma$ and watch the central lump
+          shorten and the outgoing tracks brighten as the "particle" decays sooner. The paired
+          outgoing tracks on each side are the interference effect noted in the paper.
+        </figcaption>
+      </figure>
+    </div>
+
+    <!-- INELASTIC -->
+    <div class="move reveal">
+      <span class="move__no">Process 3</span>
+      <h3>Inelastic — making new particles</h3>
+      <p>Push the energy high enough and the collision can do what colliders are built for:
+      convert energy into <strong>new particles</strong>. Above threshold, the outgoing X sprouts
+      extra tracks. Here the quantum strangeness is on full display — the outgoing state is a
+      <strong>superposition of every allowed final channel at once</strong>, all the different
+      possible sets of product particles overlaid in the same picture. To disentangle them, the
+      authors project the wavefunction onto definite particle sectors or read energy-density
+      correlations.</p>
+      <p class="plain-version">
+        <span class="tag">In Preskill's words</span>
+        "The outgoing tracks capture all of the possible final-state channels, which appear in
+        superposition. Energy density correlation functions clarify the interpretation of the
+        final state."
+      </p>
+      <div class="stage" id="d1-stage" style="margin:1.4rem 0 0"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ========================= 5. THE BIG QUESTION ========================= -->
+<section class="section wrap" id="highenergy" data-mood="0.65,0">
+  <div class="rail"><span>05</span></div>
+  <div class="col">
+    <h2 class="reveal">The question at the top of the energy scale</h2>
+
+    <p class="reveal">Here is a question that sounds simple and isn't. Send two particles in at
+    higher and higher energy and ask: what fraction of the time do they just bounce
+    (<strong>elastic</strong>), rather than shatter into more particles (<strong>inelastic</strong>)?
+    Call that high-energy limit</p>
+
+    <div class="eq reveal">
+      <div class="eq__body">$$P^{\infty}(\eta) \;=\; \lim_{E\to\infty} P_{11\to11}(E,\eta).$$</div>
+      <span class="eqn">(3)</span>
+    </div>
+
+    <p class="reveal">Is it zero (production wins), one (bouncing wins), or something in between?
+    Both integrable ends are known to give $P^{\infty} = 1$. For the strongly-coupled middle,
+    nobody could say. Pushing the simulations to several times the production threshold, the
+    results line up with a striking conjecture of Zamolodchikov: the answer is a
+    <strong>sharp switch</strong> — production wins completely below some critical coupling
+    $\eta_c$, and bouncing wins completely above it.</p>
+
+    <figure class="figure figure--wide reveal" id="f7">
+      <div class="figure__head">
+        <span class="figure__id">F7</span>
+        <span class="figure__title">Elastic survival at high energy</span>
+      </div>
+      <div class="stage" id="f7-stage"></div>
+      <div class="controls">
+        <div class="ctl" style="flex:2 1 320px">
+          <label for="f7-eta">coupling η</label>
+          <input type="range" id="f7-eta" min="1" max="100" step="1" value="20">
+          <output id="f7-eta-out" for="f7-eta">0.20</output>
+        </div>
+      </div>
+      <div class="readout">
+        <div><span class="k">P₁₁→₁₁(E) now</span><span class="v" id="f7-pe">—</span><span class="u">at the shown energy sweep</span></div>
+        <div><span class="k">High-energy limit P∞</span><span class="v good" id="f7-pinf">—</span><span class="u">Zamolodchikov's switch</span></div>
+        <div><span class="k">Side of η_c</span><span class="v" id="f7-side">—</span><span class="u">η_c ≈ 0.033</span></div>
+      </div>
+      <p class="verdict" id="f7-verdict" role="status" aria-live="polite"></p>
+      <p class="vh" id="f7-desc" aria-live="polite"></p>
+      <figcaption>
+        The elastic probability $P_{11\to11}$ falling with energy toward its plateau
+        $P^{\infty}$. The conjecture — supported by the simulations — is that the plateau is
+        <b>all or nothing</b>: $P^{\infty}=0$ for $\eta<\eta_c$ and $P^{\infty}=1$ for
+        $\eta>\eta_c$, a discontinuous jump at a critical coupling. Slide $\eta$ across
+        $\eta_c$ and watch the limit flip. Curves are schematic; the qualitative behavior and
+        the switch are the paper's finding.
+      </figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- ========================= 6. PRESKILL THREAD ========================= -->
+<section class="section wrap" id="thread" data-mood="0.55,0">
+  <div class="rail"><span>06</span></div>
+  <div class="col">
+    <h2 class="reveal">A walk through the pictures, from a co-author</h2>
+
+    <p class="reveal">When the paper appeared, John Preskill narrated the figures on X. His thread
+    is the cleanest short guide to what the movies show — reproduced here.</p>
+
+    <div class="thread reveal">
+      <div class="thread__head">
+        <span class="thread__who">John Preskill <span class="thread__at">@preskill</span></span>
+        <a class="thread__src" href="https://x.com/preskill/status/1860064634298073148" target="_blank" rel="noopener noreferrer">Nov 22, 2024 ·&nbsp;view thread</a>
+      </div>
+      <ol class="thread__list">
+        <li>I am very proud of our new paper on simulations of scattering processes in
+          (1+1)-dimensional quantum field theory. All the hard work was done by my co-authors
+          Raghav Jha, Ash Milsted, Dominik Neuenfeld, and Pedro Vieira.</li>
+        <li>Using tensor network methods, we studied wave-packet collisions in Ising field
+          theory. These pictures depict various processes that occur. Time is on the vertical
+          axis and spatial position is on the horizontal axis. The colors show the energy density
+          relative to the vacuum state.</li>
+        <li>The picture on the left shows an elastic scattering event. The particles emerge from
+          the scattering region with a time delay that reveals information about how the
+          scattering phase shift depends on the energy.</li>
+        <li>The picture in the middle shows elastic scattering with total energy close to the
+          mass of a narrow resonance. A lump of energy density appears, which gradually dissipates
+          as the resonance decays to outgoing particles.</li>
+        <li>By fitting the decay rate of the lump, we can determine the lifetime of the
+          resonance. (Pairs of tracks are seen propagating outward in each direction due to a
+          subtle interference effect that we explain in the paper.)</li>
+        <li>The picture on the right shows a process in which both elastic and inelastic
+          scattering occur. The outgoing tracks capture all of the possible final-state channels,
+          which appear in superposition. Energy density correlation functions clarify the
+          interpretation of the final state.</li>
+        <li>Seeing processes unfold in real time provides an edifying perspective, complementing
+          the more conventional approach to scattering, which focuses on the relation between
+          asymptotic in and out states rather than the dynamical evolution while the particles
+          are interacting.</li>
+        <li>Aside from generating pretty pictures, we obtain quantitative results that
+          characterize the S-matrix of the theory. It would be instructive to do the same for
+          other field theories in one dimension and beyond.</li>
+        <li>Someday (I can't say when), we'll be able to study more complex processes at higher
+          energy using quantum computers!</li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<!-- ========================= 7. REFERENCES ========================= -->
+<section class="section wrap" id="references" data-mood="0.5,0">
+  <div class="rail"><span>07</span></div>
+  <div class="col">
+    <h2 class="reveal">Selected references</h2>
+    <p class="reveal">The load-bearing citations, from the paper's bibliography.</p>
+
+    <ul class="refs reveal">
+      <li><span class="tagno">JMNPV24</span><div>R. G. Jha, A. Milsted, D. Neuenfeld, J. Preskill
+        and P. Vieira, <cite>Real-time scattering in Ising field theory using matrix product
+        states</cite> (2024). <a href="https://arxiv.org/abs/2411.13645">arXiv:2411.13645</a>;
+        Phys. Rev. Research (2025). <em>The paper this page explains.</em></div></li>
+      <li><span class="tagno">Zam89</span><div>A. B. Zamolodchikov, <cite>Integrals of motion and
+        S-matrix of the (scaled) T=T_c Ising model with magnetic field</cite>. Int. J. Mod. Phys.
+        A <strong>4</strong> (1989) 4235. <em>The $E_8$ theory.</em></div></li>
+      <li><span class="tagno">Zam13</span><div>A. B. Zamolodchikov, <cite>Ising Field Theory in a
+        magnetic field: analytic properties of the free energy</cite> (2013).
+        <a href="https://arxiv.org/abs/1310.4821">arXiv:1310.4821</a>.
+        <em>The high-energy conjecture behind $P^{\infty}$.</em></div></li>
+      <li><span class="tagno">Wig55</span><div>E. P. Wigner, <cite>Lower limit for the energy
+        derivative of the scattering phase shift</cite>. Phys. Rev. <strong>98</strong> (1955)
+        145. <em>The time delay.</em></div></li>
+      <li><span class="tagno">MV23</span><div>A. Milsted, J. Liu, J. Preskill and G. Vidal,
+        <cite>Collisions of false-vacuum bubble walls in a quantum spin chain</cite>. PRX Quantum
+        <strong>3</strong> (2022) 020316. <a href="https://arxiv.org/abs/2012.07243">arXiv:2012.07243</a>.
+        <em>The MPS scattering approach this builds on.</em></div></li>
+      <li><span class="tagno">Del04</span><div>G. Delfino, <cite>Integrable field theory and
+        critical phenomena: the Ising model in a magnetic field</cite>. J. Phys. A
+        <strong>37</strong> (2004) R45. <em>Form-factor perturbation theory.</em></div></li>
+      <li><span class="tagno">HV17</span><div>J. Haegeman and F. Verstraete, <cite>Diagonalizing
+        transfer matrices and matrix product operators</cite>. Annu. Rev. Condens. Matter Phys.
+        <strong>8</strong> (2017) 355. <em>MPS / tangent-space methods.</em></div></li>
+      <li><span class="tagno">Coldea10</span><div>R. Coldea <em>et al.</em>, <cite>Quantum
+        criticality in an Ising chain: experimental evidence for emergent $E_8$ symmetry</cite>.
+        Science <strong>327</strong> (2010) 177. <em>$E_8$ masses seen in the lab.</em></div></li>
+    </ul>
+  </div>
+</section>
+
+</main>
+
+<!-- ============================ TALLY ============================ -->
+<section class="tally wrap" id="visits" data-mood="0.6,0.22" hidden>
+  <div class="tally__count">
+    <span class="k">Visits</span>
+    <p class="tally__num mono"><span id="visit-count">0</span></p>
+  </div>
+</section>
+</div>
+
+<script src="vendor/d3/d3.min.js"></script>
+<script src="vendor/katex/katex.min.js"></script>
+<script src="vendor/katex/auto-render.min.js"></script>
+<script src="js/plane.js"></script>
+<script src="js/figures-scatter.js"></script>
+<script src="js/counter.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>
